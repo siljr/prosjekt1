@@ -1,8 +1,15 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'band_booking/login.css' %}"/>
+
 <form action="auth" method="post">
     {% csrf_token %}
-    <label for="username">Username: </label>
-    <input type="text" name="username" id="username"/> <br/>
-    <label for="password">Password: </label>
-    <input type="password" name="password" id="password">
-    <input type="submit">
+    <div class="loginField">
+        <label for="username">Username: </label>
+        <input type="text" name="username" id="username"/>
+    </div>
+    <div class="loginField">
+        <label for="password">Password: </label>
+        <input type="password" name="password" id="password">
+    </div>
+    <input class="loginButton" value="Login" type="submit">
 </form>
