@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/style.css' %}">
+    <title>Assignment 2</title>
+    <link rel ="icon" href="{% static './img/jobs.png' %}" type="image/png" sizes="16x16">
+    <meta charset="utf-8"/>
+    
+</head>
+
+<body class ="body">
+
+<div>
+    {% block content %}
+    {% endblock %}
+</div>
+    
+</body>
+</html>
