@@ -1,1 +1,6 @@
+discogs-client==2.2.1
 Django==1.10.1
+oauthlib==2.0.0
+requests==2.11.1
+six==1.10.0
+spotipy==2.3.8
