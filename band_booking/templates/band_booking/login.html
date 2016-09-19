@@ -1,0 +1,30 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'band_booking/style/login.css' %}"/>
+
+
+<div class="center">
+    {% if error %}
+        <div class="login_error" id="login_error">
+            <div class="message">
+                Incorrect username or password
+            </div>
+            <span class="dismiss">
+                <input id="dismiss_message_button" type="button" class="dismiss_message_button"/>
+            </span>
+        </div>
+    {% endif %}
+    <form action="/auth" method="post">
+        {% csrf_token %}
+        <div class="loginField">
+            <label for="username">Username: </label>
+            <input type="text" name="username" id="username"/>
+        </div>
+        <div class="loginField">
+            <label for="password">Password: </label>
+            <input type="password" name="password" id="password">
+        </div>
+        <input class="loginButton" value="Login" type="submit">
+    </form>
+</div>
+
+<script src="{% static 'band_booking/scripts/login.js'%}"></script>
