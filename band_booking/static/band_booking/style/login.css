@@ -28,7 +28,7 @@
     bottom: 9px;
     left: 4px;
     width: 15px;
-    background: transparent url("message_dismiss.png");
+    background: transparent url("../images/message_dismiss.png");
     outline: none;
 }
 
