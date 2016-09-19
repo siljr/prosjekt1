@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as logout_user
+from .artist_information import get_artist_information
 
 
 def login_page(request, error=None):
@@ -34,3 +35,11 @@ def logout(request):
     '''
     logout_user(request)
     return redirect('band_booking:login')
+
+
+def artist(request, name):
+    return render(request, "band_booking/artist.html", get_artist_information(name))
+
+
+def index(request):
+    return render(request, "band_booking/index.html")
