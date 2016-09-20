@@ -1,0 +1,80 @@
+html, body{
+    min-width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.band-title{
+    margin-left: 50%;
+    transform: translate(-50%, 0);
+    text-align: center;
+}
+
+.image-wrapper{
+    width: 400px;
+    height: 400px;
+    display: inline-block;
+}
+
+.band-image{
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+}
+
+.general-band-information{
+    top: 0;
+    display: inline-block;
+    width: 194px;
+    padding-bottom: 3px;
+    vertical-align:top;
+    height: 400px;
+}
+
+.followers{
+    height: 40px;
+}
+
+.band-information{
+    border-radius: 2px;
+    margin-left: 50%;
+    width: 600px;
+    transform: translate(-50%, 0);
+    height: 400px;
+    background-color: #f4f4f4;
+}
+
+.events, .albums{
+    vertical-align: top;
+    display: inline-block;
+    width: 49.5%;
+    height: 800px;
+    overflow: scroll;
+}
+
+.album {
+    height: 200px;
+    width: 100%;
+}
+
+.album-image {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+}
+
+.album-title {
+    height: 40px;
+    vertical-align: top;
+}
+
+.album-tracks {
+    height: 160px;
+    overflow: scroll;
+}
+
+.album-information {
+    height: 200px;
+    width: calc(100% - 200px);
+}

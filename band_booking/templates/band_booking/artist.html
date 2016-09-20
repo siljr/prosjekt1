@@ -1,0 +1,87 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'band_booking/style/artist.css'  %}"/>
+
+{%  if error %}
+    <!-- Fix how the error message is displayed -->
+    <title>{{ error }}</title>
+    <h3>{{ error }}</h3>
+{% else %}
+    <h1 class="band-title">{{ name }}</h1>
+    <div class="band-information">
+        <div class="image-wrapper">
+            <img class="band-image" src="{{ image.url }}"/>
+        </div>
+        <div class="general-band-information">
+            <div class="followers">
+                Followers: {{ followers }}
+            </div>
+            <div class="members">
+                <h5 class="members-title">
+                    Members
+                </h5>
+                <div class="band-members">
+                    {% if type == "band" %}
+                        {% for member in members %}
+                            <div class="band-member">{{ member }}</div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="band-member">{{ name }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="events">
+        <h3 class="events-title">Concerts/Events</h3>
+        {% if error in past_events %}
+            <div class="event-error">
+                {{ error }}
+            </div>
+        {% else %}
+            {% for event in past_events.events %}
+                <div class="event">
+                    <span class="event-title">
+                        {{ event.name }}
+                    </span>
+                    <span>
+                        {{ event.date }}
+                    </span>
+                    <span>
+                        {{ event.city }}
+                    </span>
+                </div>
+            {% endfor %}
+        {%  endif %}
+    </div>
+
+    <div class="albums">
+        <h3 class="albums-title">
+            Albums
+        </h3>
+        {% for album in albums %}
+            <div class="album">
+                <img class="album-image" src="{{ album.image.url }}"/>
+                <div class="album-information">
+                    <span class="album-title">
+                    {{ album.name }} - {{ album.popularity }}
+                    </span>
+                    <div class="album-tracks">
+                        <div class="tracks">
+                            {% for track in album.tracks %}
+                                <div class="track">
+                                <span class="track-name">
+                                    {{ track.track_number }}. {{ track.name }}
+                                </span>
+                                <span class="track-time">
+                                    {{ track.duration }}
+                                </span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
