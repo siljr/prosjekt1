@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as logout_user
-from .artist_information import get_artist_information
+from django.shortcuts import render, redirect
+
+from band_booking.artist_information_collectors.artist_information import get_artist_information
 
 
 def login_page(request, error=None):
