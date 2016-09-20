@@ -36,7 +36,7 @@ def get_past_events_by_id(artist_id):
     events_norway = get_events_country("Norway", results_json['results']['event'])
     if len(events_norway) == 0:
         return {'error': 'Could not find earlier events'}
-    return {'events': events_norway}
+    return {'events': build_events(events_norway)}
 
 
 def load_request(url):
@@ -52,3 +52,15 @@ def get_events_country(country_code, event_json):
     Filters the events on the given country code
     """
     return [event for event in event_json if event['venue']['metroArea']['country']['displayName'] == country_code]
+
+
+def build_events(events):
+    return [build_event(event) for event in events]
+
+
+def build_event(event):
+    return {
+        'name': event['displayName'],
+        'date': event['start']['date'],
+        'city': event['location']['city'].split(",")[0]
+    }
