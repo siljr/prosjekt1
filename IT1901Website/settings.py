@@ -33,7 +33,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'band_booking.apps.BandBookingConfig',
     'django.contrib.admin',
-    'mypage',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
