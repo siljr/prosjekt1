@@ -1,5 +1,7 @@
 import urllib.request
 import json
+import threading
+from math import ceil
 
 
 # The api key
@@ -30,13 +32,27 @@ def get_past_events_by_id(artist_id):
     """
     Finds the past events of an artist by its id. Returns an error if no events can be found in Norway
     """
-    results_json = load_request('http://api.songkick.com/api/3.0/artists/' + str(artist_id) + '/gigography.json?order=desc&')
-    if results_json['totalEntries'] == 0:
-        return {'error': 'Could not find earlier events'}
+    results_json = load_request('http://api.songkick.com/api/3.0/artists/' + str(artist_id) + '/gigography.json?order=desc&page=1&')
     events_norway = get_events_country("Norway", results_json['results']['event'])
-    if len(events_norway) == 0:
+    pages = ceil(results_json['totalEntries']/50)
+    events = [events_norway] + [[]] * (pages - 1)
+    threads = []
+
+    for page in range(2, pages + 1):
+        thread = PastEvents(artist_id, page, events)
+        thread.run()
+        threads.append(thread)
+
+    while len(threads):
+        for thread in threads:
+            if not thread.isAlive():
+                threads.remove(thread)
+
+    events = build_events(events)
+
+    if len(events) == 0:
         return {'error': 'Could not find earlier events'}
-    return {'events': build_events(events_norway)}
+    return {'events': events}
 
 
 def load_request(url):
@@ -55,12 +71,37 @@ def get_events_country(country_code, event_json):
 
 
 def build_events(events):
-    return [build_event(event) for event in events]
+    """
+    Retrieves the appropriate information from all events
+    """
+    event_list = []
+    for current_event_list in events:
+        event_list += current_event_list
+    return [build_event(event) for event in event_list]
 
 
 def build_event(event):
+    """
+    Retrieves the appropriate information from an event
+    """
     return {
         'name': event['displayName'],
         'date': event['start']['date'],
         'city': event['location']['city'].split(",")[0]
     }
+
+
+class PastEvents(threading.Thread):
+    """
+    Finds all events in norway for the given artist at the given page
+    """
+
+    def __init__(self, artist_id, page, events):
+        super().__init__()
+        self.artist_id = artist_id
+        self.page = page
+        self.events = events
+
+    def run(self):
+        result_json = load_request('http://api.songkick.com/api/3.0/artists/' + str(self.artist_id) + '/gigography.json?order=desc&page=' + str(self.page) + '&')
+        self.events[self.page - 1] = get_events_country("Norway", result_json['results']['event'])
