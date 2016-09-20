@@ -25,7 +25,7 @@ def get_artist_information(name):
     """
     artist_discogs, artist_spotify = find_artist(name)
     if artist_discogs is None:
-        return {'error': 'Could not find artist'}
+        return {'error': 'Could not find information about the artist, ' + name}
     if is_band(artist_discogs):
         return build_band_information(artist_discogs, artist_spotify)
     return build_artist_information(artist_discogs, artist_spotify)
@@ -69,16 +69,25 @@ def build_albums(artist_spotify):
     """
     Builds information about the last 5 albums made by the artist.
     """
-    albums = spotify.artist_albums(artist_spotify['uri'], album_type='album', limit=5)['items']
+    albums = spotify.artist_albums(artist_spotify['uri'], album_type='album', limit=10)['items']
     album_information = []
+    album_names = []
     for album in albums:
         album = spotify.album(album['id'])
+        
+        if album['name'] in album_names:
+            continue
+
         album_information.append({
             'image': album['images'][0],
             'name': album['name'],
             'tracks': build_track_information(album),
             'popularity': album['popularity']
         })
+        album_names.append(album['name'])
+
+        if len(album_names) == 5:
+            break
     return album_information
 
 
@@ -102,6 +111,7 @@ def format_play_time(time):
     """
     time //= 1000
     return "%02d:%02d" % (time // 60, time % 60)
+
 
 def get_members(band):
     """
