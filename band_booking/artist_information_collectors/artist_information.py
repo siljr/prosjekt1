@@ -1,5 +1,6 @@
 import discogs_client
 import spotipy
+from .songkick_collector import get_past_events
 
 
 def find_artist(name):
@@ -38,7 +39,8 @@ def build_base_information(artist_discogs, artist_spotify):
         'name': artist_discogs.name,
         'followers': artist_spotify['followers']['total'],
         'image': artist_spotify['images'][0],
-        'albums': build_albums(artist_spotify)
+        'albums': build_albums(artist_spotify),
+        'past_events': get_past_events(artist_discogs.name)
     }
 
 
