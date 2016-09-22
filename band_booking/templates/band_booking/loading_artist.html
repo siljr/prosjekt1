@@ -1,0 +1,17 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'band_booking/style/loading_artist.css' %}"/>
+
+<div class="loading_information" id="loading_information">
+    <div class="loading_information_text">
+        Loading information about {{ name }}
+    </div>
+    <div class="loading_information_description">
+        Might take up to 15 seconds
+    </div>
+    <div class="loading_information_animation" id="loading_information_animation_dots"></div>
+</div>
+
+
+<div id="artist">{{ name }}</div>
+<script src="{% static 'band_booking/scripts/loading_artist.js' %}"></script>
