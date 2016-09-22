@@ -13,7 +13,6 @@ def get_past_events(artist_name):
     Finds the past events of an artist by its name. Returns an error if no events can be found in Norway
     """
     artist_id = get_artist_id(artist_name.replace(" ", ""))
-    print(artist_id)
     if artist_id is None:
         return {'error': 'Could not find earlier events'}
     return get_past_events_by_id(artist_id)
@@ -88,7 +87,7 @@ def build_event(event):
     Retrieves the appropriate information from an event
     """
     return {
-        'name': event['displayName'],
+        'name': event['displayName'].split("(")[0],
         'date': event['start']['date'],
         'city': event['location']['city'].split(",")[0]
     }

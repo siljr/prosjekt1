@@ -36,7 +36,7 @@ def build_base_information(artist_discogs, artist_spotify):
     Builds the base information, that is valid in situations where the artist is a band or a single artist
     """
     return {
-        'name': artist_discogs.name,
+        'name': artist_spotify['name'],
         'followers': artist_spotify['followers']['total'],
         'image': artist_spotify['images'][0],
         'albums': build_albums(artist_spotify),
@@ -117,7 +117,7 @@ def get_members(band):
     """
     Returns the members of the band
     """
-    return [artist.name for artist in band.members]
+    return [artist.name.split("(")[0] for artist in band.members]
 
 
 def is_band(artist):
