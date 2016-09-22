@@ -38,23 +38,21 @@ html, body{
 
 .band-information{
     border-radius: 2px;
-    margin-left: 50%;
     width: 600px;
-    transform: translate(-50%, 0);
     height: 400px;
     background-color: #f4f4f4;
 }
 
-.events, .albums{
+.albums{
     vertical-align: top;
-    display: inline-block;
     width: 49.5%;
     height: 800px;
-    overflow: scroll;
+    display: inline-block;
 }
 
 .album {
     height: 200px;
+    overflow: hidden;
     width: 100%;
 }
 
@@ -65,16 +63,44 @@ html, body{
 }
 
 .album-title {
-    height: 40px;
+    height: 25px;
+    font-size: 24px;
     vertical-align: top;
+
 }
 
 .album-tracks {
-    height: 160px;
-    overflow: scroll;
+    height: 175px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar{
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,1);
+    background-color: #666666;
+}
+
+:window-inactive{
+    display: none;
 }
 
 .album-information {
     height: 200px;
-    width: calc(100% - 200px);
+    display: inline-block;
+    width: calc(100% - 210px);
+}
+
+.wrapper-left{
+    display: inline-block;
+    vertical-align: top;
+    width: 49.5%;
 }
