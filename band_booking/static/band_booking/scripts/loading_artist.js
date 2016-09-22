@@ -13,8 +13,10 @@ var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200){
         window.document.documentElement.innerHTML = this.responseText;
+        window.clearInterval(animationInterval);
     } else if (this.readyState == 4) {
         window.document.getElementById("loading_information").innerHTML = "Ran into a problem while loading the information about " + artist_name + ". Please try refreshing the page, if that does not work contact the system administrator.";
+        window.clearInterval(animationInterval);
     }
 };
 
