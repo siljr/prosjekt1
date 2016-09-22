@@ -13,6 +13,7 @@ def get_past_events(artist_name):
     Finds the past events of an artist by its name. Returns an error if no events can be found in Norway
     """
     artist_id = get_artist_id(artist_name.replace(" ", ""))
+    print(artist_id)
     if artist_id is None:
         return {'error': 'Could not find earlier events'}
     return get_past_events_by_id(artist_id)
@@ -33,6 +34,8 @@ def get_past_events_by_id(artist_id):
     Finds the past events of an artist by its id. Returns an error if no events can be found in Norway
     """
     results_json = load_request('http://api.songkick.com/api/3.0/artists/' + str(artist_id) + '/gigography.json?order=desc&page=1&')
+    if results_json['totalEntries'] == 0:
+        return {'error': 'Could not find earlier events'}
     events_norway = get_events_country("Norway", results_json['results']['event'])
     pages = ceil(results_json['totalEntries']/50)
     events = [events_norway] + [[]] * (pages - 1)

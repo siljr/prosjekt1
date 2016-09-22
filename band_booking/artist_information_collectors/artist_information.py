@@ -13,7 +13,7 @@ def find_artist(name):
         return None, None
     artist_discogs = artists_discogs[0]
     artist_spotify = artists_spotify['artists']['items'][0]
-    if not artist_discogs.name == artist_spotify['name']:
+    if not artist_discogs.name.startswith(artist_spotify['name']):
         return None, None
     return artist_discogs, artist_spotify
 
