@@ -54,7 +54,7 @@ class Scene(models.Model):
         (EDGAR, 'edgar')
     )
     scene_name = models.CharField(
-        max_length=2,
+        max_length=16,
         choices=SCENE_CHOICES,
         default=STORSALEN,
     )
