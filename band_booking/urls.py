@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^logout$', views.logout, name='logout'),
     url(r'^auth$', views.login_authenticate, name='login_auth'),
     url(r'^artist/(?P<name>([A-Za-z ]+))$', views.artist, name='artist'),
+    url(r'^index', views.index, name='index'),
 ]

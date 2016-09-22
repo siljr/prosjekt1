@@ -5,11 +5,11 @@
     <title></title>
 </head>
 <body>
-    <ul>
-    {% for scene in scenes_list %}
-        <li>{{ scene.name }}</li>
-    {% endfor %}
-    </ul>
-
+    <table>
+        <tr><th>Navn</th><th>Antall plasser</th><th></th></tr>
+        {% for scene in scenes_list %}
+            <tr><td>{{ scene.scene_name }}</td><td>{{ scene.number_of_seats }}</td><td><a href="{% url 'scenes' %}">se band</a></td></tr>
+        {% endfor %}
+    </table>
 </body>
 </html>
