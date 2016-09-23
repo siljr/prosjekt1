@@ -1,9 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 
-
 # Create your models here.
-
 
 class Person(models.Model):
     first_name = models.CharField(max_length=20)
@@ -42,10 +40,10 @@ class Scene(models.Model):
     handicap_accessible = models.BooleanField()
     related_name = 'a_scene'
 
-    STORSALEN = 'SS'
-    KLUBBEN = 'KL'
-    KNAUS = 'KN'
-    EDGAR = 'ED'
+    STORSALEN = 'Storsalen'
+    KLUBBEN = 'Klubben'
+    KNAUS = 'Knaus'
+    EDGAR = 'Edgar'
 
     SCENE_CHOICES = (
         (STORSALEN, 'storsalen'),
@@ -54,7 +52,7 @@ class Scene(models.Model):
         (EDGAR, 'edgar')
     )
     scene_name = models.CharField(
-        max_length=2,
+        max_length=16,
         choices=SCENE_CHOICES,
         default=STORSALEN,
     )
