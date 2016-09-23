@@ -1,7 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as logout_user
 from django.shortcuts import render, redirect
-from .models import Scene, Concert, Band
 
 from band_booking.artist_information_collectors.artist_information import get_artist_information
 
@@ -13,7 +12,7 @@ def login_page(request, error=None):
     '''
     if request.user.is_authenticated:
         return redirect('band_booking:index')
-    return render(request, 'band_booking/login.html', {"error": error})
+    return render(request, 'band_booking/login.html', {'error': error})
 
 
 def login_authenticate(request):
@@ -40,9 +39,12 @@ def logout(request):
 
 
 def artist(request, name):
-    return render(request, "band_booking/artist.html", get_artist_information(name))
+    return render(request, 'band_booking/artist.html', get_artist_information(name))
+
+
+def artist_load(request, name):
+    return render(request, 'band_booking/loading_artist.html', {'name': name})
 
 
 def index(request):
     return render(request, "band_booking/index.html")
-

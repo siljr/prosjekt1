@@ -13,7 +13,9 @@ def find_artist(name):
         return None, None
     artist_discogs = artists_discogs[0]
     artist_spotify = artists_spotify['artists']['items'][0]
-    if not artist_discogs.name == artist_spotify['name']:
+    if artist_discogs.name not in artist_spotify['name'] and artist_spotify['name'] not in artist_discogs.name:
+        if artist_spotify['name'] == name:
+            return None, artist_spotify
         return None, None
     return artist_discogs, artist_spotify
 
@@ -24,23 +26,25 @@ def get_artist_information(name):
     a dictionary with an error is returned.
     """
     artist_discogs, artist_spotify = find_artist(name)
+    if artist_spotify is None:
+        return {'error': 'Could not find information about the artist, ' + name}
     if artist_discogs is None:
-        return {'error': 'Could not find artist'}
+        return build_artist_information(artist_spotify)
     if is_band(artist_discogs):
         return build_band_information(artist_discogs, artist_spotify)
-    return build_artist_information(artist_discogs, artist_spotify)
+    return build_artist_information(artist_spotify)
 
 
-def build_base_information(artist_discogs, artist_spotify):
+def build_base_information(artist_spotify):
     """
     Builds the base information, that is valid in situations where the artist is a band or a single artist
     """
     return {
-        'name': artist_discogs.name,
+        'name': artist_spotify['name'],
         'followers': artist_spotify['followers']['total'],
         'image': artist_spotify['images'][0],
         'albums': build_albums(artist_spotify),
-        'past_events': get_past_events(artist_discogs.name)
+        'past_events': get_past_events(artist_spotify['name'])
     }
 
 
@@ -48,18 +52,18 @@ def build_band_information(band_discogs, band_spotify):
     """
     Builds information about a band
     """
-    information = build_base_information(band_discogs, band_spotify)
+    information = build_base_information(band_spotify)
     information['type'] = 'band'
     information['members'] = get_members(band_discogs)
 
     return information
 
 
-def build_artist_information(artist_discogs, artist_spotify):
+def build_artist_information(artist_spotify):
     """
     Builds information about an artist
     """
-    information = build_base_information(artist_discogs, artist_spotify)
+    information = build_base_information(artist_spotify)
     information['type'] = 'artist'
 
     return information
@@ -69,16 +73,25 @@ def build_albums(artist_spotify):
     """
     Builds information about the last 5 albums made by the artist.
     """
-    albums = spotify.artist_albums(artist_spotify['uri'], album_type='album', limit=5)['items']
+    albums = spotify.artist_albums(artist_spotify['uri'], album_type='album', limit=10)['items']
     album_information = []
+    album_names = []
     for album in albums:
         album = spotify.album(album['id'])
+        
+        if album['name'] in album_names:
+            continue
+
         album_information.append({
             'image': album['images'][0],
             'name': album['name'],
             'tracks': build_track_information(album),
             'popularity': album['popularity']
         })
+        album_names.append(album['name'])
+
+        if len(album_names) == 5:
+            break
     return album_information
 
 
@@ -103,11 +116,12 @@ def format_play_time(time):
     time //= 1000
     return "%02d:%02d" % (time // 60, time % 60)
 
+
 def get_members(band):
     """
     Returns the members of the band
     """
-    return [artist.name for artist in band.members]
+    return [artist.name.split("(")[0] for artist in band.members]
 
 
 def is_band(artist):

@@ -1,0 +1,22 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'band_booking/style/loading_artist.css' %}"/>
+<title>{{ name }}</title>
+
+
+<div class="loading_information" id="loading_information">
+    <div class="loading_information_text">
+        Laster informasjon om
+        <span class="artist_name">
+            {{ name }}
+        </span>
+    </div>
+    <div class="loading_information_description">
+        Kan ta opptil 15 sekunder
+    </div>
+    <div class="loading_information_animation" id="loading_information_animation_dots"></div>
+</div>
+
+
+<div id="artist">{{ name }}</div>
+<script src="{% static 'band_booking/scripts/loading_artist.js' %}"></script>
