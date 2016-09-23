@@ -1,5 +1,5 @@
 function loadingAnimation(){
-    var animationElement = document.getElementById("loading_information_animation_dots")
+    var animationElement = document.getElementById("loading_information_animation_dots");
     var numberOfDots = (animationElement.textContent.length + 1)%4;
     animationElement.textContent = ".".repeat(numberOfDots);
 }
