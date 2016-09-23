@@ -13,7 +13,9 @@ def find_artist(name):
         return None, None
     artist_discogs = artists_discogs[0]
     artist_spotify = artists_spotify['artists']['items'][0]
-    if not artist_discogs.name.startswith(artist_spotify['name']):
+    if artist_discogs.name not in artist_spotify['name'] and artist_spotify['name'] not in artist_discogs.name:
+        if artist_spotify['name'] == name:
+            return None, artist_spotify
         return None, None
     return artist_discogs, artist_spotify
 
@@ -24,14 +26,16 @@ def get_artist_information(name):
     a dictionary with an error is returned.
     """
     artist_discogs, artist_spotify = find_artist(name)
-    if artist_discogs is None:
+    if artist_spotify is None:
         return {'error': 'Could not find information about the artist, ' + name}
+    if artist_discogs is None:
+        return build_artist_information(artist_spotify)
     if is_band(artist_discogs):
         return build_band_information(artist_discogs, artist_spotify)
-    return build_artist_information(artist_discogs, artist_spotify)
+    return build_artist_information(artist_spotify)
 
 
-def build_base_information(artist_discogs, artist_spotify):
+def build_base_information(artist_spotify):
     """
     Builds the base information, that is valid in situations where the artist is a band or a single artist
     """
@@ -40,7 +44,7 @@ def build_base_information(artist_discogs, artist_spotify):
         'followers': artist_spotify['followers']['total'],
         'image': artist_spotify['images'][0],
         'albums': build_albums(artist_spotify),
-        'past_events': get_past_events(artist_discogs.name)
+        'past_events': get_past_events(artist_spotify['name'])
     }
 
 
@@ -48,18 +52,18 @@ def build_band_information(band_discogs, band_spotify):
     """
     Builds information about a band
     """
-    information = build_base_information(band_discogs, band_spotify)
+    information = build_base_information(band_spotify)
     information['type'] = 'band'
     information['members'] = get_members(band_discogs)
 
     return information
 
 
-def build_artist_information(artist_discogs, artist_spotify):
+def build_artist_information(artist_spotify):
     """
     Builds information about an artist
     """
-    information = build_base_information(artist_discogs, artist_spotify)
+    information = build_base_information(artist_spotify)
     information['type'] = 'artist'
 
     return information

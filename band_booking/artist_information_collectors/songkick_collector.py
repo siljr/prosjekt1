@@ -88,7 +88,7 @@ def build_event(event):
     """
     return {
         'name': event['displayName'].split("(")[0],
-        'date': event['start']['date'],
+        'date': '.'.join(event['start']['date'].split('-')[::-1]),
         'city': event['location']['city'].split(",")[0]
     }
 
