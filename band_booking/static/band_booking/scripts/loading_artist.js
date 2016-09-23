@@ -15,7 +15,7 @@ xhttp.onreadystatechange = function() {
         window.document.documentElement.innerHTML = this.responseText;
         window.clearInterval(animationInterval);
     } else if (this.readyState == 4) {
-        window.document.getElementById("loading_information").innerHTML = "Ran into a problem while loading the information about " + artist_name + ". Please try refreshing the page, if that does not work contact the system administrator.";
+        window.document.getElementById("loading_information").innerHTML = "Det oppstod et problem ved lasting av informasjon om " + artist_name + ". Prøv å oppdatere siden.";
         window.clearInterval(animationInterval);
     }
 };

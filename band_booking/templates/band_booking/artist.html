@@ -16,7 +16,7 @@
             <div class="general-band-information">
                 <h2 class="band-title">{{ name }}</h2>
                 <div class="followers">
-                    Spotify followers:
+                    Spotify følgere:
                     <span class="followers-number">
                         {{ followers }}
                     </span>
@@ -24,7 +24,7 @@
                 {% if type == "band" %}
                 <div class="members">
                     <h4 class="members-title">
-                        Members
+                        Medlemmer
                     </h4>
                     <div class="band-members">
                         {% for member in members %}
@@ -37,7 +37,7 @@
         </div>
 
         <div class="events">
-            <h3 class="events-title">Events</h3>
+            <h3 class="events-title">Konserter</h3>
             {% if past_events.error %}
                 <div class="event-error">
                     {{ past_events.error }}
@@ -47,13 +47,13 @@
                     <div class="event-table-wrapper-table">
                         <div class="event-headers">
                             <span class="event-title-header">
-                                Event name
+                                Konsert navn
                             </span>
                             <span class="event-date-header">
-                                Date
+                                Dato
                             </span>
                             <span class="event-city-header">
-                                City
+                                Sted
                             </span>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                     <span class="album-title">
                     {{ album.name }} -
                         <span class="album-popularity">
-                            Popularity: {{ album.popularity }}
+                            Popularitet: {{ album.popularity }}
                         </span>
                     </span>
                     <div class="album-tracks">
