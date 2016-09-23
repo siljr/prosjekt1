@@ -47,4 +47,4 @@ def artist_load(request, name):
 
 
 def index(request):
-    return render(request, 'band_booking/index.html')
+    return render(request, "band_booking/index.html")

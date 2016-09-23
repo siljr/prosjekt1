@@ -8,7 +8,7 @@
     <table>
         <tr><th>Navn</th><th>Antall plasser</th><th></th></tr>
         {% for scene in scenes_list %}
-            <tr><td>{{ scene.scene_name }}</td><td>{{ scene.number_of_seats }}</td><td><a href="{% url 'scenes' %}">se band</a></td></tr>
+            <tr><td>{{ scene.scene_name }}</td><td>{{ scene.number_of_seats }}</td><td><a href="/scenes/{{ scene.scene_name }}">se band</a></td></tr>
         {% endfor %}
     </table>
 </body>

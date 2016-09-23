@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'bookingansvarlig/style/concert_overview.css' %}"/>
+    <title>{{ scene }}</title>
+</head>
+<body>
+    <h3>Dette er alle konserter på {{ scene }}</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Konsert navn
+                </th>
+                <th>
+                    Band
+                </th>
+                <th>
+                    Dato
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {%  for concert in concerts %}
+                <tr>
+                    <td>
+                        {{ concert.name }}
+                    </td>
+                    <td>
+                        {% for band in concert.bands %}
+
+                            <span class="band-name">
+                                <a href="/artist/{{ band }}">
+                                    {{ band }}
+                                </a>
+                            </span>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {{ concert.date }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
