@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'band_booking/style/Scenes.css' %}"/>
+    <title>{{ scene }}</title>
+</head>
+<body>
+    <h3>Dette er alle konserter på {{ scene }}</h3>
+    {% if all_concerts %}
+        <ul>
+            {% for concert in all_concerts %}
+            <li><a href="/info/{{ concert }}">{{ concert.concert_title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3>Det er ingen registrerte konserter</h3>
+    {% endif %}
+</body>
+</html>
+

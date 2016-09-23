@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as logout_user
 from django.shortcuts import render, redirect
+from .models import Scene, Concert, Band
 
 from band_booking.artist_information_collectors.artist_information import get_artist_information
 
@@ -44,3 +45,4 @@ def artist(request, name):
 
 def index(request):
     return render(request, "band_booking/index.html")
+
