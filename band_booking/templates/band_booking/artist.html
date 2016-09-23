@@ -1,0 +1,119 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'band_booking/style/artist.css'  %}"/>
+
+{%  if error %}
+    <!-- Fix how the error message is displayed -->
+    <title>{{ error }}</title>
+    <h3>{{ error }}</h3>
+{% else %}
+    <title>{{ name }}</title>
+    <!--<h1 class="band-title">{{ name }}</h1> -->
+    <div class="wrapper-left">
+        <div class="band-information">
+            <div class="image-wrapper">
+                <img class="band-image" src="{{ image.url }}"/>
+            </div>
+            <div class="general-band-information">
+                <h2 class="band-title">{{ name }}</h2>
+                <div class="followers">
+                    Spotify followers:
+                    <span class="followers-number">
+                        {{ followers }}
+                    </span>
+                </div>
+                {% if type == "band" %}
+                <div class="members">
+                    <h4 class="members-title">
+                        Members
+                    </h4>
+                    <div class="band-members">
+                        {% for member in members %}
+                            <div class="band-member">{{ member }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="events">
+            <h3 class="events-title">Events</h3>
+            {% if past_events.error %}
+                <div class="event-error">
+                    {{ past_events.error }}
+                </div>
+            {% else %}
+                <div class="events-table">
+                    <div class="event-table-wrapper-table">
+                        <div class="event-headers">
+                            <span class="event-title-header">
+                                Event name
+                            </span>
+                            <span class="event-date-header">
+                                Date
+                            </span>
+                            <span class="event-city-header">
+                                City
+                            </span>
+                        </div>
+                    </div>
+                    <div class="event-table-wrapper">
+                        <div class="event-table-wrapper-table">
+                            <div class="event-table-events">
+                                {% for event in past_events.events %}
+                                    <div class="event">
+                                    <span class="event-title">
+                                        {{ event.name }}
+                                    </span>
+                                    <span class="event-date">
+                                        {{ event.date }}
+                                    </span>
+                                    <span class="event-city">
+                                        {{ event.city }}
+                                    </span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {%  endif %}
+        </div>
+    </div>
+
+    <div class="albums">
+        <h3 class="albums-title">
+            Albums
+        </h3>
+        {% for album in albums %}
+            <div class="album">
+                <img class="album-image" src="{{ album.image.url }}"/>
+                <div class="album-information">
+                    <span class="album-title">
+                    {{ album.name }} -
+                        <span class="album-popularity">
+                            Popularity: {{ album.popularity }}
+                        </span>
+                    </span>
+                    <div class="album-tracks">
+                        <div class="tracks">
+                            {% for track in album.tracks %}
+                                <div class="track">
+                                    <span class="track-number">
+                                        {{ track.track_number }}
+                                    </span>
+                                    <span class="track-name">
+                                        {{ track.name }}
+                                    </span>
+                                    <span class="track-time">
+                                        {{ track.duration }}
+                                    </span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
