@@ -1,7 +1,7 @@
 from django.views import generic
 from band_booking.models import Scene, Concert, Band
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
+from django.core.exceptions import ObjectDoesNotExist
 
 __author__ = 'Weronika'
 
@@ -17,16 +17,25 @@ class ScenesListView(generic.ListView):
         scenes = Scene.objects.order_by('scene_name')
         return scenes
 
+
 def concert_scene(request, scene):
-    all_concerts = Concert.objects.filter()
+
+    def build_concert(concert):
+        return {
+            'name': concert.concert_title,
+            'bands': [band.band_name for band in concert.bands.all()],
+            'date': concert.date.strftime("%d.%m.%Y")
+        }
+
+    try:
+        current_scene = Scene.objects.get(scene_name=scene)
+    except ObjectDoesNotExist:
+        return redirect('bookingansvarlig:scenes')
+    concerts = Concert.objects.filter(scene=current_scene)
+
     context = {
-        'all_concerts': all_concerts,
+        'concerts': [build_concert(concert) for concert in concerts],
         'scene': scene,
     }
-    return render(request, 'bookingansvarlig/concert_scene.html', context)
 
-def band_info(request, concert):
-    context ={
-        'concert': concert
-    }
-    return render(request, 'bookingansvarlig/info_concert.html', context)
+    return render(request, 'bookingansvarlig/concert_scene.html', context)
