@@ -39,3 +39,28 @@ def concert_scene(request, scene):
     }
 
     return render(request, 'bookingansvarlig/concert_scene.html', context)
+
+def concert_info(request):
+
+    def build_concert(concert):
+        return {
+            'name': concert.concert_title,
+            'bands': [band.band_name for band in concert.bands.all()],
+            'date': concert.date.strftime("%d.%m.%Y"),
+            'ticket_price': concert.ticket_price,
+            'genre': [band.genre for band in concert.bands.all()],
+            'attendance': concert.attendance,
+            'scene': concert.scene.scene_name,
+        }
+
+    try:
+        scene_info = Scene.objects.all()
+    except ObjectDoesNotExist:
+        return redirect('bookingansvarlig:scenes')
+    concerts = Concert.objects.all()
+
+    context = {
+        'concerts': [build_concert(concert) for concert in concerts],
+    }
+
+    return render(request, 'bookingansvarlig/concert_info.html', context)

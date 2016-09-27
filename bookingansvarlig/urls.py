@@ -10,4 +10,5 @@ urlpatterns = [
         permission_required('band_booking.view_scenes', login_url='/login')(views.ScenesListView.as_view()),
         name='scenes'),
     url(r'^scenes/(?P<scene>([A-Za-z 0-9]+))/$', views.concert_scene, name='concert_scene'),
+    url(r'^scenes/concert_info/$', views.concert_info, name='concert_info')
 ]
