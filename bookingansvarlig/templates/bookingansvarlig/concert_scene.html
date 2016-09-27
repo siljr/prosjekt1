@@ -8,6 +8,16 @@
 </head>
 <body>
     <h3>Dette er alle konserter på {{ scene }}</h3>
+
+    <h4>Søk etter band som tidligere har spilt på {{ scene }}</h4>
+
+    <!-- This adds a sarchbar to the view where the user can search for bands-->
+
+    <form method="GET" action="">
+    <input type="text" placeholder="Skriv inn navn på band"/>
+    <input type="submit" value="Søk"/>
+    <br><br>
+
     <table>
         <thead>
             <tr>
@@ -47,4 +57,3 @@
     </table>
 </body>
 </html>
-
