@@ -36,25 +36,16 @@ def concert_scene(request, scene):
         return redirect('bookingansvarlig:scenes')
     concerts = Concert.objects.filter(scene=current_scene)
 
-
-    # adds a search function
+# Adds the serch functions
     query = request.GET.get('q')
     filteredConcerts = []
-    print("Concerts object", concerts)
-    #print("Band object", Concert.bands.filter(band_name__icontains=query))
     for concert in concerts:
         if query:
             queryset_list = concert.bands.filter(band_name__icontains=query)
             if(queryset_list):
                 filteredConcerts.append(concert)
-                print("concert", concert.bands.all())
-            print("filtered:",filteredConcerts)
-            print("set list", queryset_list.all())
         else:
             filteredConcerts.append(concert)
-        # print(queryset_list)
-        print(filteredConcerts)
-
 
     context = {
         'concerts': [build_concert(concert) for concert in filteredConcerts],
