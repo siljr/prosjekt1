@@ -3,10 +3,6 @@ from band_booking.models import Scene, Concert, Band
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 
-# silje tuller
-from django.contrib.postgres.search import SearchVector
-
-
 __author__ = 'Weronika'
 
 
