@@ -115,11 +115,12 @@ class Concert(models.Model):
 
 
 class Booking(models.Model):
+    EMAIL_MAX_LENGTH = 5000
 
     sender = models.ForeignKey(User, null=True, blank=True)
     title_name = models.CharField(max_length=50,default = ' ')
     recipient_email = models.EmailField(max_length=50,default = ' ')
-    email_text = models.CharField(max_length = 5000,default = 'Booking offer goes here')
+    email_text = models.CharField(max_length = EMAIL_MAX_LENGTH,default = 'Booking offer goes here')
 
     UNDECIDED = 'U'
     NOT_APPROVED = 'N'
@@ -141,15 +142,15 @@ class Booking(models.Model):
         return self.title_name
 
     def change_email_text(self, new_text):
-        self.email_text = new_text
-        self.save()
+        if len(new_text) < self.EMAIL_MAX_LENGTH:
+            self.email_text = new_text
+            self.save()
 
     def change_status(self, new_status):
 
-        if new_status == 'U'| 'N'| 'A' | 'S':
+        if new_status == Booking.UNDECIDED or Booking.NOT_APPROVED or Booking.APPROVED or Booking.SENT:
             self.status = new_status
             self.save()
-
 
 
 
