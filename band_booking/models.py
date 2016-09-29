@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -110,3 +111,30 @@ class Concert(models.Model):
 
     def __str__(self):
         return self.concert_title
+
+
+class Booking(models.Model):
+
+    sender = models.ForeignKey(User, null=True, blank=True)
+    title_name = models.CharField(max_length=50,default = ' ')
+    recipient_email = models.EmailField(max_length=50,default = ' ')
+    email_text = models.CharField(max_length = 5000,default = 'Booking offer goes here')
+
+    UNDECIDED = 'U'
+    NOT_APPROVED = 'N'
+    APPROVED = 'A'
+    SENT = 'S'
+
+    STATUS_CHOICES = (
+        (UNDECIDED, 'Undecided'),
+        (NOT_APPROVED, 'Not approved'),
+        (APPROVED, 'Approved'),
+        (SENT, 'Sent'),
+    )
+    status = models.CharField(
+        default ='U',
+        max_length=1,
+        choices=STATUS_CHOICES,
+    )
+    def __str__(self):
+        return self.title_name
