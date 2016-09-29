@@ -141,12 +141,14 @@ class Booking(models.Model):
     def __str__(self):
         return self.title_name
 
-    def change_email_text(self, new_text):
-        if len(new_text) < self.EMAIL_MAX_LENGTH:
-            self.email_text = new_text
-            self.save()
 
-    def change_status(self, new_status):
+    # Unused change method for changing e-mail text.
+    #def change_email_text(self, new_text):
+    #    if len(new_text) < self.EMAIL_MAX_LENGTH:
+    #        self.email_text = new_text
+    #        self.save()
+
+    def change_status(self, new_status): #Method that changes the status of the booking
 
         if new_status == Booking.UNDECIDED or Booking.NOT_APPROVED or Booking.APPROVED or Booking.SENT:
             self.status = new_status
