@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
+from django import forms
 
 # Create your models here.
 
@@ -138,3 +139,20 @@ class Booking(models.Model):
     )
     def __str__(self):
         return self.title_name
+
+    def change_email_text(self, new_text):
+        self.email_text = new_text
+        self.save()
+
+    def change_status(self, new_status):
+
+        if new_status == 'U'| 'N'| 'A' | 'S':
+            self.status = new_status
+            self.save()
+
+
+
+
+
+
+
