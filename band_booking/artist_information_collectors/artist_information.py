@@ -44,7 +44,6 @@ def build_base_information(artist_spotify):
         'followers': artist_spotify['followers']['total'],
         'image': artist_spotify['images'][0],
         'albums': build_albums(artist_spotify),
-        'past_events': get_past_events(artist_spotify['name'])
     }
 
 
@@ -73,7 +72,7 @@ def build_albums(artist_spotify):
     """
     Builds information about the last 5 albums made by the artist.
     """
-    albums = spotify.artist_albums(artist_spotify['uri'], album_type='album', limit=10)['items']
+    albums = spotify.artist_albums(artist_spotify['uri'], album_type='album', limit=30)['items']
     album_information = []
     album_names = []
     for album in albums:
@@ -86,7 +85,8 @@ def build_albums(artist_spotify):
             'image': album['images'][0],
             'name': album['name'],
             'tracks': build_track_information(album),
-            'popularity': album['popularity']
+            'popularity': album['popularity'],
+            'sales': str(int((artist_spotify['followers']['total'] * album['popularity'])/57.13))
         })
         album_names.append(album['name'])
 
