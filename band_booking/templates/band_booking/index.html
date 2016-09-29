@@ -8,11 +8,13 @@
 	</head>
 
 	<body>
-		<div id="links">
+		<div class="links">
 			{% for page in pages %}
 			<a href="{{page.link}}">
 				<div class="link">
-					{{page.title}} 
+                    <span class="link-title">
+                        {{page.title}}
+                    </span>
 				</div>
 			</a>
 			{% endfor %}
