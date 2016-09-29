@@ -17,13 +17,13 @@ a:visited {
 
 .link {
     display: inline-block;
-    width: 250px;
-    height: 150px;
+    width: 200px;
+    height: 120px;
     border: 1px solid #000000;
     background-color: #f2f2f2;
     margin: 10px;
     text-align: center;
-    line-height: 150px;
+    line-height: 120px;
     border-radius: 15px;
 }
 
