@@ -1,3 +1,4 @@
+
 from django.apps import AppConfig
 
 __author__ = 'Weronika'
