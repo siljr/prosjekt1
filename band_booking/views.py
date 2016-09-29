@@ -53,7 +53,9 @@ def event_load(request, name):
 
 def index(request):
     pages = {
-        "Booking Ansvarlig": [{"title": "Scene Oversikt", "link": reverse('bookingansvarlig:scenes')}],
+        "Booking Ansvarlig": [
+            {"title": "Scene Oversikt", "link": reverse('bookingansvarlig:scenes')},
+        ],
         "Booking Sjef": [],
         "Arrangør": [],
         "Tekniker": [],
@@ -68,6 +70,6 @@ def index(request):
     user_groups = request.user.groups.all()
     user_pages = []
     for user_group in user_groups:
-        if user_group in pages:
-            user_pages += pages[user_group]
+        if user_group.name in pages:
+            user_pages += pages[user_group.name]
     return render(request, "band_booking/index.html", {'pages': user_pages})
