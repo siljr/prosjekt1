@@ -61,7 +61,7 @@ def index(request):
 
     if request.user.is_superuser:
         super_user_pages = []
-        for user_group_pages in pages.items():
+        for user_group_pages in pages.values():
             super_user_pages += user_group_pages
         return render(request, "band_booking/index.html", {'pages': super_user_pages})
 
