@@ -7,14 +7,13 @@
     <h3>{{ error }}</h3>
 {% else %}
     <title>{{ name }}</title>
-    <!--<h1 class="band-title">{{ name }}</h1> -->
     <div class="wrapper-left">
         <div class="band-information">
             <div class="image-wrapper">
                 <img class="band-image" src="{{ image.url }}"/>
             </div>
             <div class="general-band-information">
-                <h2 class="band-title">{{ name }}</h2>
+                <h2 class="band-title" id="band-title">{{ name }}</h2>
                 <div class="followers">
                     Spotify følgere:
                     <span class="followers-number">
@@ -38,46 +37,9 @@
 
         <div class="events">
             <h3 class="events-title">Konserter</h3>
-            {% if past_events.error %}
-                <div class="event-error">
-                    {{ past_events.error }}
-                </div>
-            {% else %}
-                <div class="events-table">
-                    <div class="event-table-wrapper-table">
-                        <div class="event-headers">
-                            <span class="event-title-header">
-                                Konsert navn
-                            </span>
-                            <span class="event-date-header">
-                                Dato
-                            </span>
-                            <span class="event-city-header">
-                                Sted
-                            </span>
-                        </div>
-                    </div>
-                    <div class="event-table-wrapper">
-                        <div class="event-table-wrapper-table">
-                            <div class="event-table-events">
-                                {% for event in past_events.events %}
-                                    <div class="event">
-                                    <span class="event-title">
-                                        {{ event.name }}
-                                    </span>
-                                    <span class="event-date">
-                                        {{ event.date }}
-                                    </span>
-                                    <span class="event-city">
-                                        {{ event.city }}
-                                    </span>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {%  endif %}
+            <div id="events-list">
+                <div class="concert-load"> Laster konsert information<span id="loading_information_animation_dots"></span></div>
+            </div>
         </div>
     </div>
 
@@ -92,7 +54,13 @@
                     <span class="album-title">
                     {{ album.name }} -
                         <span class="album-popularity">
-                            Popularitet: {{ album.popularity }}
+                            Popularitet: {{ album.popularity }}/100
+                        </span>
+                        <span class="album-information-title-divider">
+                            -
+                        </span>
+                        <span class="album-sales">
+                            Salg: {{ album.sales }}
                         </span>
                     </span>
                     <div class="album-tracks">

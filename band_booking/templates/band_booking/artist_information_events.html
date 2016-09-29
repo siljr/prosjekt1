@@ -1,0 +1,40 @@
+{% if error %}
+    <div class="event-error">
+        {{ error }}
+    </div>
+{% else %}
+    <div class="events-table">
+        <div class="event-table-wrapper-table">
+            <div class="event-headers">
+                <span class="event-title-header">
+                    Konsert navn
+                </span>
+                <span class="event-date-header">
+                    Dato
+                </span>
+                <span class="event-city-header">
+                    Sted
+                </span>
+            </div>
+        </div>
+        <div class="event-table-wrapper">
+            <div class="event-table-wrapper-table">
+                <div class="event-table-events">
+                    {% for event in events %}
+                        <div class="event">
+                            <span class="event-title">
+                                {{ event.name }}
+                            </span>
+                            <span class="event-date">
+                                {{ event.date }}
+                            </span>
+                            <span class="event-city">
+                                {{ event.city }}
+                            </span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{%  endif %}
