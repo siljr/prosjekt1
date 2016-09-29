@@ -1,8 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link type="text/css" rel="stylesheet" href="../../static/style/login.css">
+		<link type="text/css" rel="stylesheet" href="{% static 'band_booking/style/index.css' %}">
 		<title> Index </title>
 	</head>
 
@@ -10,7 +11,7 @@
 		<div id="links">
 			{% for page in pages %}
 			<a href="{{page.link}}">
-				<div>
+				<div class="link">
 					{{page.title}} 
 				</div>
 			</a>
