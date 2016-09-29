@@ -7,15 +7,14 @@
 	</head>
 
 	<body>
-		<header id="header">
-
-		</header>
-
-		<div id="body">
-			<a href="/scenes"> <button> Scene-oversikt </button> </a>
+		<div id="links">
+			{% for page in pages %}
+			<a href="{{page.link}}">
+				<div>
+					{{page.title}} 
+				</div>
+			</a>
+			{% endfor %}
 		</div>
-		<footer id="footer">
-
-		</footer>
 	</body>
 </html>
