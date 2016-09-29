@@ -3,6 +3,7 @@ from django.contrib.auth import logout as logout_user
 from django.shortcuts import render, redirect
 
 from band_booking.artist_information_collectors.artist_information import get_artist_information
+from band_booking.artist_information_collectors.songkick_collector import get_past_events
 
 
 def login_page(request, error=None):
@@ -44,6 +45,10 @@ def artist(request, name):
 
 def artist_load(request, name):
     return render(request, 'band_booking/loading_artist.html', {'name': name})
+
+
+def event_load(request, name):
+    return render(request, 'band_booking/artist_information_events.html', get_past_events(name))
 
 
 def index(request):
