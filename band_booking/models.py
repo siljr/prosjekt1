@@ -148,11 +148,11 @@ class Booking(models.Model):
     #        self.email_text = new_text
     #        self.save()
 
-    def change_status(self, new_status): #Method that changes the status of the booking
-
-        if new_status == Booking.UNDECIDED or Booking.NOT_APPROVED or Booking.APPROVED or Booking.SENT:
+    def change_status(self, new_status,): #Method that changes the status of the booking
+        if new_status in (Booking.UNDECIDED, Booking.NOT_APPROVED, Booking.APPROVED, Booking.SENT):
             self.status = new_status
             self.save()
+
 
 
 
