@@ -54,7 +54,7 @@ def event_load(request, name):
 def index(request):
     pages = {
         "Booking Ansvarlig": [
-            {"title": "Scene Oversikt", "link": reverse('bookingansvarlig:scenes')},
+            {"title": "Sceneoversikt", "link": reverse('bookingansvarlig:scenes')},
         ],
         "Booking Sjef": [],
         "Arrangør": [],
