@@ -9,4 +9,7 @@ class BookingansvarligConfig(AppConfig):
 
     def ready(self):
         from .permissions import add_user_permissions
-        add_user_permissions()
+        try:
+            add_user_permissions()
+        except Exception:
+            pass

@@ -13,6 +13,7 @@ def add_user_permissions(**kwargs):
     """
     Method adding view_scenes permission to model object Scene.
     """
+    auth_models.Group.objects.get_or_create(name='Bookingansvarlig')
     content_type = ContentType.objects.get_for_model(Scene)
     Permission.objects.get_or_create(codename='view_scenes', name='Can see scenes information',
                                      content_type=content_type)
