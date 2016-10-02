@@ -1,0 +1,79 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'bookingsjef/style/economic_result.css' %}">
+</head>
+<body>
+    <main>
+        <h1 class="title">Rapport - {{ title }} - {{ date }}</h1>
+        <div class="table information-table">
+            <div>
+                <div class="table-cell">
+                    Band:
+                </div>
+                <div class="table-cell">
+                    <div class="table band-table">
+                    {% for band in bands %}
+                        <div class="table-row">
+                            <div class="table-cell-small">
+                                {{ band.title }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="table-cell">
+                    Publikumstall
+                </div>
+                <div class="table-cell">
+                    {{ attendance }}
+                </div>
+            </div>
+            <div>
+                <div class="information-table-title table-cell">
+                    Kostnader:
+                </div>
+            </div>
+            {% for expense, cost in expenses.items %}
+                <div>
+                    <div class="table-cell">
+                        {{ expense }}
+                    </div>
+                    <div class="table-cell">
+                        {{ cost }}
+                    </div>
+                </div>
+            {% endfor %}
+            <div>
+                <div class="information-table-title table-cell">
+                    Inntekter:
+                </div>
+            </div>
+            {% for item, value in income.items %}
+                <div>
+                    <div class="table-cell">
+                        {{ item }}
+                    </div>
+                    <div class="table-cell">
+                        {{ value }}
+                    </div>
+                </div>
+            {% endfor %}
+            <div>
+                <div class="information-table-title table-cell">
+                    Økonomisk resultat
+                </div>
+                <div class="table-cell">
+                    {{ economic_result }}
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
