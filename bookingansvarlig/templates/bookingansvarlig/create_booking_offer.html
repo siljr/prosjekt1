@@ -1,14 +1,17 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link type="text/css" rel="stylesheet" href="tilbudViewStyle.css">
+		<link type="text/css" rel="stylesheet" href="{% static 'bookingansvarlig/style/create_booking_offer.css' %}">
 		<title> Bookingtilbud </title>
 	</head>
 
 	<body>
 	<main>
-		<form>
+		<form method="post" action="" autocomplete="off">
+            {% csrf_token %}
 			<h2> Bookingtilbud </h2>
 			
 			<div class="text_fields">
@@ -17,7 +20,7 @@
 						Tittel:
 					</label>
 					<br>
-					<input type="text" name="title" id="title">
+					<input type="text" name="title" id="title" required>
 				</div>
 				
 				<div class="email">
@@ -25,20 +28,20 @@
 						E-post mottaker: 
 					</label>
 					<br>
-					<input type="text" name="e-post" id="email">
+					<input type="email" name="e-post" id="email" required>
 				</div>
 			</div>
 			
 			<br>
 
 			<div class="email_text">
-				Beskjed: 
+				<label for="message">Beskjed: </label>
 				<br>
-				<textarea name="message"></textarea>
+				<textarea id="message" name="message" required></textarea>
 				<br> <br>
 			</div>
 			
-			<button type="button" onclick="confirm('Du er i ferd med aa sende forespoersel om tilbud. Er du sikker paa at du vil fortsette?')">Send tilbud til godkjenning</button>
+			<input class="submit" type="submit" value="Send tilbud til godkjenning"/>
 		</form>
 	</main>
 	</body>
