@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'band_booking.apps.BandBookingConfig',
     'bookingansvarlig.apps.BookingansvarligConfig',
+    'bookingsjef.apps.BookingsjefConfig',
 ]
 
 MIDDLEWARE = [

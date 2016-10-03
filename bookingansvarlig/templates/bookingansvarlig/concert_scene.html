@@ -7,9 +7,9 @@
     <title>{{ scene }}</title>
 </head>
 <body>
-    <h3>Dette er alle konserter på {{ scene }}</h3>
+    <h3>Dette er alle konserter på</h3>
 
-    <h4>Søk etter band som tidligere har spilt på {{ scene }}</h4>
+    <h4>Søk etter band</h4>
 
     <!-- This adds a sarchbar to the view where the user can search for bands-->
     <form method="GET" action="">
@@ -23,6 +23,9 @@
         <thead>
             <tr>
                 <th>
+                    Scene
+                </th>
+                <th>
                     Konsert navn
                 </th>
                 <th>
@@ -31,11 +34,23 @@
                 <th>
                     Dato
                 </th>
+                <th>
+                    Billettpris
+                </th>
+                <th>
+                    Sjanger
+                </th>
+                <th>
+                    Publikumstall
+                </th>
             </tr>
         </thead>
         <tbody>
             {%  for concert in concerts %}
                 <tr>
+                    <td>
+                        {{ concert.scene }}
+                    </td>
                     <td>
                         {{ concert.name }}
                     </td>
@@ -51,6 +66,17 @@
                     </td>
                     <td>
                         {{ concert.date }}
+                    </td>
+                    <td>
+                        {{ concert.ticket_price }}
+                    </td>
+                    <td>
+                        {% for genre in concert.genre %}
+                            <p>{{ genre }}</p>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {{ concert.attendance }}
                     </td>
                 </tr>
             {% endfor %}

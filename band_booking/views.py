@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as logout_user
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 
 from band_booking.artist_information_collectors.artist_information import get_artist_information
 from band_booking.artist_information_collectors.songkick_collector import get_past_events
@@ -52,4 +52,24 @@ def event_load(request, name):
 
 
 def index(request):
-    return render(request, "band_booking/index.html")
+    pages = {
+        "Bookingansvarlig": [
+            {"title": "Sceneoversikt", "link": reverse('bookingansvarlig:scenes')},
+        ],
+        "Bookingsjef": [],
+        "Arrangør": [],
+        "Tekniker": [],
+    }
+
+    if request.user.is_superuser:
+        super_user_pages = []
+        for user_group_pages in pages.values():
+            super_user_pages += user_group_pages
+        return render(request, "band_booking/index.html", {'pages': super_user_pages})
+
+    user_groups = request.user.groups.all()
+    user_pages = []
+    for user_group in user_groups:
+        if user_group.name in pages:
+            user_pages += pages[user_group.name]
+    return render(request, "band_booking/index.html", {'pages': user_pages})
