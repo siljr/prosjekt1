@@ -52,3 +52,7 @@ def concert_scene(request, scene):
     }
 
     return render(request, 'bookingansvarlig/concert_scene.html', context)
+
+
+def create_booking_offer(request):
+    return render(request, 'bookingansvarlig/create_booking_offer.html', {})
