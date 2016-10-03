@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link type="text/css" rel="stylesheet" href="tilbudViewStyle.css">
+		<title> Bookingtilbud </title>
+	</head>
+
+	<body>
+	<main>
+		<form>
+			<h2> Bookingtilbud </h2>
+			
+			<div class="text_fields">
+				<div class="title_field">
+					<label for="title" >
+						Tittel:
+					</label>
+					<br>
+					<input type="text" name="title" id="title">
+				</div>
+				
+				<div class="email">
+					<label for="email"> 
+						E-post mottaker: 
+					</label>
+					<br>
+					<input type="text" name="e-post" id="email">
+				</div>
+			</div>
+			
+			<br>
+
+			<div class="email_text">
+				Beskjed: 
+				<br>
+				<textarea name="message"></textarea>
+				<br> <br>
+			</div>
+			
+			<button type="button" onclick="confirm('Du er i ferd med aa sende forespoersel om tilbud. Er du sikker paa at du vil fortsette?')">Send tilbud til godkjenning</button>
+		</form>
+	</main>
+	</body>
+</html>
