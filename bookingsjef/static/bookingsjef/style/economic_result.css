@@ -73,3 +73,7 @@ main {
 .information-table-header + div > .table-cell {
     padding-top: 20px;
 }
+
+a:visited {
+    color: #0977ab;
+}
