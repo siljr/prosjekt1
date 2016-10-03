@@ -1,0 +1,79 @@
+body {
+    margin-left: 100px;
+    margin-top: 50px;
+    max-width: 100%;
+}
+
+main {
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, 0);
+    width: 600px;
+    max-width: 100%;
+}
+
+.information-table {
+    width: 600px;
+    max-width: 100%;
+}
+
+.information-table > div {
+    display: table-row;
+}
+
+.information-table > div > div:last-child {
+    text-align: right;
+}
+
+.information-table > div > div:first-child {
+    padding-right: 100px;
+    text-align: left;
+}
+
+.information-table .table-cell{
+    padding-bottom: 8px;
+}
+
+.information-table-title {
+    padding-top: 40px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.table-cell-small {
+    padding-bottom: 2px;
+    text-align: right;
+}
+
+.table {
+    display: table;
+}
+
+.table-row {
+    display: table-row;
+}
+
+.table-cell, .table-cell-small {
+    display: table-cell;
+}
+
+.title {
+    padding-bottom: 30px;
+}
+
+.band-table {
+    width: 100%;
+}
+
+.information-table-header > .table-cell{
+    padding-bottom: 0;
+    border-bottom: 2px solid #000000;
+}
+
+.information-table-header + div > .table-cell {
+    padding-top: 20px;
+}
+
+a:visited {
+    color: #0977ab;
+}

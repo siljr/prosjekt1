@@ -8,5 +8,5 @@ class BookingsjefConfig(AppConfig):
         from .permissions import add_user_permissions
         try:
             add_user_permissions()
-        except Exception:
-            pass
+        except Exception as e:
+            print(e)
