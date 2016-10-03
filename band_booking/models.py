@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
-from django import forms
 
 # Create your models here.
 
@@ -41,6 +40,7 @@ class Scene(models.Model):
     number_of_seats = models.IntegerField()
     handicap_accessible = models.BooleanField()
     related_name = 'a_scene'
+    expenditure = models.IntegerField(default=0)
 
     STORSALEN = 'Storsalen'
     KLUBBEN = 'Klubben'
@@ -91,10 +91,12 @@ class Concert(models.Model):
     bands = models.ManyToManyField(Band)  # There can play many bands on the concert and band can play many concerts
     scene = models.ForeignKey(Scene, null=True, blank=True)  # only one scene per concert, but many concerts per scene
     personnel = models.ManyToManyField(Person)
-    attendance = models.IntegerField()
-    ticket_price = models.IntegerField()
+    attendance = models.IntegerField(default=0)
+    ticket_price = models.IntegerField(default=0)
+    booking_price = models.IntegerField(default=0)
     related_name = 'a_concert'
 
+    GUARD_EXPENSE = 1000
     BOOKED = 'B'
     CONTACTED = 'C'
     PAID = 'P'
@@ -112,6 +114,15 @@ class Concert(models.Model):
 
     def __str__(self):
         return self.concert_title
+
+    #Calculates the concert's economic result
+    def calc_econ_result(self):
+        return self.ticket_price*self.attendance-self.booking_price-self.scene.expenditure-self.GUARD_EXPENSE
+
+    #Disguises the method call as a field
+    @property
+    def economic_result(self):
+        return self.calc_econ_result()
 
 
 class Booking(models.Model):
@@ -148,7 +159,7 @@ class Booking(models.Model):
     #        self.email_text = new_text
     #        self.save()
 
-    def change_status(self, new_status,): #Method that changes the status of the booking
+    def change_status(self, new_status): #Method that changes the status of the booking
         if new_status in (Booking.UNDECIDED, Booking.NOT_APPROVED, Booking.APPROVED, Booking.SENT):
             self.status = new_status
             self.save()
