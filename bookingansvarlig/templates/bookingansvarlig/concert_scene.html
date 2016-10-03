@@ -4,10 +4,21 @@
     <meta charset="UTF-8">
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'bookingansvarlig/style/concert_overview.css' %}"/>
-    <title>Info</title>
+    <title>{{ scene }}</title>
 </head>
 <body>
-    <h3>Info om konserter</h3>
+    <h3>Dette er alle konserter på</h3>
+
+    <h4>Søk etter band</h4>
+
+    <!-- This adds a sarchbar to the view where the user can search for bands-->
+    <form method="GET" action="">
+      <input type="text" name="q" placeholder="Skriv inn navn på band"/>
+      <input type="submit" value="Søk"/>
+    </form>
+    <br><br>
+
+
     <table>
         <thead>
             <tr>
@@ -15,7 +26,7 @@
                     Scene
                 </th>
                 <th>
-                    Konsertnavn
+                    Konsert navn
                 </th>
                 <th>
                     Band
@@ -73,4 +84,3 @@
     </table>
 </body>
 </html>
-

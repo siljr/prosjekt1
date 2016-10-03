@@ -49,7 +49,6 @@ def concert_scene(request, scene):
 
     context = {
         'concerts': [build_concert(concert) for concert in filteredConcerts],
-        'scene': scene,
     }
 
     return render(request, 'bookingansvarlig/concert_scene.html', context)
