@@ -3,6 +3,8 @@ import json
 import threading
 from math import ceil
 
+from django.core.exceptions import ObjectDoesNotExist
+from band_booking.models import Concert, Band
 
 # The api key
 api_key = 'io09K9l3ebJxmxe2'
@@ -15,7 +17,9 @@ def get_past_events(artist_name):
     artist_id = get_artist_id(artist_name.replace(" ", ""))
     if artist_id is None:
         return {'error': 'Could not find earlier events'}
-    return get_past_events_by_id(artist_id)
+    events = get_past_events_by_id(artist_id)
+    build_events_samfundet(events, artist_name)
+    return events
 
 
 def get_artist_id(artist_name):
@@ -63,6 +67,33 @@ def load_request(url):
     """
     results = urllib.request.urlopen(url + 'apikey=' + api_key).read()
     return json.loads(results.decode('UTF-8'))['resultsPage']
+
+
+def build_events_samfundet(events, artist_name):
+    """
+    Adds all events at Samfundet to the list of events
+    """
+    try:
+        current_artist = Band.objects.get(band_name=artist_name)
+    except ObjectDoesNotExist:
+        return
+    concert_objects = Concert.objects.filter(bands=current_artist)
+    events['events'] += make_events_samfundet(concert_objects)
+    events['events'].sort(key=lambda k: k['date'].split(".")[::-1], reverse=True)
+
+
+def make_events_samfundet(concerts):
+    """
+    Creates the events objects for the Samfundet events
+    """
+    events = []
+    for concert in concerts:
+        events.append({
+            'name': concert.concert_title,
+            'date': concert.date.strftime('%d.%m.%Y'),
+            'city': 'Trondheim'
+        })
+    return events
 
 
 def get_events_country(country_code, event_json):

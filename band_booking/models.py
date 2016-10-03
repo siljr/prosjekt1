@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
+from django.contrib.auth.models import User
+from django import forms
 
 # Create your models here.
 
@@ -110,3 +112,50 @@ class Concert(models.Model):
 
     def __str__(self):
         return self.concert_title
+
+
+class Booking(models.Model):
+    EMAIL_MAX_LENGTH = 5000
+
+    sender = models.ForeignKey(User, null=True, blank=True)
+    title_name = models.CharField(max_length=50,default = ' ')
+    recipient_email = models.EmailField(max_length=50,default = ' ')
+    email_text = models.CharField(max_length = EMAIL_MAX_LENGTH,default = 'Booking offer goes here')
+
+    UNDECIDED = 'U'
+    NOT_APPROVED = 'N'
+    APPROVED = 'A'
+    SENT = 'S'
+
+    STATUS_CHOICES = (
+        (UNDECIDED, 'Undecided'),
+        (NOT_APPROVED, 'Not approved'),
+        (APPROVED, 'Approved'),
+        (SENT, 'Sent'),
+    )
+    status = models.CharField(
+        default ='U',
+        max_length=1,
+        choices=STATUS_CHOICES,
+    )
+    def __str__(self):
+        return self.title_name
+
+
+    # Unused change method for changing e-mail text.
+    #def change_email_text(self, new_text):
+    #    if len(new_text) < self.EMAIL_MAX_LENGTH:
+    #        self.email_text = new_text
+    #        self.save()
+
+    def change_status(self, new_status,): #Method that changes the status of the booking
+        if new_status in (Booking.UNDECIDED, Booking.NOT_APPROVED, Booking.APPROVED, Booking.SENT):
+            self.status = new_status
+            self.save()
+
+
+
+
+
+
+

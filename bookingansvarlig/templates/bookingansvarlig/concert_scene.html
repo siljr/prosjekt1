@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'bookingansvarlig/style/concert_overview.css' %}"/>
-    <title>{{ scene }}</title>
+    <title>Info</title>
 </head>
 <body>
-    <h3>Dette er alle konserter på {{ scene }}</h3>
+    <h3>Info om konserter</h3>
     <table>
         <thead>
             <tr>
                 <th>
-                    Konsert navn
+                    Scene
+                </th>
+                <th>
+                    Konsertnavn
                 </th>
                 <th>
                     Band
@@ -20,11 +23,23 @@
                 <th>
                     Dato
                 </th>
+                <th>
+                    Billettpris
+                </th>
+                <th>
+                    Sjanger
+                </th>
+                <th>
+                    Publikumstall
+                </th>
             </tr>
         </thead>
         <tbody>
             {%  for concert in concerts %}
                 <tr>
+                    <td>
+                        {{ concert.scene }}
+                    </td>
                     <td>
                         {{ concert.name }}
                     </td>
@@ -40,6 +55,17 @@
                     </td>
                     <td>
                         {{ concert.date }}
+                    </td>
+                    <td>
+                        {{ concert.ticket_price }}
+                    </td>
+                    <td>
+                        {% for genre in concert.genre %}
+                            <p>{{ genre }}</p>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {{ concert.attendance }}
                     </td>
                 </tr>
             {% endfor %}
