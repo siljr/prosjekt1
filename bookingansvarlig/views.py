@@ -19,7 +19,6 @@ class ScenesListView(generic.ListView):
 
 
 def concert_scene(request, scene):
-
     def build_concert(concert):
         return {
             'name': concert.concert_title,
@@ -33,9 +32,23 @@ def concert_scene(request, scene):
         return redirect('bookingansvarlig:scenes')
     concerts = Concert.objects.filter(scene=current_scene)
 
+# Adds the serch functions
+    query = request.GET.get('q')
+    filteredConcerts = []
+    for concert in concerts:
+        if query:
+            queryset_list = concert.bands.filter(band_name__icontains=query)
+            if(queryset_list):
+                filteredConcerts.append(concert)
+        else:
+            filteredConcerts.append(concert)
+
     context = {
-        'concerts': [build_concert(concert) for concert in concerts],
+        'concerts': [build_concert(concert) for concert in filteredConcerts],
         'scene': scene,
     }
+
+
+
 
     return render(request, 'bookingansvarlig/concert_scene.html', context)

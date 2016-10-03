@@ -4,6 +4,21 @@ function loadingAnimation(){
     animationElement.textContent = ".".repeat(numberOfDots);
 }
 
+function loadEvents(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("events-list").innerHTML = this.responseText;
+            window.clearInterval(animationInterval);
+        } else if (this.readyState == 4) {
+            window.clearInterval(animationInterval);
+        }
+    };
+
+    xhttp.open("GET", "/event_information/" + artist_name, true);
+    xhttp.send();
+}
+
 var animationInterval = window.setInterval(loadingAnimation, 500);
 
 
@@ -13,7 +28,7 @@ var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200){
         window.document.documentElement.innerHTML = this.responseText;
-        window.clearInterval(animationInterval);
+        loadEvents();
     } else if (this.readyState == 4) {
         window.document.getElementById("loading_information").innerHTML = "Det oppstod et problem ved lasting av informasjon om " + artist_name + ". Prøv å oppdatere siden.";
         window.clearInterval(animationInterval);
