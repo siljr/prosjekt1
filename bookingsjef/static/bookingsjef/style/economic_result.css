@@ -1,6 +1,20 @@
 body {
     margin-left: 100px;
     margin-top: 50px;
+    max-width: 100%;
+}
+
+main {
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, 0);
+    width: 600px;
+    max-width: 100%;
+}
+
+.information-table {
+    width: 600px;
+    max-width: 100%;
 }
 
 .information-table > div {
@@ -49,4 +63,13 @@ body {
 
 .band-table {
     width: 100%;
+}
+
+.information-table-header > .table-cell{
+    padding-bottom: 0;
+    border-bottom: 2px solid #000000;
+}
+
+.information-table-header + div > .table-cell {
+    padding-top: 20px;
 }

@@ -11,6 +11,15 @@
     <main>
         <h1 class="title">Rapport - {{ title }} - {{ date }}</h1>
         <div class="table information-table">
+            <div class="information-table-header">
+                <div class="table-cell information-table-title">
+                    Felt
+                </div>
+
+                <div class="table-cell information-table-title">
+                    Verdi
+                </div>
+            </div>
             <div>
                 <div class="table-cell">
                     Band:
@@ -20,7 +29,7 @@
                     {% for band in bands %}
                         <div class="table-row">
                             <div class="table-cell-small">
-                                {{ band.title }}
+                                <a href="/artist/{{ band.title }}"> {{ band.title }} </a>
                             </div>
                         </div>
                     {% endfor %}
