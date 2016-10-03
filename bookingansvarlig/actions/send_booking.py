@@ -6,10 +6,10 @@ __author__ = 'Weronika'
 
 
 def send_booking(booking: Booking):
-    # norwegian signs do not work
+    # norwegian signs do not work, coding fixes required
     if booking.status == Booking.APPROVED:
-        email = EmailMessage(subject=booking.title_name, body=booking.email_text, to=booking.recipient_email,
-                             from_email=booking.user.email)
+        email = EmailMessage(subject=booking.title_name, body=booking.email_text, to=[booking.recipient_email],
+                             from_email=booking.sender.email)
         try:
             email.send(fail_silently=False)
             booking.change_status(Booking.SENT)
