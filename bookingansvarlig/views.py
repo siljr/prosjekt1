@@ -23,14 +23,18 @@ def concert_scene(request, scene):
         return {
             'name': concert.concert_title,
             'bands': [band.band_name for band in concert.bands.all()],
-            'date': concert.date.strftime("%d.%m.%Y")
+            'date': concert.date.strftime("%d.%m.%Y"),
+            'ticket_price': concert.ticket_price,
+            'genre': [band.genre for band in concert.bands.all()],
+            'attendance': concert.attendance,
+            'scene': concert.scene.scene_name
         }
 
     try:
-        current_scene = Scene.objects.get(scene_name=scene)
+        current_scene = Scene.objects.all()
     except ObjectDoesNotExist:
         return redirect('bookingansvarlig:scenes')
-    concerts = Concert.objects.filter(scene=current_scene)
+    concerts = Concert.objects.all()
 
 # Adds the serch functions
     query = request.GET.get('q')
@@ -45,10 +49,6 @@ def concert_scene(request, scene):
 
     context = {
         'concerts': [build_concert(concert) for concert in filteredConcerts],
-        'scene': scene,
     }
-
-
-
 
     return render(request, 'bookingansvarlig/concert_scene.html', context)
