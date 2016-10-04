@@ -35,13 +35,6 @@ def concert(request):
             'scene': concert.scene.scene_name,
         }
 
-    def get_query(key):
-        """
-        Gets the get value for the given key. If the value is None an empty string is returned
-        """
-        query = request.GET.get(key)
-        return '' if query is None else query
-
     def get_genres(concerts):
         """
         Finds all possible genres from bands that have played at Samfundet
@@ -56,7 +49,7 @@ def concert(request):
     concerts = Concert.objects.all()
 
     # Adds the search functions
-    band_name_query, genre_query, scene_query = get_query('band_name'), get_query('genre'), get_query('scene')
+    band_name_query, genre_query, scene_query = request.GET.get('band_name', ''), request.GET.get('genre', ''), request.GET.get('scene', '')
     filtered_concerts = []
     for concert in concerts.filter(scene__scene_name__icontains=scene_query).filter(date__lte=timezone.now()).order_by('-date'):
         queryset_list = concert.bands.filter(band_name__icontains=band_name_query).filter(genre__icontains=genre_query)
