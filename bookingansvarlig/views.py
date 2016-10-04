@@ -52,8 +52,9 @@ def concert(request):
     band_name_query, genre_query, scene_query = request.GET.get('band_name', ''), request.GET.get('genre', ''), request.GET.get('scene', '')
     filtered_concerts = []
     for concert in concerts.filter(scene__scene_name__icontains=scene_query).filter(date__lte=timezone.now()).order_by('-date'):
-        queryset_list = concert.bands.filter(band_name__icontains=band_name_query).filter(genre__icontains=genre_query)
-        if queryset_list:
+        queryset_list_name = concert.bands.filter(band_name__icontains=band_name_query)
+        queryset_list_genre = concert.bands.filter(genre__icontains=genre_query)
+        if queryset_list_name or queryset_list_genre:
             filtered_concerts.append(concert)
 
     context = {
