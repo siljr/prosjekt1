@@ -1,6 +1,7 @@
 from django.views import generic
 from band_booking.models import Scene, Concert, Band
 from django.shortcuts import render, redirect
+from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 
 __author__ = 'Weronika'
@@ -18,37 +19,57 @@ class ScenesListView(generic.ListView):
         return scenes
 
 
-def concert_scene(request, scene):
+def concert(request):
     def build_concert(concert):
+        """
+        Builds the information about a concert from the concert model
+        """
         return {
+            'pk': concert.pk,
             'name': concert.concert_title,
             'bands': [band.band_name for band in concert.bands.all()],
             'date': concert.date.strftime("%d.%m.%Y"),
             'ticket_price': concert.ticket_price,
             'genre': [band.genre for band in concert.bands.all()],
             'attendance': concert.attendance,
-            'scene': concert.scene.scene_name
+            'scene': concert.scene.scene_name,
         }
 
-    try:
-        current_scene = Scene.objects.all()
-    except ObjectDoesNotExist:
-        return redirect('bookingansvarlig:scenes')
+    def get_query(key):
+        """
+        Gets the get value for the given key. If the value is None an empty string is returned
+        """
+        query = request.GET.get(key)
+        return '' if query is None else query
+
+    def get_genres(concerts):
+        """
+        Finds all possible genres from bands that have played at Samfundet
+        """
+        genres = []
+        for concert in concerts:
+            for band in concert.bands.all():
+                if band.genre not in genres:
+                    genres.append(band.genre)
+        return genres
+
     concerts = Concert.objects.all()
 
-# Adds the serch functions
-    query = request.GET.get('q')
-    filteredConcerts = []
-    for concert in concerts:
-        if query:
-            queryset_list = concert.bands.filter(band_name__icontains=query)
-            if(queryset_list):
-                filteredConcerts.append(concert)
-        else:
-            filteredConcerts.append(concert)
+    # Adds the search functions
+    band_name_query, genre_query, scene_query = get_query('band_name'), get_query('genre'), get_query('scene')
+    filtered_concerts = []
+    for concert in concerts.filter(scene__scene_name__icontains=scene_query).filter(date__lte=timezone.now()).order_by('-date'):
+        queryset_list = concert.bands.filter(band_name__icontains=band_name_query).filter(genre__icontains=genre_query)
+        if queryset_list:
+            filtered_concerts.append(concert)
 
     context = {
-        'concerts': [build_concert(concert) for concert in filteredConcerts],
+        'genres': get_genres(concerts),
+        'concerts': [build_concert(concert) for concert in filtered_concerts],
+        'genre': genre_query,
+        'scene': scene_query,
+        'band_name': band_name_query,
+        'scenes': [scene.scene_name for scene in Scene.objects.all()]
     }
 
     return render(request, 'bookingansvarlig/concert_scene.html', context)
