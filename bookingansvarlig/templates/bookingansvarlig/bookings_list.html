@@ -7,8 +7,9 @@
 <body>
 <table>
     {% for booking in bookings %}
+        <tr><th>Titel</th><th>Status</th><th>Mottaker</th></tr>
         <tr>
-            <td>{{ booking.title_name }}</td>
+            <td>{{ booking.title_name }}</td><td>{{ booking.status }}</td><td>{{ booking.recipient_email }}</td><td><a href="">se tilbud</a></td>
         </tr>
     {% endfor %}
 </table>
