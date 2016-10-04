@@ -52,9 +52,11 @@ def event_load(request, name):
 
 
 def index(request):
+    """
+    Creates a role specific user page
+    """
     pages = {
         "Bookingansvarlig": [
-            {"title": "Sceneoversikt", "link": reverse('bookingansvarlig:scenes')},
             {"title": "Bookingsoversikt", "link": reverse('bookingansvarlig:bookings')},
             {"title": "Tidligere konserter", "link": reverse('bookingansvarlig:concerts')},
         ],
@@ -69,6 +71,8 @@ def index(request):
         super_user_pages = []
         for user_group_pages in pages.values():
             super_user_pages += user_group_pages
+        # Removes duplicate links from the admin view
+        super_user_pages = list({page['link']: page for page in super_user_pages}.values())
         return render(request, "band_booking/index.html", {'pages': super_user_pages})
 
     user_groups = request.user.groups.all()

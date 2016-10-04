@@ -10,5 +10,5 @@ urlpatterns = [
     url(r'^artist/(?P<name>([A-Za-z0-9 ]+))$', views.artist_load, name='artist_load'),
     url(r'^get_artist/(?P<name>([A-Za-z0-9 ]+))$', views.artist, name='artist'),
     url(r'^event_information/(?P<name>([A-Za-z0-9 ]+))$', views.event_load, name='past_events'),
-    url(r'^index$', views.index, name='index'),
+    url(r'^index/$', views.index, name='index'),
 ]
