@@ -67,6 +67,7 @@ def index(request):
         super_user_pages = []
         for user_group_pages in pages.values():
             super_user_pages += user_group_pages
+        super_user_pages = list({q['link']:q for q in super_user_pages}.values())
         return render(request, "band_booking/index.html", {'pages': super_user_pages})
 
     user_groups = request.user.groups.all()
