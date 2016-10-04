@@ -5,7 +5,7 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'bookingansvarlig/style/concert_overview.css' %}"/>
     <script src="{% static 'bookingansvarlig/scripts/concert_dropdown_selector.js'%}"></script>
-    <title>{{ scene }}</title>
+    <title>Concerts</title>
 </head>
 <body>
 <main>
@@ -21,7 +21,7 @@
                 <form method="GET" action="" id="concert_filters">
                     <input type="hidden" name="scene" id="scene_selector" value="{{ scene }}" hidden/>
                     <input type="hidden" name="genre" id="genre_selector" value="{{ genre }}"hidden/>
-                    <input type="text" name="band_name" placeholder="Skriv inn navn på band" value="{{ band_name }}"/>
+                    <input type="text" class="search-bar" name="band_name" placeholder="Skriv inn navn på band" value="{{ band_name }}"/>
                     <input type="submit" value="Søk"/>
                 </form>
             </div>

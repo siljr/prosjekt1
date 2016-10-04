@@ -26,6 +26,11 @@ body {
     text-align: center;
 }
 
+.search-bar {
+    font-size: 12px;
+    width: 200px;
+}
+
 .dropdown {
     background-color: #f1f1f1;
     width: 200px;
@@ -78,6 +83,7 @@ body {
     background-color: #ffffff;
     border: 1px solid #808080;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .currently-selected-item{
