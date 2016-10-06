@@ -1,5 +1,5 @@
 from django.views import generic
-from band_booking.models import Scene, Concert, Band
+from band_booking.models import Scene, Concert, Band, Booking
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
@@ -73,3 +73,12 @@ def concert(request):
 
 def create_booking_offer(request):
     return render(request, 'bookingansvarlig/create_booking_offer.html', {})
+
+
+class BookingListView(generic.ListView):
+    template_name = 'bookingansvarlig/bookings_list.html'
+    context_object_name = 'bookings'
+
+    def get_queryset(self):
+        bookings = Booking.objects.filter(sender=self.request.user)
+        return bookings
