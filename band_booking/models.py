@@ -149,6 +149,7 @@ class Booking(models.Model):
         max_length=1,
         choices=STATUS_CHOICES,
     )
+
     def __str__(self):
         return self.title_name
 

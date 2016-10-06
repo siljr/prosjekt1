@@ -88,8 +88,8 @@ def update_booking_offer(request, offer_id=None):
         booking_offer = Booking.objects.get(pk=offer_id)
         if booking_offer.sender != request.user:
             return create_new_offer(title, recipient_email, text, request.user)
-        booking_offer.text = text
-        booking_offer.title = title
+        booking_offer.email_text = text
+        booking_offer.title_name = title
         booking_offer.recipient_email = recipient_email
         booking_offer.save()
         request.session['saved-offer'] = True
