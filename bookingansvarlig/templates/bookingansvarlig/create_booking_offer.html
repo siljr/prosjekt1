@@ -6,13 +6,28 @@
 		<meta charset="UTF-8">
 		<link type="text/css" rel="stylesheet" href="{% static 'bookingansvarlig/style/create_booking_offer.css' %}">
 		<title> Bookingtilbud </title>
+        <script src="{% static 'bookingansvarlig/scripts/concert_overview.js' %}"></script>
 	</head>
 
 	<body>
 	<main>
-		<form method="post" action="" autocomplete="off">
+        {% if saved %}
+            <div class="saved-message" id="saved-message">
+                <span class="center-message-vertical">
+                    Tilbud er lagret
+                </span>
+            </div>
+        {% endif %}
+        {% if offer %}
+            <div class="{{ offer.status }}" id="offer-status-message">
+                <span class="center-message-vertical">
+                    {{ status }}
+                </span>
+            </div>
+        {% endif %}
+		<form class="offer-form" method="post" action="{{ link }}" autocomplete="off">
             {% csrf_token %}
-			<h2> Bookingtilbud </h2>
+			<h1 class="page-title"> Bookingtilbud </h1>
 			
 			<div class="text_fields">
 				<div class="title_field">
@@ -20,7 +35,7 @@
 						Tittel:
 					</label>
 					<br>
-					<input type="text" name="title" id="title" required>
+					<input type="text" name="title" id="title" required {% if offer %}value="{{ offer.title_name }}"{% endif %}>
 				</div>
 				
 				<div class="email">
@@ -28,20 +43,20 @@
 						E-post mottaker: 
 					</label>
 					<br>
-					<input type="email" name="e-post" id="email" required>
+					<input type="email" name="email" id="email" required {% if offer %}value="{{ offer.recipient_email }}"{% endif %}>
 				</div>
 			</div>
 			
 			<br>
 
-			<div class="email_text">
+			<div class="email-text">
 				<label for="message">Beskjed: </label>
 				<br>
-				<textarea id="message" name="message" required></textarea>
+				<textarea class="message-field" id="message" name="message" required>{% if offer %}{{ offer.email_text }}{% endif %}</textarea>
 				<br> <br>
 			</div>
 			
-			<input class="submit" type="submit" value="Send tilbud til godkjenning"/>
+			<input class="submit" type="submit" value="Lagre tilbud"/>
 		</form>
 	</main>
 	</body>

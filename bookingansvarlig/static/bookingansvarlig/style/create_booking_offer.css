@@ -1,10 +1,10 @@
-h2 {
+.page-title {
 	text-align: center;
 }
 
-textarea {
+.message-field {
     width: 100%;
-    height: 300px;
+    height: calc(100% - 25px);
     padding: 12px 20px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -26,8 +26,13 @@ textarea {
 	display: inline-block;
 }
 
-.title_field {
-	
+.offer-form {
+    height: calc(100% - 130px);
+}
+
+.email-text {
+    height: calc(100% - 300px);
+    margin-bottom: 10px;
 }
 
 input {
@@ -39,11 +44,18 @@ input {
 }
 
 body {
-	margin: 30px;
+	padding: 30px;
+    margin: 0;
+}
+
+body, html {
+    max-height: 100%;
+    width: 100%;
 }
 
 main {
 	max-width: 100%;
+    height: calc(100% - 60px);
 	width: 800px;
 	position: absolute;
 	left: 50%;
@@ -52,4 +64,39 @@ main {
 
 .submit {
     float: right;
+}
+
+.saved-message {
+    background-color: #3ebb3b;
+}
+
+.center-message-vertical {
+    vertical-align: middle;
+    line-height: 45px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.U, .S, .A, .N, .saved-message {
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+    height: 45px;
+    margin-bottom: 5px;
+}
+
+.U {
+    background-color: #738ffe;
+}
+
+.N {
+    background-color: #ff655d;
+}
+
+.A, .S {
+    background-color: #3ebb3b;
+}
+
+#offer-status-message, #saved-message{
+    cursor: pointer;
 }
