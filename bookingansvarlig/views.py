@@ -1,10 +1,8 @@
 from django.views import generic
-from band_booking.models import Scene, Concert, Band
-from django.shortcuts import render, redirect
+from band_booking.models import Scene, Concert, Band, Booking
+from django.shortcuts import render, redirect, reverse
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
-
-__author__ = 'Weronika'
 
 
 class ScenesListView(generic.ListView):
@@ -71,5 +69,49 @@ def concert(request):
     return render(request, 'bookingansvarlig/concert_scene.html', context)
 
 
-def create_booking_offer(request):
-    return render(request, 'bookingansvarlig/create_booking_offer.html', {})
+def update_booking_offer(request, offer_id=None):
+
+    def create_new_offer(title, email, text, user):
+        new_booking_offer = Booking(sender=user, title_name=title, recipient_email=email, email_text=text)
+        new_booking_offer.save()
+        request.session['saved-offer'] = True
+        return redirect('bookingansvarlig:create_booking_offer', offer_id=new_booking_offer.pk)
+
+    title, text, recipient_email = request.POST.get('title'), request.POST.get('message'), request.POST.get('email')
+    if title is None or text is None or recipient_email is None:
+        return redirect('bookingansvarlig:create_booking_offer')
+
+    if offer_id is None:
+        return create_new_offer(title, recipient_email, text, request.user)
+
+    try:
+        booking_offer = Booking.objects.get(pk=offer_id)
+        if booking_offer.sender != request.user:
+            return create_new_offer(title, recipient_email, text, request.user)
+        booking_offer.text = text
+        booking_offer.title = title
+        booking_offer.recipient_email = recipient_email
+        booking_offer.save()
+        request.session['saved-offer'] = True
+        return redirect('bookingansvarlig:create_booking_offer', offer_id=booking_offer.pk)
+    except Booking.DoesNotExist:
+        return create_new_offer(title, recipient_email, text, request.user)
+
+
+def create_booking_offer(request, offer_id=None):
+    saved = request.session.pop('saved-offer', False)
+    status_messages = {'U': 'Tilbudet er under godkjenning', 'N': 'Tilbudet er ikke godkjent',
+                       'A': 'Tilbudet er godkjent', 'S': 'Tilbudet er sent'}
+
+    if offer_id is None:
+        return render(request, 'bookingansvarlig/create_booking_offer.html',
+                      {'link': "/booking/offer/save/"})
+
+    booking_offer = Booking.objects.get(pk=offer_id)
+    if booking_offer.sender != request.user:
+        return redirect('band_booking:index')
+
+    context = {'offer': booking_offer, 'saved': saved, 'status': status_messages[booking_offer.status],
+               'link': reverse("bookingansvarlig:update_booking_offer", kwargs={"offer_id": offer_id})}
+
+    return render(request, 'bookingansvarlig/create_booking_offer.html', context)
