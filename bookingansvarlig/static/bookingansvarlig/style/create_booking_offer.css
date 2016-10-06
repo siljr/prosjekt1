@@ -50,13 +50,14 @@ label{
 }
 
 body {
-	padding: 30px;
+	padding: 10px 0 0 0;
     margin: 0;
 }
 
 body, html {
     max-height: 100%;
     width: 100%;
+    font-size: 15px;
 }
 
 main {
@@ -70,9 +71,23 @@ main {
 
 .submit {
     float: right;
+}
+
+.menu {
+    float: left;
+    margin-top: -170px;
+}
+
+.submit, .menu {
     background-color: #f8f8f8;
     width: 200px;
-    border: 2px solid #ccc;
+    height: 25px;
+    border-radius: 6px;
+    border: 2px solid #8d8d8d;
+}
+
+.submit:hover, .menu:hover {
+    background-color: #ededed;
 }
 
 .saved-message {
@@ -103,6 +118,10 @@ main {
     background-color: #ff655d;
 }
 
-.A, .S {
+.S {
     background-color: #3ebb3b;
+}
+
+.A {
+    background-color: #d3ff25;
 }

@@ -35,7 +35,7 @@
 		<form class="offer-form" method="post" action="{{ link }}" autocomplete="off">
             {% csrf_token %}
 			<h1 class="page-title"> Bookingtilbud </h1>
-			
+
 			<div class="text_fields">
 				<div class="title_field">
 					<label for="title" >
@@ -44,16 +44,16 @@
 					<br>
 					<input class="title-input-field" type="text" name="title" id="title" placeholder="Bookingtilbud tittel" required {% if offer %}value="{{ offer.title_name }}"{% endif %}>
 				</div>
-				
+
 				<div class="email">
-					<label for="email"> 
+					<label for="email">
 						E-post manager:
 					</label>
 					<br>
 					<input class="email-input-field" type="email" name="email" id="email" placeholder="Managers epost" required {% if offer %}value="{{ offer.recipient_email }}"{% endif %}>
 				</div>
 			</div>
-			
+
 			<br>
 
 			<div class="email-text">
@@ -62,9 +62,12 @@
 				<textarea class="message-field" id="message" name="message" placeholder="Bookingtilbud tekst" required>{% if offer %}{{ offer.email_text }}{% endif %}</textarea>
 				<br> <br>
 			</div>
-			
+
 			<input class="submit" type="submit" value="Lagre tilbud"/>
 		</form>
+        <a href="{% url 'bookingansvarlig:bookings' %}">
+            <button class="menu"> Oversikt tilbud </button>
+        </a>
 	</main>
 	</body>
 </html>
