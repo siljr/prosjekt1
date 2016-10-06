@@ -11,4 +11,5 @@ function hideOnClick(elementId){
 window.onload = function(){
     hideOnClick("saved-message");
     hideOnClick("offer-status-message");
+    hideOnClick("error-message");
 };

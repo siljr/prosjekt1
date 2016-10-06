@@ -5,7 +5,7 @@
 .message-field {
     width: 100%;
     height: calc(100% - 25px);
-    padding: 12px 20px;
+    padding: 6px;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
@@ -14,16 +14,17 @@
 }
 
 .text_fields {
-	padding: 12px 20px;
     width: 100%;
     border-radius: 4px;
 }
 
 .title_field, .email{
-	position: relative;
-	left: 20%;
-	width: 30%;
+	width: calc(50% - 40px);
 	display: inline-block;
+}
+
+.title_field {
+    padding-right: 55px;
 }
 
 .offer-form {
@@ -35,12 +36,17 @@
     margin-bottom: 10px;
 }
 
-input {
+.title-input-field, .email-input-field {
     border: 2px solid #ccc;
 	border-radius: 4px;
 	background-color: #f8f8f8;
-	width: 200px;
-    padding: 2px;
+    padding: 3px 10px 3px 10px;
+    width: 100%;
+}
+
+label{
+    padding-left: 4px;
+    font-weight: bold;
 }
 
 body {
@@ -64,6 +70,9 @@ main {
 
 .submit {
     float: right;
+    background-color: #f8f8f8;
+    width: 200px;
+    border: 2px solid #ccc;
 }
 
 .saved-message {
@@ -77,26 +86,23 @@ main {
     font-weight: 500;
 }
 
-.U, .S, .A, .N, .saved-message {
+.U, .S, .A, .N, .saved-message, .error-message {
     width: 100%;
     border-radius: 10px;
     text-align: center;
     height: 45px;
     margin-bottom: 5px;
+    cursor: pointer;
 }
 
 .U {
     background-color: #738ffe;
 }
 
-.N {
+.N, .error-message {
     background-color: #ff655d;
 }
 
 .A, .S {
     background-color: #3ebb3b;
-}
-
-#offer-status-message, #saved-message{
-    cursor: pointer;
 }

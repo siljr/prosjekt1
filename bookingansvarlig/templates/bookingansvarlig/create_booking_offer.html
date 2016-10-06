@@ -18,6 +18,13 @@
                 </span>
             </div>
         {% endif %}
+        {% if error %}
+            <div class="error-message" id="error-message">
+                <span class="center-message-vertical">
+                    {{ error }}
+                </span>
+            </div>
+        {% endif %}
         {% if offer %}
             <div class="{{ offer.status }}" id="offer-status-message">
                 <span class="center-message-vertical">
@@ -35,15 +42,15 @@
 						Tittel:
 					</label>
 					<br>
-					<input type="text" name="title" id="title" required {% if offer %}value="{{ offer.title_name }}"{% endif %}>
+					<input class="title-input-field" type="text" name="title" id="title" placeholder="Bookingtilbud tittel" required {% if offer %}value="{{ offer.title_name }}"{% endif %}>
 				</div>
 				
 				<div class="email">
 					<label for="email"> 
-						E-post mottaker: 
+						E-post manager:
 					</label>
 					<br>
-					<input type="email" name="email" id="email" required {% if offer %}value="{{ offer.recipient_email }}"{% endif %}>
+					<input class="email-input-field" type="email" name="email" id="email" placeholder="Managers epost" required {% if offer %}value="{{ offer.recipient_email }}"{% endif %}>
 				</div>
 			</div>
 			
@@ -52,7 +59,7 @@
 			<div class="email-text">
 				<label for="message">Beskjed: </label>
 				<br>
-				<textarea class="message-field" id="message" name="message" required>{% if offer %}{{ offer.email_text }}{% endif %}</textarea>
+				<textarea class="message-field" id="message" name="message" placeholder="Bookingtilbud tekst" required>{% if offer %}{{ offer.email_text }}{% endif %}</textarea>
 				<br> <br>
 			</div>
 			
