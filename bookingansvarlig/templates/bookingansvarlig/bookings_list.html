@@ -1,17 +1,52 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Bookingtilbud</title>
+    <link rel="stylesheet" href="{% static 'bookingansvarlig/style/booking_list.css' %}">
 </head>
 <body>
-<table>
-    {% for booking in bookings %}
-        <tr><th>Titel</th><th>Status</th><th>Mottaker</th></tr>
+<main>
+    <div class="button-container">
+        <a href="{% url 'band_booking:index' %}" class="menu-button button">
+            <button>
+                Meny
+            </button>
+        </a>
+        <a href="{% url 'bookingansvarlig:create_booking_offer' %}" class="booking-offer-button button">
+            <button>
+                Nytt bookingtilbud
+            </button>
+        </a>
+    </div>
+    <table class="booking-table">
+        <thead>
         <tr>
-            <td>{{ booking.title_name }}</td><td>{{ booking.status }}</td><td>{{ booking.recipient_email }}</td><td><a href="">se tilbud</a></td>
+            <th>Tittel</th>
+            <th>Mottaker</th>
+            <th>Ansvarlig</th>
+            <th>Tilbud</th>
+            <th>Status</th>
         </tr>
-    {% endfor %}
-</table>
+        </thead>
+        <tbody>
+        {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.title_name }}</td>
+                <td>{{ booking.recipient_email }}</td>
+                {% if booking.sender.first_name %}
+                    <td>{{ booking.sender.first_name }} {{ booking.sender.last_name }}</td>
+                {% else %}
+                    <td>{{ booking.sender.username }}</td>
+                {% endif %}
+                <td><a href="{% url 'bookingansvarlig:create_booking_offer' booking.pk %}">Se tilbud</a></td>
+                <td class="{{ booking.status }}">{{ booking.get_status_word }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</main>
 </body>
 </html>
