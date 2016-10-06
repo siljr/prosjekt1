@@ -150,6 +150,20 @@ class Booking(models.Model):
         choices=STATUS_CHOICES,
     )
 
+    def get_status_message(self):
+        """
+        Returns a status message in Norwegian for the current status of the booking offer.
+        """
+        status_messages = {'U': 'Tilbudet er under godkjenning', 'N': 'Tilbudet er ikke godkjent',
+                           'A': 'Tilbudet er godkjent', 'S': 'Tilbudet er sent'}
+        return status_messages[self.status]
+
+    def user_allowed_to_view(self, user):
+        """
+        Checks if the given user is allowed to view the booking offer
+        """
+        return self.sender == user or user.has_perm('bookingansvarlig.view_all_booking_offers')
+
     def __str__(self):
         return self.title_name
 
