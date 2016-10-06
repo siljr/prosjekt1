@@ -157,3 +157,12 @@ def create_booking_offer(request, offer_id=None):
                }
 
     return render(request, 'bookingansvarlig/create_booking_offer.html', context)
+
+
+class BookingListView(generic.ListView):
+    template_name = 'bookingansvarlig/bookings_list.html'
+    context_object_name = 'bookings'
+
+    def get_queryset(self):
+        bookings = Booking.objects.filter(sender=self.request.user)
+        return bookings
