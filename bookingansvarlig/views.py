@@ -164,5 +164,4 @@ class BookingListView(generic.ListView):
     context_object_name = 'bookings'
 
     def get_queryset(self):
-        bookings = Booking.objects.filter(sender=self.request.user)
-        return bookings
+        return [booking for booking in Booking.objects.all() if booking.user_allowed_to_view(self.request.user)]
