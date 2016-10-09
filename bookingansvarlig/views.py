@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, reverse
 from django.utils import timezone
 from django.core import validators
 from django.core.exceptions import ValidationError
-
+import re
 
 class ScenesListView(generic.ListView):
     """
@@ -154,6 +154,7 @@ def create_booking_offer(request, offer_id=None):
     context = {'offer': booking_offer, 'saved': saved,
                'status': booking_offer.get_status_message(),
                'link': reverse('bookingansvarlig:update_booking_offer', kwargs={'offer_id': offer_id}),
+               'email_text': booking_offer.email_text
                }
 
     return render(request, 'bookingansvarlig/create_booking_offer.html', context)
@@ -165,3 +166,12 @@ class BookingListView(generic.ListView):
 
     def get_queryset(self):
         return [booking for booking in Booking.objects.all() if booking.user_allowed_to_view(self.request.user)]
+
+
+def search_for_artist(request):
+    artist_name = request.GET.get('name', None)
+    if artist_name is None or artist_name == "":
+        return render(request, 'bookingansvarlig/search_artist.html', {})
+    if re.match("^[A-Za-z0-9 ]+$", artist_name):
+        return redirect('band_booking:artist_load', name=artist_name)
+    return render(request, 'bookingansvarlig/search_artist.html', {'name': artist_name, 'error': 'Artist navnet inneholder karakterer som ikke er støttet. Støttede karakterer er mellomrom, bokstavene fra A til Z og tall'})

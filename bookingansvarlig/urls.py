@@ -16,4 +16,5 @@ urlpatterns = [
     url(r'^booking/offer/save/$', views.update_booking_offer, name='update_booking_offer'),
     url(r'^bookings$', views.BookingListView.as_view(), name='bookings'),
     url(r'^booking/create_offer$', views.create_booking_offer, name='create_booking_offer'),
+    url(r'^artist/$', views.search_for_artist, name='search_for_artist'),
 ]
