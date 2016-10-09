@@ -57,7 +57,7 @@ def get_past_events_by_id(artist_id):
     events = build_events(events)
 
     if len(events) == 0:
-        return {'error': 'Could not find earlier events'}
+        return {'error': 'Fant ingen tidligere konserter'}
     return {'events': events}
 
 
