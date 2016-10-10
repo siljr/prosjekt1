@@ -1,0 +1,69 @@
+main{
+    max-width: 1000px;
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+body, html {
+    padding-top: 10px;
+    min-width: 100%;
+    font-size: 15px;
+}
+
+.booking-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.booking-table, .booking-table td, .booking-table th {
+    border: 1px solid #000000;
+}
+
+.booking-table > tbody > tr {
+    height: 40px;
+}
+
+th {
+    background-color: #0ca2e8;
+}
+
+.U {
+    background-color: #738ffe;
+}
+
+.N {
+    background-color: #ff655d;
+}
+
+.S {
+    background-color: #3ebb3b;
+}
+
+.A {
+    background-color: #d3ff25;
+}
+
+.button-container {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.booking-offer-button{
+    float: right;
+}
+
+.button > button {
+    height: 35px;
+    width: 200px;
+    background-color: #ededed;
+    border: 1px solid #525252;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button > button:hover {
+    background-color: #c6c6c6;
+}

@@ -1,11 +1,10 @@
 from django.views import generic
 from band_booking.models import Scene, Concert, Band, Booking
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.utils import timezone
-from django.core.exceptions import ObjectDoesNotExist
-
-__author__ = 'Weronika'
-
+from django.core import validators
+from django.core.exceptions import ValidationError
+import re
 
 class ScenesListView(generic.ListView):
     """
@@ -71,8 +70,94 @@ def concert(request):
     return render(request, 'bookingansvarlig/concert_scene.html', context)
 
 
-def create_booking_offer(request):
-    return render(request, 'bookingansvarlig/create_booking_offer.html', {})
+def update_booking_offer(request, offer_id=None):
+    """
+    Updates the booking offer with the given ID, if no ID a new booking offer is created instead.
+    Also creates a new booking offer if the user does not have permissions to edit the current booking offer
+    """
+
+    def create_new_offer(title, email, text, user):
+        """
+        Creates a new booking offer given the title, email, text and user.
+        """
+        new_booking_offer = Booking(sender=user, title_name=title, recipient_email=email, email_text=text)
+        new_booking_offer.save()
+        request.session['saved-offer'] = True
+        return redirect('bookingansvarlig:create_booking_offer', offer_id=new_booking_offer.pk)
+
+    title, text, recipient_email = request.POST.get('title'), request.POST.get('message'), request.POST.get('email')
+
+    # If one of the three fields are not set, then we return the user to the create booking offer view, as the HTML
+    # requires the user to fill in all three fields.
+    if title is None or text is None or recipient_email is None:
+        return redirect('bookingansvarlig:create_booking_offer')
+
+    # Checks if the email is in a valid format, if not the user is returned
+    # to the offer creation page with an error message
+    try:
+        validators.validate_email(recipient_email)
+    except ValidationError:
+        context = {'link': reverse('bookingansvarlig:update_booking_offer'),
+                   'offer': {'title_name': title, 'recipient_email': recipient_email, 'email_text': text},
+                   'error': "Email is not valid",
+                   }
+        if offer_id is not None:
+            context['link'] = reverse('bookingansvarlig:update_booking_offer', kwargs={'offer_id': offer_id})
+        return render(request, 'bookingansvarlig/create_booking_offer.html', context)
+
+    # If no offer ID is given, then we create a new booking offer
+    if offer_id is None:
+        return create_new_offer(title, recipient_email, text, request.user)
+
+    try:
+        # Find the booking offer
+        booking_offer = Booking.objects.get(pk=offer_id)
+
+        # If the user isn't allowed the view the booking_offer, it isn't allowed to edit it either. That is
+        # a new booking offer is created instead.
+        if not booking_offer.user_allowed_to_view(request.user):
+            return create_new_offer(title, recipient_email, text, request.user)
+
+        # Update the information in the booking offer
+        booking_offer.email_text = text
+        booking_offer.title_name = title
+        booking_offer.recipient_email = recipient_email
+        booking_offer.save()
+        request.session['saved-offer'] = True
+        return redirect('bookingansvarlig:create_booking_offer', offer_id=booking_offer.pk)
+
+    # If no booking offer exist for the given offer ID, we create a new booking offer.
+    except Booking.DoesNotExist:
+        return create_new_offer(title, recipient_email, text, request.user)
+
+
+def create_booking_offer(request, offer_id=None):
+    """
+    Either displays the information about the current booking offer
+    """
+    saved = request.session.pop('saved-offer', False)
+
+    # If no offer ID is given, a new booking offer is to be created
+    if offer_id is None:
+        return render(request, 'bookingansvarlig/create_booking_offer.html',
+                      {'link': reverse('bookingansvarlig:update_booking_offer')})
+
+    try:
+        booking_offer = Booking.objects.get(pk=offer_id)
+    except Booking.DoesNotExist:
+        return redirect('band_booking:index')
+
+    # Check if the user is allowed to view the booking offer, else redirect it the overview of the booking
+    if not booking_offer.user_allowed_to_view(request.user):
+        return redirect('band_booking:index')
+
+    context = {'offer': booking_offer, 'saved': saved,
+               'status': booking_offer.get_status_message(),
+               'link': reverse('bookingansvarlig:update_booking_offer', kwargs={'offer_id': offer_id}),
+               'email_text': booking_offer.email_text
+               }
+
+    return render(request, 'bookingansvarlig/create_booking_offer.html', context)
 
 
 class BookingListView(generic.ListView):
@@ -80,5 +165,13 @@ class BookingListView(generic.ListView):
     context_object_name = 'bookings'
 
     def get_queryset(self):
-        bookings = Booking.objects.filter(sender=self.request.user)
-        return bookings
+        return [booking for booking in Booking.objects.all() if booking.user_allowed_to_view(self.request.user)]
+
+
+def search_for_artist(request):
+    artist_name = request.GET.get('name', None)
+    if artist_name is None or artist_name == "":
+        return render(request, 'bookingansvarlig/search_artist.html', {})
+    if re.match("^[A-Za-z0-9 ]+$", artist_name):
+        return redirect('band_booking:artist_load', name=artist_name)
+    return render(request, 'bookingansvarlig/search_artist.html', {'name': artist_name, 'error': 'Artist navnet inneholder karakterer som ikke er støttet. Støttede karakterer er mellomrom, bokstavene fra A til Z og tall'})

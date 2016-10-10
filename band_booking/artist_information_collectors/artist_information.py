@@ -27,7 +27,7 @@ def get_artist_information(name):
     """
     artist_discogs, artist_spotify = find_artist(name)
     if artist_spotify is None:
-        return {'error': 'Could not find information about the artist, ' + name}
+        return {'error': 'Kunne ikke finne informasjon om, ' + name}
     if artist_discogs is None:
         return build_artist_information(artist_spotify)
     if is_band(artist_discogs):

@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
+from django.dispatch import receiver
 
 # Create your models here.
 
@@ -149,6 +150,26 @@ class Booking(models.Model):
         max_length=1,
         choices=STATUS_CHOICES,
     )
+
+    def get_status_message(self):
+        """
+        Returns a status message in Norwegian for the current status of the booking offer.
+        """
+        return "Tilbudet er " + self.get_status_word().lower()
+
+    def get_status_word(self):
+        """
+        Returns a status word in Norwegian for the current status of the booking offer
+        """
+        status_words = {'U': 'Under godkjenning', 'N': 'Ikke godkjent', 'A': 'Godkjent', 'S': 'Sent'}
+        return status_words[self.status]
+
+    def user_allowed_to_view(self, user):
+        """
+        Checks if the given user is allowed to view the booking offer
+        """
+        return self.sender == user or user.has_perm('bookingansvarlig.view_all_booking_offers')
+
     def __str__(self):
         return self.title_name
 
@@ -163,6 +184,18 @@ class Booking(models.Model):
         if new_status in (Booking.UNDECIDED, Booking.NOT_APPROVED, Booking.APPROVED, Booking.SENT):
             self.status = new_status
             self.save()
+
+
+@receiver(models.signals.post_save, sender=Booking)
+def handle_change(sender, **kwargs):
+    """
+    Sends the email for the booking offer when the status changes to approved
+    """
+    booking_object = kwargs['instance']
+    if booking_object.status == Booking.APPROVED:
+        from bookingansvarlig.actions.send_booking import send_booking
+        send_booking(booking_object)
+        booking_object.change_status(Booking.SENT)
 
 
 

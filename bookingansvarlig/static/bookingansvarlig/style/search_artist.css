@@ -1,0 +1,61 @@
+body, html {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    padding: 40px;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, 0);
+    width: 700px;
+    text-align: center;
+}
+
+.menu-button {
+    padding: 3px;
+}
+
+.menu-button > button {
+    height: 25px;
+    width: 60px;
+    background-color: #ffffff;
+    border: 1px solid #808080;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 40px;
+    float: left;
+}
+
+.error-message {
+    padding: 5px;
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+    min-height: 40px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    margin-top: 20px;
+    background-color: #ff655d;
+}
+
+.submit {
+    background-color: #f8f8f8;
+    width: 100px;
+    height: 25px;
+    border-radius: 6px;
+    border: 2px solid #8d8d8d;
+    float: right;
+}
+
+.search-form{
+    margin-top: 20px;
+    width: 300px;
+    text-align: left;
+    padding-left: calc(50% - 150px);
+}
+
+.artist-name-label {
+    font-weight: bold;
+}
