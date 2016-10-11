@@ -42,7 +42,8 @@ html {
 
 body {
     min-width: 100%;
-    min-height: 100%
+    min-height: 100%;
+    font-family: "Times New Roman", serif;
 }
 
 html, body {
@@ -53,6 +54,30 @@ html, body {
 main{
     width: 100%;
     height: 100%;
+}
+
+.table-row {
+    display: table-row;
+}
+
+.table-cell {
+    display: table-cell;
+}
+
+.table {
+    display: table;
+}
+
+.overflow-scroll-x {
+    overflow-x: scroll;
+}
+
+.overflow-scroll-y {
+    overflow-y: scroll;
+}
+
+.table-row-group {
+    display: table-row-group;
 }
 
 .content {
@@ -74,6 +99,10 @@ main{
     top: 50%;
     transform: translate(-50%, -50%);
     position: absolute;
+}
+
+.hidden {
+    display: none;
 }
 
 .basic-button {
@@ -99,6 +128,14 @@ main{
     margin: 10px;
     line-height: 120px;
     border-radius: 15px;
+}
+
+.small-padding-left {
+    padding-left: 8px;
+}
+
+.small-padding-right {
+    padding-right: 8px;
 }
 
 .basic-button:hover {
@@ -157,7 +194,7 @@ main{
     outline: none;
 }
 
-.hover-pointer:hover{
+.hover-pointer:hover {
     cursor: pointer;
 }
 
@@ -165,4 +202,212 @@ main{
     padding-left: 6px;
     padding-top: 18px;
     display: inline-block;
+}
+
+.artist-information-loading-wrapper {
+    font-size: 25px;
+    max-width: 600px;
+}
+
+.artist-information-loading-animation {
+    height: 30px;
+    text-align: center;
+}
+
+.artist-information-loading-description {
+    font-style: italic;
+    font-size: 15px;
+    text-align: center;
+}
+
+.artist-information-loading-artist-name {
+    font-style: italic;
+    font-weight: 600;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.8);
+    background-color: #f2f2f2;
+}
+
+.tracks {
+    width: 100%;
+}
+
+.track-time {
+    width: 40px;
+}
+
+.track-number {
+    width: 28px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.track {
+    height: 20px;
+}
+
+.album-popularity, .album-sales, .album-information-title-divider {
+    font-weight: normal;
+    font-style: italic;
+    font-size: 16px;
+    vertical-align: bottom;
+}
+
+.album-information-title-divider {
+    padding: 0 5px 0 5px;
+}
+
+.albums {
+    vertical-align: top;
+    width: 49.5%;
+    height: 100%;
+    display: inline-block;
+}
+
+.album {
+    height: 200px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.album-image {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+}
+
+.album-title {
+    height: 25px;
+    font-size: 24px;
+    vertical-align: top;
+
+}
+
+.albums-title {
+    display: none;
+}
+
+.album-tracks {
+    height: 175px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.album-information {
+    height: 200px;
+    display: inline-block;
+    width: calc(100% - 210px);
+}
+
+.artist-information-event-date, .artist-information-event-date-header {
+    width: 75px;
+}
+
+.artist-information-event-city, .artist-information-event-city-header {
+    width: 125px;
+}
+
+.artist-information-events {
+    width: 100%;
+    height: calc(100% - 425px);
+    vertical-align: top;
+}
+
+.artist-information-event, .artist-information-event-headers {
+    display: table-row;
+    height: 25px;
+    width: 100%;
+}
+
+.artist-information-event-headers {
+    font-weight: bold;
+    font-size: 18px;
+    height: 20px;
+}
+
+.artist-information-event-table-events {
+    height: 100%;
+    vertical-align: top;
+    margin: 0;
+    padding: 0;
+}
+
+.artist-information-event-table-wrapper {
+    height: calc(100% - 20px);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.artist-information-event-table-wrapper-table {
+    display: table;
+    width: 100%;
+}
+
+.artist-information-events-table {
+    height: calc(100% - 40px);
+    width: 100%;
+}
+
+.artist-information-events-title {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+.artist-information-followers {
+    height: 40px;
+}
+
+.artist-information-band-image-wrapper {
+    width: 400px;
+    height: 400px;
+    display: inline-block;
+}
+
+.artist-information-band-image {
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+}
+
+.artist-information-wrapper-left {
+    display: inline-block;
+    vertical-align: top;
+    width: 49.7%;
+}
+
+.artist-information-band-members {
+    height: calc(100% - 137px);
+    padding-bottom: 2px;
+}
+
+.artist-information-band-title {
+    text-align: center;
+    margin-top: 5px;
+}
+.artist-information-general-band-information {
+    top: 0;
+    display: inline-block;
+    width: calc(100% - 405px);
+    padding-bottom: 3px;
+    vertical-align: top;
+    height: 400px;
+}
+
+.artist-information-band-information {
+    border-radius: 2px;
+    width: 100%;
+    height: 400px;
+    background-color: #f4f4f4;
 }
