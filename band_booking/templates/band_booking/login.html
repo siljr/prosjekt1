@@ -1,29 +1,28 @@
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'band_booking/style/login.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'band_booking/style/style.css' %}"/>
 
-
-<div class="center">
+<div class="centered login-area">
     {% if error %}
-        <div class="login_error" id="login_error">
-            <div class="message">
-                Incorrect username or password
+        <div class="login-error" id="login_error">
+            <div class="login-error-message">
+                Feil brukernavn eller passord
             </div>
             <span class="dismiss">
-                <input id="dismiss_message_button" type="button" class="dismiss_message_button"/>
+                <input id="dismiss_message_button" type="button" class="hover-pointer login-dismiss-message-button"/>
             </span>
         </div>
     {% endif %}
-    <form action="/auth" method="post">
+    <form action="{% url 'band_booking:login_auth' %}" method="post">
         {% csrf_token %}
-        <div class="loginField">
-            <label for="username">Username: </label>
-            <input type="text" name="username" id="username"/>
+        <div class="login-field">
+            <label for="username">Brukernavn: </label>
+            <input type="text" name="username" class="login-input-field" id="username"/>
         </div>
-        <div class="loginField">
-            <label for="password">Password: </label>
-            <input type="password" name="password" id="password">
+        <div class="login-field">
+            <label for="password">Passord: </label>
+            <input type="password" name="password" class="login-input-field" id="password">
         </div>
-        <input class="loginButton" value="Login" type="submit">
+        <input class="login-button basic-button" value="Logg inn" type="submit">
     </form>
 </div>
 

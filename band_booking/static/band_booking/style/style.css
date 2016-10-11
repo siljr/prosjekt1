@@ -76,6 +76,13 @@ main{
     position: absolute;
 }
 
+.basic-button {
+    border: 2px solid #8d8d8d;
+    text-align: center;
+    background-color: #f2f2f2;
+    border-radius: 6px;
+}
+
 .menu-links {
     max-width: 900px;
 }
@@ -89,14 +96,73 @@ main{
     display: inline-block;
     width: 200px;
     height: 120px;
-    border: 2px solid #8d8d8d;
-    background-color: #f2f2f2;
     margin: 10px;
-    text-align: center;
     line-height: 120px;
     border-radius: 15px;
 }
 
-.menu-link:hover {
+.basic-button:hover {
     background-color: #e4e4e4;
+}
+
+.login-area {
+    width: 250px;
+}
+
+.login-error{
+    width: 250px;
+    text-align: center;
+    height: 57px;
+    font-size: 16px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    border: 1px solid #777777;
+}
+
+.login-field {
+    display: block;
+    width: 250px;
+    margin: 20px 0 40px 0;
+    font-size: 17px;
+}
+
+.login-button {
+    width: 100px;
+    font-size: 16px;
+    margin: 10px 0 0 75px;
+    border-radius: 4px;
+    height: 28px;
+}
+
+.login-input-field {
+    font-size: 15px;
+    float: right;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    width: 250px;
+    padding: 3px 10px 3px 10px;
+}
+
+.login-input-field:focus {
+    outline: none;
+}
+
+.login-dismiss-message-button{
+    position: relative;
+    border: none;
+    bottom: 9px;
+    left: 4px;
+    width: 15px;
+    background: transparent url("../images/message_dismiss.png");
+    outline: none;
+}
+
+.hover-pointer:hover{
+    cursor: pointer;
+}
+
+.login-error-message{
+    padding-left: 6px;
+    padding-top: 18px;
+    display: inline-block;
 }
