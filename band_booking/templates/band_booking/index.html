@@ -1,28 +1,15 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<link type="text/css" rel="stylesheet" href="{% static 'band_booking/style/index.css' %}">
-		<title> Index </title>
-	</head>
-
-	<body>
-		<div class="links">
-			{% for page in pages %}
-			<a href="{{page.link}}">
-				<div class="link">
-                    <span class="link-title">
-                        {{page.title}}
-                    </span>
-				</div>
-			</a>
-			{% endfor %}
-		</div>
-        <a href="/logout">
-            <button class="logout-button">
-                Logout
-            </button>
-        </a>
-	</body>
-</html>
+{% extends 'band_booking/base.html' %}
+{% block content %}
+    <title>Meny</title>
+    <div class="menu-links centered">
+        {% for page in pages %}
+            <a href="{{ page.link }}" class="black-link">
+                <div class="menu-link">
+                <span class="menu-link-title">
+                    {{ page.title }}
+                </span>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}
