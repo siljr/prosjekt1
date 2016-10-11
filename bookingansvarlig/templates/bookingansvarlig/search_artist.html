@@ -1,26 +1,18 @@
+{% extends 'band_booking/base.html' %}
 {% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+{% block content %}
     <title>Søk på artist</title>
-    <link rel="stylesheet" href="{% static 'bookingansvarlig/style/search_artist.css' %}">
     <script src="{% static 'bookingansvarlig/scripts/search_artist.js' %}"></script>
-</head>
-<body>
-<main>
-    <a href="/index/" class="menu-button"> <button type="button">Meny</button></a>
     {% if error %}
-        <div id="error-message" class="error-message">
+        <div id="error-message" class="artist-search-error-message error-message center-horizontal">
             {{ error }}
         </div>
     {% endif %}
-    <form class="search-form" action="" method="get">
-        <label for="artist_name" class="artist-name-label">Søk på artist:</label> <br/>
-        <input id="artist_name" type="text" value="{% if name %}{{ name }}{% endif %}" placeholder="Søk på artist navn" name="name">
-        <input class="submit" type="submit" value="Søk">
-    </form>
-</main>
-</body>
-</html>
+    <div class="centered artist-search-area">
+        <form class="artist-search-form" action="" method="get">
+            <label for="artist_name" class="bold">Søk på artist:</label> <br/>
+            <input id="artist_name" type="text" value="{% if name %}{{ name }}{% endif %}" placeholder="Søk på artist navn" name="name" class="artist-search-box">
+            <input class="artist-search-search-button basic-button" type="submit" value="Søk">
+        </form>
+    </div>
+{% endblock %}
