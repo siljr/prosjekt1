@@ -57,9 +57,9 @@ def index(request):
     """
     pages = {
         "Bookingansvarlig": [
-            {"title": "Bookingsoversikt", "link": reverse('bookingansvarlig:bookings')},
+            {"title": "Bookingoversikt", "link": reverse('bookingansvarlig:bookings')},
             {"title": "Tidligere konserter", "link": reverse('bookingansvarlig:concerts')},
-            {"title": "Artist informasjon", "link": reverse('bookingansvarlig:search_for_artist')}
+            {"title": "Artistinformasjon", "link": reverse('bookingansvarlig:search_for_artist')}
         ],
         "Bookingsjef": [
             {"title": "Tidligere konserter", "link": reverse('bookingansvarlig:concerts')},

@@ -16,9 +16,18 @@ def get_past_events(artist_name):
     """
     artist_id = get_artist_id(artist_name.replace(" ", ""))
     if artist_id is None:
-        return {'error': 'Could not find earlier events'}
+        events = {'events': []}
+        build_events_samfundet(events, artist_name)
+        if events['events']:
+            return events
+        return {'error': 'Fant ingen tidligere konserter'}
     events = get_past_events_by_id(artist_id)
+    if 'events' not in events:
+        events['events'] = []
     build_events_samfundet(events, artist_name)
+    if events['events']:
+        if 'error' in events:
+            del events['error']
     return events
 
 
@@ -38,7 +47,7 @@ def get_past_events_by_id(artist_id):
     """
     results_json = load_request('http://api.songkick.com/api/3.0/artists/' + str(artist_id) + '/gigography.json?order=desc&page=1&')
     if results_json['totalEntries'] == 0:
-        return {'error': 'Could not find earlier events'}
+        return {'error': 'Fant ingen tidligere konserter'}
     events_norway = get_events_country("Norway", results_json['results']['event'])
     pages = ceil(results_json['totalEntries']/50)
     events = [events_norway] + [[]] * (pages - 1)
