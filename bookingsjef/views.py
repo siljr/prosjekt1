@@ -45,7 +45,7 @@ def generator_input(request):
 
 def price_generator(request):
     bandname = request.POST.get('band', '')
-    price = request.POST.get('price', '')
+    price = int(request.POST.get('price', ''))
     price_generated = get_ticket_prices_for_scenes(bandname, price)
     info=[]
     for list in price_generated:
