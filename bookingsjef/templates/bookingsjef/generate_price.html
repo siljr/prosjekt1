@@ -1,26 +1,15 @@
-{% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Søk på artist</title>
-    <link rel="stylesheet" href="{% static 'bookingansvarlig/style/search_artist.css' %}">
-    <script src="{% static 'bookingansvarlig/scripts/search_artist.js' %}"></script>
-</head>
-<body>
-<main>
-    <a href="/index/" class="menu-button"> <button type="button">Meny</button></a>
-    {% if error %}
-        <div id="error-message" class="error-message">
-            {{ error }}
+{% extends 'band_booking/base.html' %}
+{% block content %}
+        <title>Billettprisgenerator</title>
+        <div class="centered">
+            <div class="price-generator-input-box">
+                <label for markedinfo>Band: </label>
+                <input type="text" class="price-generator-input-field" id="Band"/>
+            </div>
+            <div class="price-generator-input-box">
+                <label for cost>Honorar: </label>
+                <input type="text" class="price-generator-input-field" id="cost"/>
+            </div>
+            <input class="price-generator-button basic-button" value="Generer" type="submit">
         </div>
-    {% endif %}
-    <form class="search-form" action="" method="get">
-        <label for="artist_name" class="artist-name-label">Søk på artist:</label> <br/>
-        <input id="artist_name" type="text" value="{% if name %}{{ name }}{% endif %}" placeholder="Søk på artist navn" name="name">
-        <input class="submit" type="submit" value="Søk">
-    </form>
-</main>
-</body>
-</html>
+{% endblock %}

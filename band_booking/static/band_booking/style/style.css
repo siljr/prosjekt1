@@ -768,3 +768,29 @@ main{
 .economic-result-link:visited {
     color: #0977ab;
 }
+
+.price-generator-input-box {
+    display: block;
+    width: 250px;
+    margin: 20px 40px 40px 0;
+    font-size: 17px;
+    float: left;
+}
+
+.price-generator-input-field {
+    font-size: 15px;
+    float: right;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    width: 250px;
+    padding: 3px 10px 3px 10px;
+}
+
+.price-generator-button {
+    float: left;
+    width: 100px;
+    font-size: 16px;
+    margin: 40px 0 0 0px;
+    border-radius: 4px;
+    height: 28px;
+}
