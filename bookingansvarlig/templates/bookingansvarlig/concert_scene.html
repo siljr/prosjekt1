@@ -1,126 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'bookingansvarlig/style/concert_overview.css' %}"/>
-    <script src="{% static 'bookingansvarlig/scripts/concert_dropdown_selector.js'%}"></script>
-    <title>Concerts</title>
-</head>
-<body>
-<main>
-    <a href="/index/" class="menu-button"> <button type="button">Meny</button></a>
-    <h1 class="title">Konserter</h1>
+{% extends 'band_booking/base.html' %}
+{% load static %}
+{% block content %}
+    <script src="{% static 'bookingansvarlig/scripts/concert_dropdown_selector.js' %}"></script>
+    <title>Konserter</title>
 
-    <div class="filter-bar">
-        <div class="row-wrapper">
-            <div class="table-cell">
-                <h4>Søk etter band</h4>
-
-                <!-- This adds a search bar to the view where the user can search for bands-->
-                <form method="GET" action="" id="concert_filters">
-                    <input type="hidden" name="scene" id="scene_selector" value="{{ scene }}" hidden/>
-                    <input type="hidden" name="genre" id="genre_selector" value="{{ genre }}"hidden/>
-                    <input type="text" class="search-bar" name="band_name" placeholder="Skriv inn navn på band" value="{{ band_name }}"/>
-                    <input type="submit" value="Søk"/>
-                </form>
-            </div>
-
-            <div class="table-cell">
-                <div class="dropdown">
-                    Scene: <span class="currently-selected">{% if scene == "" %}Ingen valgt{% endif %}{{ scene }}</span>
-                    <div class="dropdown-wrapper">
-                        {% for current_scene in scenes %}
-                            <div class="scene-item{% if current_scene == scene %} currently-selected-item{% endif %}">{{ current_scene }}</div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-
-            <div class="table-cell">
-                <div class="dropdown">
-                    Sjanger: <span class="currently-selected">{% if genre == "" %}Ingen valgt{% endif %}{{ genre }}</span>
-                    <div class="dropdown-wrapper">
-                        {% for current_genre in genres %}
-                            <div class="genre-item{% if current_genre == genre %} currently-selected-item{% endif %}" >{{ current_genre }}</div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="information-table table">
-        <div class="table-head">
-            <div class="table-cell">
-                Scene
-            </div>
-            <div class="table-cell">
-                Konsert navn
-            </div>
-            <div class="table-cell">
-                Band
-            </div>
-            <div class="table-cell">
-                Dato
-            </div>
-            <div class="table-cell">
-                Billettpris
-            </div>
-            <div class="table-cell">
-                Sjanger
-            </div>
-            <div class="table-cell">
-                Publikumstall
-            </div>
-            {% if perms.band_booking.view_concert_economic_results %}
-                <div class="table-cell">
-                    Rapport
-                </div>
-            {% endif %}
-        </div>
-        {%  for concert in concerts %}
+    <div class="center-horizontal concert-overview-wrapper">
+        <h1 class="concert-overview-title">Konserter</h1>
+        <div class="concert-overview-filter-bar">
             <div class="table-row">
                 <div class="table-cell">
-                    {{ concert.scene }}
+                    <h4>Søk etter band</h4>
+
+                    <!-- This adds a search bar to the view where the user can search for bands-->
+                    <form method="GET" action="" id="concert_filters">
+                        <input type="hidden" name="scene" id="scene_selector" value="{{ scene }}" hidden/>
+                        <input type="hidden" name="genre" id="genre_selector" value="{{ genre }}" hidden/>
+                        <input type="text" class="concert-overview-search-bar" name="band_name" placeholder="Skriv inn navn på band"
+                               value="{{ band_name }}"/>
+                        <input type="submit" value="Søk"/>
+                    </form>
+                </div>
+
+                <div class="table-cell">
+                    <div class="dropdown">
+                        Scene: <span class="dropdown-currently-selected">{% if scene == "" %}Ingen
+                        valgt{% endif %}{{ scene }}</span>
+                        <div class="dropdown-wrapper">
+                            {% for current_scene in scenes %}
+                                <div class="dropdown-item scene-item{% if current_scene == scene %} dropdown-currently-selected-item{% endif %}">{{ current_scene }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-cell">
+                    <div class="dropdown">
+                        Sjanger: <span class="dropdown-currently-selected">{% if genre == "" %}Ingen
+                        valgt{% endif %}{{ genre }}</span>
+                        <div class="dropdown-wrapper">
+                            {% for current_genre in genres %}
+                                <div class="dropdown-item genre-item{% if current_genre == genre %} dropdown-currently-selected-item{% endif %}">{{ current_genre }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="concert-overview-information-table table">
+            <div class="table-head concert-overview-table-head">
+                <div class="table-cell">
+                    Scene
                 </div>
                 <div class="table-cell">
-                    {{ concert.name }}
+                    Konsert navn
                 </div>
                 <div class="table-cell">
-                    {% for band in concert.bands %}
-                        <span class="band-name">
+                    Band
+                </div>
+                <div class="table-cell">
+                    Dato
+                </div>
+                <div class="table-cell">
+                    Billettpris
+                </div>
+                <div class="table-cell">
+                    Sjanger
+                </div>
+                <div class="table-cell">
+                    Publikumstall
+                </div>
+                {% if perms.band_booking.view_concert_economic_results %}
+                    <div class="table-cell">
+                        Rapport
+                    </div>
+                {% endif %}
+            </div>
+            {% for concert in concerts %}
+                <div class="table-row">
+                    <div class="table-cell">
+                        {{ concert.scene }}
+                    </div>
+                    <div class="table-cell">
+                        {{ concert.name }}
+                    </div>
+                    <div class="table-cell">
+                        {% for band in concert.bands %}
+                            <span class="concert-overview-band-name">
                             <a href="/artist/{{ band }}">
                                 {{ band }}
                             </a>
                         </span>
-                    {% endfor %}
-                </div>
-                <div class="table-cell">
-                    {{ concert.date }}
-                </div>
-                <div class="table-cell">
-                    {{ concert.ticket_price }} kr
-                </div>
-                <div class="table-cell">
-                    {% for genre in concert.genre %}
-                        <span class="genre-band">{{ genre }}</span>
-                    {% endfor %}
-                </div>
-                <div class="table-cell">
-                    {{ concert.attendance }}
-                </div>
-                {% if perms.band_booking.view_concert_economic_results %}
-                    <div class="table-cell">
-                        <a href="/economy/concert/{{ concert.pk }}/">
-                            Rapport
-                        </a>
+                        {% endfor %}
                     </div>
-                {% endif %}
-            </div>
-        {% endfor %}
+                    <div class="table-cell">
+                        {{ concert.date }}
+                    </div>
+                    <div class="table-cell">
+                        {{ concert.ticket_price }} kr
+                    </div>
+                    <div class="table-cell">
+                        {% for genre in concert.genre %}
+                            <span class="concert-overview-genre-band">{{ genre }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="table-cell">
+                        {{ concert.attendance }}
+                    </div>
+                    {% if perms.band_booking.view_concert_economic_results %}
+                        <div class="table-cell">
+                            <a href="/economy/concert/{{ concert.pk }}/">
+                                Rapport
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
 
+        </div>
     </div>
-</main>
-</body>
-</html>
+{% endblock %}

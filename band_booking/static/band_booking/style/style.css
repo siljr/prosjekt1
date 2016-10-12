@@ -70,6 +70,12 @@ main{
 
 .table {
     display: table;
+    border-collapse: collapse;
+}
+
+.table-head {
+    display: table-row;
+    font-weight: bold;
 }
 
 .overflow-scroll-x {
@@ -466,3 +472,94 @@ main{
     font-size: 16px;
     width: 300px;
 }
+
+.concert-overview-wrapper {
+    width: 900px;
+}
+
+.concert-overview-information-table {
+    width: 100%;
+}
+
+.concert-overview-information-table > div > .table-cell {
+    border: 1px solid #000000;
+    text-align: center;
+    padding: 5px 0 5px 0;
+    vertical-align: middle;
+}
+
+.concert-overview-information-table > .table-head > .table-cell {
+    padding: 2px 0 2px 0;
+}
+
+.concert-overview-table-head {
+    background-color: #0ca2e8;
+}
+
+.concert-overview-title {
+    width: 100%;
+    text-align: center;
+}
+
+.concert-overview-band-name, .concert-overview-genre-band {
+    display: block;
+}
+
+.concert-overview-search-bar {
+    font-size: 12px;
+    width: 200px;
+}
+
+.concert-overview-filter-bar {
+    width: 100%;
+    display: table;
+    margin-bottom: 20px;
+}
+
+.dropdown {
+    background-color: #f1f1f1;
+    width: 200px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.dropdown:hover {
+    background-color: #d8d8d8;
+}
+
+.dropdown-wrapper{
+    background-color: #f1f1f1;
+    width: 200px;
+    border: 1px solid black;
+    margin-left: -1px;
+}
+
+.dropdown-item, .dropdown-item {
+    background-color: #f1f1f1;
+    width: 200px;
+    padding: 1px 0 1px 0;
+}
+
+.dropdown-item:hover, .dropdown-item:hover {
+    background-color: #d8d8d8;
+    z-index: 5;
+}
+
+.dropdown > .dropdown-wrapper {
+    display: none;
+}
+
+.dropdown:hover > .dropdown-wrapper {
+    display: block;
+    position: absolute;
+    z-index: 10;
+}
+
+.dropdown-currently-selected-item{
+    background-color: #b8b8b8;
+}
+
+.dropdown-currently-selected {
+    font-style: italic;
+}
+
