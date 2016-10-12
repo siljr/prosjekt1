@@ -168,7 +168,7 @@ class Booking(models.Model):
         """
         Checks if the given user is allowed to view the booking offer
         """
-        return self.sender == user or user.has_perm('bookingansvarlig.view_all_booking_offers')
+        return self.sender == user or user.has_perm('band_booking.view_all_booking_offers')
 
     def __str__(self):
         return self.title_name
