@@ -31,6 +31,11 @@
     text-decoration: none;
 }
 
+.logout-button > a:visited {
+    color: #ffffff;
+    text-decoration: none;
+}
+
 .user-info-divider {
     margin: 0 10px 0 10px;
 }
@@ -65,6 +70,15 @@ main{
 }
 
 .table-cell {
+    display: table-cell;
+}
+
+.table-cell-small {
+    padding-bottom: 2px;
+    text-align: right;
+}
+
+.table-cell-small {
     display: table-cell;
 }
 
@@ -699,4 +713,58 @@ main{
 .booking-offer-menu-button {
     float: left;
     margin-top: -170px;
+}
+
+.economic-result-wrapper {
+    width: 600px;
+    max-width: 100%;
+}
+
+.economic-result-title {
+    padding-bottom: 30px;
+}
+
+.economic-result-band-table {
+    width: 100%;
+}
+
+.economic-result-information-table-header > .table-cell{
+    padding-bottom: 0;
+    border-bottom: 2px solid #000000;
+}
+
+.economic-result-information-table-header + div > .table-cell {
+    padding-top: 20px;
+}
+
+.economic-result-information-table {
+    width: 600px;
+    max-width: 100%;
+}
+
+.economic-result-information-table > div {
+    display: table-row;
+}
+
+.economic-result-information-table > div > div:last-child {
+    text-align: right;
+}
+
+.economic-result-information-table > div > div:first-child {
+    padding-right: 100px;
+    text-align: left;
+}
+
+.economic-result-information-table .table-cell{
+    padding-bottom: 8px;
+}
+
+.economic-result-information-table-title {
+    padding-top: 40px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.economic-result-link:visited {
+    color: #0977ab;
 }
