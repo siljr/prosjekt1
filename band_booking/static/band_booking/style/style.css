@@ -1,0 +1,770 @@
+.navbar {
+    background-color: #000000;
+    width: 100%;
+    color: #ffffff;
+    height: 45px;
+    font-size: 18px;
+    line-height: 45px;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.logo {
+    margin-top: 7px;
+    margin-left: 8px;
+}
+
+.logo-image{
+    width: auto;
+    height: 25px;
+}
+
+.user-info {
+    float: right;
+    margin-right: 10px;
+}
+
+.logout-button > a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.logout-button > a:visited {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.user-info-divider {
+    margin: 0 10px 0 10px;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    min-width: 100%;
+    min-height: 100%;
+    font-family: "Times New Roman", serif;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+main{
+    width: 100%;
+    height: 100%;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.table-row {
+    display: table-row;
+}
+
+.table-cell {
+    display: table-cell;
+}
+
+.table-cell-small {
+    padding-bottom: 2px;
+    text-align: right;
+}
+
+.table-cell-small {
+    display: table-cell;
+}
+
+.table {
+    display: table;
+    border-collapse: collapse;
+}
+
+.table-head {
+    display: table-row;
+    font-weight: bold;
+}
+
+.overflow-scroll-x {
+    overflow-x: scroll;
+}
+
+.overflow-scroll-y {
+    overflow-y: scroll;
+}
+
+.table-row-group {
+    display: table-row-group;
+}
+
+.content {
+    margin: 10px;
+    height: calc(100% - 45px);
+}
+
+.black-link {
+    text-decoration: none;
+    color: #000000;
+}
+
+.black-link:visited {
+    color: #000000;
+}
+
+.centered {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+.center-horizontal {
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%);
+}
+
+.hidden {
+    display: none;
+}
+
+.basic-button {
+    border: 2px solid #8d8d8d;
+    text-align: center;
+    background-color: #f2f2f2;
+    border-radius: 6px;
+}
+
+.menu-links {
+    max-width: 900px;
+}
+
+.menu-link-title {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.menu-link {
+    display: inline-block;
+    width: 200px;
+    height: 120px;
+    margin: 10px;
+    line-height: 120px;
+    border-radius: 15px;
+}
+
+.small-padding-left {
+    padding-left: 8px;
+}
+
+.small-padding-right {
+    padding-right: 8px;
+}
+
+.basic-button:hover {
+    background-color: #e4e4e4;
+}
+
+.login-area {
+    width: 250px;
+}
+
+.login-error{
+    width: 250px;
+    text-align: center;
+    height: 57px;
+    font-size: 16px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    border: 1px solid #777777;
+}
+
+.login-field {
+    display: block;
+    width: 250px;
+    margin: 20px 0 40px 0;
+    font-size: 17px;
+}
+
+.login-button {
+    width: 100px;
+    font-size: 16px;
+    margin: 10px 0 0 75px;
+    border-radius: 4px;
+    height: 28px;
+}
+
+.login-input-field {
+    font-size: 15px;
+    float: right;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    width: 250px;
+    padding: 3px 10px 3px 10px;
+}
+
+.login-input-field:focus {
+    outline: none;
+}
+
+.login-dismiss-message-button{
+    position: relative;
+    border: none;
+    bottom: 9px;
+    left: 4px;
+    width: 15px;
+    background: transparent url("../images/message_dismiss.png");
+    outline: none;
+}
+
+.hover-pointer:hover {
+    cursor: pointer;
+}
+
+.login-error-message{
+    padding-left: 6px;
+    padding-top: 18px;
+    display: inline-block;
+}
+
+.artist-information-loading-wrapper {
+    font-size: 25px;
+    max-width: 600px;
+}
+
+.artist-information-loading-animation {
+    height: 30px;
+    text-align: center;
+}
+
+.artist-information-loading-description {
+    font-style: italic;
+    font-size: 15px;
+    text-align: center;
+}
+
+.artist-information-loading-artist-name {
+    font-style: italic;
+    font-weight: 600;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.8);
+    background-color: #f2f2f2;
+}
+
+.tracks {
+    width: 100%;
+}
+
+.track-time {
+    width: 40px;
+}
+
+.track-number {
+    width: 28px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.track {
+    height: 20px;
+}
+
+.album-popularity, .album-sales, .album-information-title-divider {
+    font-weight: normal;
+    font-style: italic;
+    font-size: 16px;
+    vertical-align: bottom;
+}
+
+.album-information-title-divider {
+    padding: 0 5px 0 5px;
+}
+
+.albums {
+    vertical-align: top;
+    width: 49.5%;
+    height: 100%;
+    display: inline-block;
+}
+
+.album {
+    height: 200px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.album-image {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+}
+
+.album-title {
+    height: 25px;
+    font-size: 24px;
+    vertical-align: top;
+
+}
+
+.albums-title {
+    display: none;
+}
+
+.album-tracks {
+    height: 175px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.album-information {
+    height: 200px;
+    display: inline-block;
+    width: calc(100% - 210px);
+}
+
+.artist-information-event-date, .artist-information-event-date-header {
+    width: 75px;
+}
+
+.artist-information-event-city, .artist-information-event-city-header {
+    width: 125px;
+}
+
+.artist-information-events {
+    width: 100%;
+    height: calc(100% - 425px);
+    vertical-align: top;
+}
+
+.artist-information-event, .artist-information-event-headers {
+    display: table-row;
+    height: 25px;
+    width: 100%;
+}
+
+.artist-information-event-headers {
+    font-weight: bold;
+    font-size: 18px;
+    height: 20px;
+}
+
+.artist-information-event-table-events {
+    height: 100%;
+    vertical-align: top;
+    margin: 0;
+    padding: 0;
+}
+
+.artist-information-event-table-wrapper {
+    height: calc(100% - 20px);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.artist-information-event-table-wrapper-table {
+    display: table;
+    width: 100%;
+}
+
+.artist-information-events-table {
+    height: calc(100% - 40px);
+    width: 100%;
+}
+
+.artist-information-events-title {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+.artist-information-followers {
+    height: 40px;
+}
+
+.artist-information-band-image-wrapper {
+    width: 400px;
+    height: 400px;
+    display: inline-block;
+}
+
+.artist-information-band-image {
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+}
+
+.artist-information-wrapper-left {
+    display: inline-block;
+    vertical-align: top;
+    width: 49.7%;
+}
+
+.artist-information-band-members {
+    height: calc(100% - 137px);
+    padding-bottom: 2px;
+}
+
+.artist-information-band-title {
+    text-align: center;
+    margin-top: 5px;
+}
+.artist-information-general-band-information {
+    top: 0;
+    display: inline-block;
+    width: calc(100% - 405px);
+    padding-bottom: 3px;
+    vertical-align: top;
+    height: 400px;
+}
+
+.artist-information-band-information {
+    border-radius: 2px;
+    width: 100%;
+    height: 400px;
+    background-color: #f4f4f4;
+}
+
+.artist-search-area {
+    width: 700px;
+    text-align: center;
+}
+
+.error-message {
+    background-color: #ff655d;
+}
+
+.artist-search-error-message {
+    padding: 5px;
+    width: 75%;
+    max-width: 500px;
+    border-radius: 10px;
+    text-align: center;
+    min-height: 40px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.artist-search-search-button {
+    width: 100px;
+    height: 25px;
+    border-radius: 6px;
+    margin-top: 20px;
+    margin-left: 100px;
+}
+
+.artist-search-form {
+    margin-top: 20px;
+    width: 300px;
+    text-align: left;
+    padding-left: calc(50% - 150px);
+}
+
+.artist-search-box {
+    border: 1px solid #8d8d8d;
+    border-radius: 5px;
+    padding-left: 5px;
+    height: 23px;
+    font-size: 16px;
+    width: 300px;
+}
+
+.concert-overview-wrapper {
+    width: 900px;
+}
+
+.concert-overview-information-table {
+    width: 100%;
+}
+
+.concert-overview-information-table > div > .table-cell {
+    border: 1px solid #000000;
+    text-align: center;
+    padding: 5px 0 5px 0;
+    vertical-align: middle;
+}
+
+.concert-overview-information-table > .table-head > .table-cell {
+    padding: 2px 0 2px 0;
+}
+
+.concert-overview-table-head, .booking-overview-table-header {
+    background-color: #0ca2e8;
+}
+
+.concert-overview-title {
+    width: 100%;
+    text-align: center;
+}
+
+.concert-overview-band-name, .concert-overview-genre-band {
+    display: block;
+}
+
+.concert-overview-search-bar {
+    font-size: 12px;
+    width: 200px;
+}
+
+.concert-overview-filter-bar {
+    width: 100%;
+    display: table;
+    margin-bottom: 20px;
+}
+
+.page-title {
+    text-align: center;
+}
+
+.dropdown {
+    background-color: #f1f1f1;
+    width: 200px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.dropdown:hover {
+    background-color: #d8d8d8;
+}
+
+.dropdown-wrapper{
+    background-color: #f1f1f1;
+    width: 200px;
+    border: 1px solid black;
+    margin-left: -1px;
+}
+
+.dropdown-item, .dropdown-item {
+    background-color: #f1f1f1;
+    width: 200px;
+    padding: 1px 0 1px 0;
+}
+
+.dropdown-item:hover, .dropdown-item:hover {
+    background-color: #d8d8d8;
+    z-index: 5;
+}
+
+.dropdown > .dropdown-wrapper {
+    display: none;
+}
+
+.dropdown:hover > .dropdown-wrapper {
+    display: block;
+    position: absolute;
+    z-index: 10;
+}
+
+.dropdown-currently-selected-item{
+    background-color: #b8b8b8;
+}
+
+.dropdown-currently-selected {
+    font-style: italic;
+}
+
+.booking-list-wrapper {
+    margin-top: 30px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.booking-list-new-offer-button {
+    height: 33px;
+    width: 150px;
+    line-height: 33px;
+    float: right;
+}
+
+.booking-overview-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.booking-overview-table, .booking-overview-table td, .booking-overview-table th {
+    border: 1px solid #000000;
+}
+
+.booking-overview-table > tbody > tr {
+    height: 40px;
+}
+
+.booking-overview-button-container {
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.U {
+    background-color: #738ffe;
+}
+
+.N {
+    background-color: #ff655d;
+}
+
+.S {
+    background-color: #3ebb3b;
+}
+
+.A {
+    background-color: #d3ff25;
+}
+
+.create-booking-offer-wrapper {
+    width: 800px;
+    max-width: 100%;
+    height: calc(100% - 60px);
+}
+
+.booking-offer-message-field {
+    width: 100%;
+    height: calc(100% - 25px);
+    padding: 6px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+
+.booking-offer-status-message {
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+    height: 45px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.center-booking-status-message-vertical {
+    vertical-align: middle;
+    line-height: 45px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.booking-offer-saved-message {
+    background-color: #3ebb3b;
+}
+
+.booking-offer-button {
+    width: 200px;
+    height: 25px;
+}
+.booking-offer-text_fields {
+    width: 100%;
+    border-radius: 4px;
+}
+
+.booking-offer-title_field, .booking-offer-email{
+    width: calc(50% - 40px);
+    display: inline-block;
+}
+
+.booking-offer-title_field {
+    padding-right: 55px;
+}
+
+.booking-offer-offer-form {
+    height: calc(100% - 130px);
+}
+
+.booking-offer-email-text {
+    height: calc(100% - 300px);
+    margin-bottom: 10px;
+}
+
+.booking-offer-title-input-field, .booking-offer-email-input-field {
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    padding: 3px 10px 3px 10px;
+    width: 100%;
+}
+
+.booking-offer-label{
+    padding-left: 4px;
+    font-weight: bold;
+}
+
+.booking-offer-save-button {
+    float: right;
+}
+
+.booking-offer-menu-button {
+    float: left;
+    margin-top: -170px;
+}
+
+.economic-result-wrapper {
+    width: 600px;
+    max-width: 100%;
+}
+
+.economic-result-title {
+    padding-bottom: 30px;
+}
+
+.economic-result-band-table {
+    width: 100%;
+}
+
+.economic-result-information-table-header > .table-cell{
+    padding-bottom: 0;
+    border-bottom: 2px solid #000000;
+}
+
+.economic-result-information-table-header + div > .table-cell {
+    padding-top: 20px;
+}
+
+.economic-result-information-table {
+    width: 600px;
+    max-width: 100%;
+}
+
+.economic-result-information-table > div {
+    display: table-row;
+}
+
+.economic-result-information-table > div > div:last-child {
+    text-align: right;
+}
+
+.economic-result-information-table > div > div:first-child {
+    padding-right: 100px;
+    text-align: left;
+}
+
+.economic-result-information-table .table-cell{
+    padding-bottom: 8px;
+}
+
+.economic-result-information-table-title {
+    padding-top: 40px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.economic-result-link:visited {
+    color: #0977ab;
+}

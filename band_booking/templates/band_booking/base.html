@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'band_booking/style/style.css' %}">
+</head>
+<body>
+<header>
+    <div class="navbar">
+        <div class="logo inline">
+            <a href="{% url 'band_booking:index' %}">
+                <img src="{% static 'band_booking/images/logo.png' %}" class="logo-image">
+            </a>
+        </div>
+        <div class="user-info inline">
+            <span class="username">
+                {% if user.first_name %}
+                    {{ user.first_name }} {{ user.last_name }}
+                {% else %}
+                    {{ user.username }}
+                {% endif %}
+            </span>
+            <span class="user-info-divider">
+                ||||
+            </span>
+            <span class="logout-button">
+                <a href="{% url 'band_booking:logout' %}">Logg ut</a>
+            </span>
+        </div>
+    </div>
+</header>
+<main>
+    <div class="content" id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</main>
+</body>
+</html>

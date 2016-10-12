@@ -6,17 +6,6 @@ from django.core import validators
 from django.core.exceptions import ValidationError
 import re
 
-class ScenesListView(generic.ListView):
-    """
-    Retrieves list of all the scenes from database (ordered by scene_name) and renders scenes page.
-    """
-    template_name = 'bookingansvarlig/scenes_list.html'
-    context_object_name = 'scenes_list'
-
-    def get_queryset(self):
-        scenes = Scene.objects.order_by('scene_name')
-        return scenes
-
 
 def concert(request):
     def build_concert(concert):

@@ -1,22 +1,16 @@
+{% extends "band_booking/base.html" %}
 {% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+{% block content %}
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="{% static 'bookingsjef/style/economic_result.css' %}">
-</head>
-<body>
-    <main>
-        <h1 class="title">Rapport - {{ title }} - {{ date }}</h1>
-        <div class="table information-table">
-            <div class="information-table-header">
-                <div class="table-cell information-table-title">
+    <div class="economic-result-wrapper center-horizontal">
+        <h1 class="economic-result-title">Rapport - {{ title }} - {{ date }}</h1>
+        <div class="table economic-result-information-table">
+            <div class="economic-result-information-table-header">
+                <div class="table-cell economic-result-information-table-title">
                     Felt
                 </div>
 
-                <div class="table-cell information-table-title">
+                <div class="table-cell economic-result-information-table-title">
                     Verdi
                 </div>
             </div>
@@ -25,11 +19,11 @@
                     Band:
                 </div>
                 <div class="table-cell">
-                    <div class="table band-table">
+                    <div class="table economic-result-band-table">
                     {% for band in bands %}
                         <div class="table-row">
                             <div class="table-cell-small">
-                                <a href="/artist/{{ band.title }}"> {{ band.title }} </a>
+                                <a href="/artist/{{ band.title }}" class="economic-result-link"> {{ band.title }} </a>
                             </div>
                         </div>
                     {% endfor %}
@@ -45,7 +39,7 @@
                 </div>
             </div>
             <div>
-                <div class="information-table-title table-cell">
+                <div class="economic-result-information-table-title table-cell">
                     Kostnader:
                 </div>
             </div>
@@ -60,7 +54,7 @@
                 </div>
             {% endfor %}
             <div>
-                <div class="information-table-title table-cell">
+                <div class="economic-result-information-table-title table-cell">
                     Inntekter:
                 </div>
             </div>
@@ -75,7 +69,7 @@
                 </div>
             {% endfor %}
             <div>
-                <div class="information-table-title table-cell">
+                <div class="economic-result-information-table-title table-cell">
                     Økonomisk resultat
                 </div>
                 <div class="table-cell">
@@ -83,6 +77,5 @@
                 </div>
             </div>
         </div>
-    </main>
-</body>
-</html>
+    </div>
+{% endblock %}
