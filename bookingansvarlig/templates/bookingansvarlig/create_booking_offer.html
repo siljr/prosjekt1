@@ -13,14 +13,14 @@
         {% endif %}
         {% if error %}
             <div class="error-message booking-offer-status-message" id="error-message">
-                <span class="center-message-vertical">
+                <span class="center-booking-status-message-vertical">
                     {{ error }}
                 </span>
             </div>
         {% endif %}
         {% if offer %}
             <div class="{{ offer.status }} booking-offer-status-message" id="offer-status-message">
-                <span class="center-message-vertical">
+                <span class="center-booking-status-message-vertical">
                     {{ status }}
                 </span>
             </div>
