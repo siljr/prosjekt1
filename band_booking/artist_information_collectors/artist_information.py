@@ -132,6 +132,26 @@ def is_band(artist):
     return len(artist.members) > 0
 
 
+def get_popularity(artist_spotify):
+    """
+    Returns information about popularity of up to 50 bands albums.
+    """
+    albums = spotify.artist_albums(artist_spotify['uri'], album_type='album', limit=50)['items']
+    popularity = []
+    album_names = []
+    for album in albums:
+        album = spotify.album(album['id'])
+
+        if album['name'] in album_names:
+            continue
+        popularity.append(int(album['popularity']))
+        album_names.append(album['name'])
+
+        if len(album_names) == 50:
+            break
+    popularity.sort(reverse=True)
+    return popularity
+
 """
 Creates variables for access to the APIs.
 """
