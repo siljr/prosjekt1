@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
+from django.utils import timezone
 
 # Create your models here.
 
@@ -133,6 +134,7 @@ class Booking(models.Model):
     title_name = models.CharField(max_length=50,default = ' ')
     recipient_email = models.EmailField(max_length=50,default = ' ')
     email_text = models.CharField(max_length = EMAIL_MAX_LENGTH,default = 'Booking offer goes here')
+    date = models.DateField(default=timezone.now)
 
     UNDECIDED = 'U'
     NOT_APPROVED = 'N'
