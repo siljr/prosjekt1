@@ -17,6 +17,9 @@
                 <th>Ansvarlig</th>
                 <th>Tilbud</th>
                 <th>Status</th>
+                {% if perms.band_booking.can_approve_booking_offers %}
+                    <th>Godkjenn</th>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -31,6 +34,27 @@
                     {% endif %}
                     <td><a href="{% url 'bookingansvarlig:create_booking_offer' booking.pk %}">Se tilbud</a></td>
                     <td class="{{ booking.status }}">{{ booking.get_status_word }}</td>
+                    {% if perms.band_booking.can_approve_booking_offers %}
+                        {% if booking.status == "N" or booking.status == "U" %}
+                            <td class=" booking-offer-accept-buttons">
+                                <a href="{% url 'bookingsjef:approve_booking_offer' booking.pk %}" class="black-link">
+                                    <div class="booking-offer-accept-button S">
+                                        Godkjenn
+                                    </div>
+                                </a>
+                                <a href="{% url 'bookingsjef:decline_booking_offer' booking.pk %}" class="black-link">
+                                    <div class="booking-offer-decline-button N">
+                                        Avslå
+                                    </div>
+                                </a>
+                            </td>
+                        {% else %}
+                            <td class="booking-offer-disabled-approval-buttons">
+
+                            </td>
+                        {% endif %}
+                    {% endif %}
+
                 </tr>
             {% endfor %}
             </tbody>
