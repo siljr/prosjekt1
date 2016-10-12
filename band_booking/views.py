@@ -59,10 +59,11 @@ def index(request):
         "Bookingansvarlig": [
             {"title": "Bookingoversikt", "link": reverse('bookingansvarlig:bookings')},
             {"title": "Tidligere konserter", "link": reverse('bookingansvarlig:concerts')},
-            {"title": "Artistinformasjon", "link": reverse('bookingansvarlig:search_for_artist')}
+            {"title": "Artistinformasjon", "link": reverse('bookingansvarlig:search_for_artist')},
         ],
         "Bookingsjef": [
             {"title": "Tidligere konserter", "link": reverse('bookingansvarlig:concerts')},
+            {"title": "Bookingoversikt", "link": reverse('bookingansvarlig:bookings')},
         ],
         "Arrangør": [],
         "Tekniker": [],

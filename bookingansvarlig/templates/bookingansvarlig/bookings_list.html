@@ -16,6 +16,7 @@
                 <th>Mottaker</th>
                 <th>Ansvarlig</th>
                 <th>Tilbud</th>
+                <th>Dato</th>
                 <th>Status</th>
                 {% if perms.band_booking.can_approve_booking_offers %}
                     <th>Godkjenn</th>
@@ -33,6 +34,7 @@
                         <td>{{ booking.sender.username }}</td>
                     {% endif %}
                     <td><a href="{% url 'bookingansvarlig:create_booking_offer' booking.pk %}">Se tilbud</a></td>
+                    <td>{{ booking.date }}</td>
                     <td class="{{ booking.status }}">{{ booking.get_status_word }}</td>
                     {% if perms.band_booking.can_approve_booking_offers %}
                         {% if booking.status == "N" or booking.status == "U" %}
