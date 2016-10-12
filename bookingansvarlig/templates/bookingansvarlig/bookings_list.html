@@ -10,10 +10,10 @@
             </a>
         </div>
 
-      
+      <!--  adds a dropdown menu where the user can choose a status to filter by -->
         <div class="table-cell">
             <div class="dropdown">
-                Scene: <span class="dropdown-currently-selected">{% if scene == "" %}Ingen
+                : <span class="dropdown-currently-selected">{% if scene == "" %}Ingen
                 valgt{% endif %}{{ scene }}</span>
                 <div class="dropdown-wrapper">
                     {% for current_scene in scenes %}
@@ -22,6 +22,7 @@
                 </div>
             </div>
         </div>
+
 
         <table class="booking-overview-table">
             <thead class="booking-overview-table-header">
