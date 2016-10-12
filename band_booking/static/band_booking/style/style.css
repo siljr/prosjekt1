@@ -594,6 +594,25 @@ main{
     float: right;
 }
 
+.booking-offer-accept-button, .booking-offer-decline-button {
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+
+}
+
+.booking-offer-disabled-approval-buttons {
+    background-color: #8d8d8d;
+}
+
+.booking-offer-accept-buttons {
+    padding: 0;
+}
+
+.booking-offer-accept-button {
+    border-bottom: 1px solid #000000;
+}
+
 .booking-overview-table {
     width: 100%;
     border-collapse: collapse;
