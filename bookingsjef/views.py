@@ -1,5 +1,5 @@
-from django.shortcuts import render, get_object_or_404
-from band_booking.models import Concert
+from django.shortcuts import render, get_object_or_404, redirect
+from band_booking.models import Concert, Booking
 
 
 def economic_result_concert(request, concert_id):
@@ -20,3 +20,19 @@ def economic_result_concert(request, concert_id):
         },
     }
     return render(request, 'bookingsjef/economic_result.html', context)
+
+
+def approve_booking_offer(request, offer_id, approved=False):
+    try:
+        offer = Booking.objects.get(pk=offer_id)
+        if offer.status not in [Booking.UNDECIDED, Booking.NOT_APPROVED]:
+            return redirect('bookingansvarlig:bookings')
+        if not approved:
+            offer.change_status(Booking.NOT_APPROVED)
+        else:
+            offer.change_status(Booking.APPROVED)
+        offer.save()
+        return redirect('bookingansvarlig:bookings')
+    except Booking.DoesNotExist:
+        print('does not exist')
+        return redirect('bookingansvarlig:bookings')
