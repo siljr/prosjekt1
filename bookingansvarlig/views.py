@@ -87,8 +87,9 @@ def update_booking_offer(request, offer_id=None):
         validators.validate_email(recipient_email)
     except ValidationError:
         context = {'link': reverse('bookingansvarlig:update_booking_offer'),
-                   'offer': {'title_name': title, 'recipient_email': recipient_email, 'email_text': text},
+                   'offer': {'title_name': title, 'recipient_email': recipient_email},
                    'error': "Email is not valid",
+                   'email_text': text
                    }
         if offer_id is not None:
             context['link'] = reverse('bookingansvarlig:update_booking_offer', kwargs={'offer_id': offer_id})
