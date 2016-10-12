@@ -9,6 +9,20 @@
                 </div>
             </a>
         </div>
+
+      
+        <div class="table-cell">
+            <div class="dropdown">
+                Scene: <span class="dropdown-currently-selected">{% if scene == "" %}Ingen
+                valgt{% endif %}{{ scene }}</span>
+                <div class="dropdown-wrapper">
+                    {% for current_scene in scenes %}
+                        <div class="dropdown-item scene-item{% if current_scene == scene %} dropdown-currently-selected-item{% endif %}">{{ current_scene }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
         <table class="booking-overview-table">
             <thead class="booking-overview-table-header">
             <tr>
