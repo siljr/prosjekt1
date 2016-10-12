@@ -492,7 +492,7 @@ main{
     padding: 2px 0 2px 0;
 }
 
-.concert-overview-table-head {
+.concert-overview-table-head, .booking-overview-table-header {
     background-color: #0ca2e8;
 }
 
@@ -563,3 +563,50 @@ main{
     font-style: italic;
 }
 
+.booking-list-wrapper {
+    margin-top: 30px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.booking-list-new-offer-button {
+    height: 33px;
+    width: 150px;
+    line-height: 33px;
+    float: right;
+}
+
+.booking-overview-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.booking-overview-table, .booking-overview-table td, .booking-overview-table th {
+    border: 1px solid #000000;
+}
+
+.booking-overview-table > tbody > tr {
+    height: 40px;
+}
+
+.booking-overview-button-container {
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.U {
+    background-color: #738ffe;
+}
+
+.N {
+    background-color: #ff655d;
+}
+
+.S {
+    background-color: #3ebb3b;
+}
+
+.A {
+    background-color: #d3ff25;
+}
