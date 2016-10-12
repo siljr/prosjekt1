@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from band_booking.models import Concert, Scene
+from band_booking.models import Concert
+from bookingsjef.algorithms.ticket_price import get_ticket_prices_for_scenes
 
 def economic_result_concert(request, concert_id):
     concert = get_object_or_404(Concert, pk=concert_id)
@@ -27,7 +28,18 @@ def generator_input(request):
     return render(request, 'bookingsjef/generator_input.html', context)
 
 def price_generator(request):
-    context = {
+    bandname = request.POST.get('band', '')
+    price = request.POST.get('price', '')
+    price_generated = get_ticket_prices_for_scenes(bandname, price)
+    info=[]
+    for list in price_generated:
+        name = list[0].scene_name
+        price = list[1]
 
-    }
-    return render(request, 'bookingsjef/generator_input.html', context)
+        info.append({
+        'name': name,
+        'price': price
+
+        })
+    context = {'info': info}
+    return render(request, 'bookingsjef/generate_price.html', context)

@@ -1,15 +1,15 @@
 {% extends 'band_booking/base.html' %}
 {% block content %}
         <title>Billettprisgenerator</title>
-        <div class="centered">
-            <div class="price-generator-input-box">
-                <label for markedinfo>Band: </label>
-                <input type="text" class="price-generator-input-field" id="Band"/>
-            </div>
-            <div class="price-generator-input-box">
-                <label for cost>Honorar: </label>
-                <input type="text" class="price-generator-input-field" id="cost"/>
-            </div>
-            <input class="price-generator-button basic-button" value="Generer" type="submit">
-        </div>
+ <div class="centered">
+     <h1 class="generate-scene-header">Generete bilettpriser</h1>
+     <div class="generate-scene-boxes">
+         {% for i in info %}
+         <div class="generate-scene-box">
+             <p>Scene: {{ i.name }}</p>
+             <p>Billetpris: {{ i.price }}</p>
+         </div>
+         {% endfor %}
+     </div>
+ </div>
 {% endblock %}

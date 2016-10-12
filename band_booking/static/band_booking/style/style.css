@@ -794,3 +794,24 @@ main{
     border-radius: 4px;
     height: 28px;
 }
+
+.generate-scene-header {
+	margin: auto;
+	text-align: center;
+}
+
+.generate-scene-boxes {
+	display: inline-flex;
+	width: : 800px;
+	margin: 0 0 0 0;
+	float: left;
+}
+
+.generate-scene-box {
+	margin-left: 50px;
+	font-size: 16px;
+}
+
+.generate-scene-box:first-child {
+	margin-left: 0;
+}
