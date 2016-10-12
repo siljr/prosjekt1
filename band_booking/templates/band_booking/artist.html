@@ -1,22 +1,19 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'band_booking/style/artist.css'  %}"/>
-
 {%  if error %}
     <!-- Fix how the error message is displayed -->
     <title>{{ error }}</title>
     <h3>{{ error }}</h3>
 {% else %}
     <title>{{ name }}</title>
-    <div class="wrapper-left">
-        <div class="band-information">
-            <div class="image-wrapper">
-                <img class="band-image" src="{{ image.url }}"/>
+    <div class="artist-information-wrapper-left">
+        <div class="artist-information-band-information">
+            <div class="artist-information-band-image-wrapper">
+                <img class="artist-information-band-image" src="{{ image.url }}"/>
             </div>
-            <div class="general-band-information">
-                <h2 class="band-title" id="band-title">{{ name }}</h2>
-                <div class="followers">
+            <div class="artist-information-general-band-information">
+                <h2 class="artist-information-band-title" id="band-title">{{ name }}</h2>
+                <div class="artist-information-followers">
                     Spotify følgere:
-                    <span class="followers-number">
+                    <span class="artist-information-followers-number">
                         {{ followers }}
                     </span>
                 </div>
@@ -25,7 +22,7 @@
                     <h4 class="members-title">
                         Medlemmer
                     </h4>
-                    <div class="band-members">
+                    <div class="band-members overflow-scroll-x">
                         {% for member in members %}
                             <div class="band-member">{{ member }}</div>
                         {% endfor %}
@@ -43,7 +40,7 @@
         </div>
     </div>
 
-    <div class="albums">
+    <div class="albums overflow-scroll-x">
         <h3 class="albums-title">
             Albums
         </h3>
@@ -64,16 +61,16 @@
                         </span>
                     </span>
                     <div class="album-tracks">
-                        <div class="tracks">
+                        <div class="tracks table">
                             {% for track in album.tracks %}
-                                <div class="track">
-                                    <span class="track-number">
+                                <div class="track table-row">
+                                    <span class="track-number table-cell">
                                         {{ track.track_number }}
                                     </span>
-                                    <span class="track-name">
+                                    <span class="track-name table-cell">
                                         {{ track.name }}
                                     </span>
-                                    <span class="track-time">
+                                    <span class="track-time table-cell">
                                         {{ track.duration }}
                                     </span>
                                 </div>
