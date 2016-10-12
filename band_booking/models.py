@@ -39,7 +39,7 @@ class Person(models.Model):
 
 class Scene(models.Model):
     number_of_seats = models.IntegerField()
-    handicap_accessible = models.BooleanField()
+    handicap_accessible = models.NullBooleanField()
     related_name = 'a_scene'
     expenditure = models.IntegerField(default=0)
 
