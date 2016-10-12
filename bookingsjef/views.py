@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from band_booking.models import Concert
+from band_booking.models import Concert, Scene
 
 
 def economic_result_concert(request, concert_id):
@@ -20,3 +20,15 @@ def economic_result_concert(request, concert_id):
         },
     }
     return render(request, 'bookingsjef/economic_result.html', context)
+
+def generator_input(request):
+    context = {
+
+    }
+    return render(request, 'bookingsjef/generator_input.html', context)
+
+#def price_generator(request, Scene):
+    #context = {
+        #'scene_name' = [Scene.scene_name for Scene.objects.all()],
+        #'scene_size' = [Scene.expenditure for Scene.objects.all()]
+    #}
