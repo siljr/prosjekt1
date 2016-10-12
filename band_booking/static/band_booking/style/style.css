@@ -516,6 +516,10 @@ main{
     margin-bottom: 20px;
 }
 
+.page-title {
+    text-align: center;
+}
+
 .dropdown {
     background-color: #f1f1f1;
     width: 200px;
@@ -609,4 +613,90 @@ main{
 
 .A {
     background-color: #d3ff25;
+}
+
+.create-booking-offer-wrapper {
+    width: 800px;
+    max-width: 100%;
+    height: calc(100% - 60px);
+}
+
+.booking-offer-message-field {
+    width: 100%;
+    height: calc(100% - 25px);
+    padding: 6px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+
+.booking-offer-status-message {
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+    height: 45px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.center-booking-status-message-vertical {
+    vertical-align: middle;
+    line-height: 45px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.booking-offer-saved-message {
+    background-color: #3ebb3b;
+}
+
+.booking-offer-button {
+    width: 200px;
+    height: 25px;
+}
+.booking-offer-text_fields {
+    width: 100%;
+    border-radius: 4px;
+}
+
+.booking-offer-title_field, .booking-offer-email{
+    width: calc(50% - 40px);
+    display: inline-block;
+}
+
+.booking-offer-title_field {
+    padding-right: 55px;
+}
+
+.booking-offer-offer-form {
+    height: calc(100% - 130px);
+}
+
+.booking-offer-email-text {
+    height: calc(100% - 300px);
+    margin-bottom: 10px;
+}
+
+.booking-offer-title-input-field, .booking-offer-email-input-field {
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    padding: 3px 10px 3px 10px;
+    width: 100%;
+}
+
+.booking-offer-label{
+    padding-left: 4px;
+    font-weight: bold;
+}
+
+.booking-offer-save-button {
+    float: right;
+}
+
+.booking-offer-menu-button {
+    float: left;
+    margin-top: -170px;
 }
