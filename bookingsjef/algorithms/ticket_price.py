@@ -1,5 +1,5 @@
 from band_booking.models import Scene
-from band_booking.artist_information_collectors.artist_information import find_artist, get_popularity
+from band_booking.artist_information_collectors.artist_information import find_artist_spotify, get_popularity
 
 __author__ = 'Weronika'
 
@@ -25,7 +25,7 @@ def get_ticket_prices_for_scenes(band_name, booking_price):
 
 
 def _get_marked_data(band_name):
-    artist_dicogs, artist_spotify = find_artist(band_name)
+    artist_spotify = find_artist_spotify(band_name)
     if artist_spotify is None:
         raise ValueError("No such band in Spotify")
     popularity = get_popularity(artist_spotify)
