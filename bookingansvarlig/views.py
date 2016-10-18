@@ -65,20 +65,20 @@ def update_booking_offer(request, offer_id=None):
     Also creates a new booking offer if the user does not have permissions to edit the current booking offer
     """
 
-    def create_new_offer(title, email, text, user):
+    def create_new_offer(title, email, text, user, date, scene):
         """
         Creates a new booking offer given the title, email, text and user.
         """
-        new_booking_offer = Booking(sender=user, title_name=title, recipient_email=email, email_text=text)
+        new_booking_offer = Booking(sender=user, title_name=title, recipient_email=email, email_text=text, date=date, scene=Scene.objects.get(scene_name__icontains=scene))
         new_booking_offer.save()
         request.session['saved-offer'] = True
         return redirect('bookingansvarlig:create_booking_offer', offer_id=new_booking_offer.pk)
 
-    title, text, recipient_email = request.POST.get('title'), request.POST.get('message'), request.POST.get('email')
+    title, text, recipient_email, date, scene = request.POST.get('title'), request.POST.get('message'), request.POST.get('email'), request.POST.get('date'), request.POST.get('scene')
 
     # If one of the three fields are not set, then we return the user to the create booking offer view, as the HTML
     # requires the user to fill in all three fields.
-    if title is None or text is None or recipient_email is None:
+    if title is None or text is None or recipient_email is None or date is None or scene is None:
         return redirect('bookingansvarlig:create_booking_offer')
 
     # Checks if the email is in a valid format, if not the user is returned
@@ -89,7 +89,9 @@ def update_booking_offer(request, offer_id=None):
         context = {'link': reverse('bookingansvarlig:update_booking_offer'),
                    'offer': {'title_name': title, 'recipient_email': recipient_email},
                    'error': "Email is not valid",
-                   'email_text': text
+                   'email_text': text,
+                   'date': date,
+                   'scene': scene,
                    }
         if offer_id is not None:
             context['link'] = reverse('bookingansvarlig:update_booking_offer', kwargs={'offer_id': offer_id})
@@ -97,7 +99,7 @@ def update_booking_offer(request, offer_id=None):
 
     # If no offer ID is given, then we create a new booking offer
     if offer_id is None:
-        return create_new_offer(title, recipient_email, text, request.user)
+        return create_new_offer(title, recipient_email, text, request.user, date, scene)
 
     try:
         # Find the booking offer
@@ -106,12 +108,14 @@ def update_booking_offer(request, offer_id=None):
         # If the user isn't allowed the view the booking_offer, it isn't allowed to edit it either. That is
         # a new booking offer is created instead.
         if not booking_offer.user_allowed_to_view(request.user):
-            return create_new_offer(title, recipient_email, text, request.user)
+            return create_new_offer(title, recipient_email, text, request.user, date, scene)
 
         # Update the information in the booking offer
         booking_offer.email_text = text
         booking_offer.title_name = title
         booking_offer.recipient_email = recipient_email
+        booking_offer.date = date
+        booking_offer.scene = Scene.objects.get(scene_name__icontains=scene)
         booking_offer.save()
         request.session['saved-offer'] = True
         return redirect('bookingansvarlig:create_booking_offer', offer_id=booking_offer.pk)
@@ -130,7 +134,7 @@ def create_booking_offer(request, offer_id=None):
     # If no offer ID is given, a new booking offer is to be created
     if offer_id is None:
         return render(request, 'bookingansvarlig/create_booking_offer.html',
-                      {'link': reverse('bookingansvarlig:update_booking_offer')})
+                      {'link': reverse('bookingansvarlig:update_booking_offer'), 'scenes': [scene.scene_name for scene in Scene.objects.all()]})
 
     try:
         booking_offer = Booking.objects.get(pk=offer_id)
@@ -144,8 +148,13 @@ def create_booking_offer(request, offer_id=None):
     context = {'offer': booking_offer, 'saved': saved,
                'status': booking_offer.get_status_message(),
                'link': reverse('bookingansvarlig:update_booking_offer', kwargs={'offer_id': offer_id}),
-               'email_text': booking_offer.email_text
+               'email_text': booking_offer.email_text,
+               'date': "%04d-%02d-%02d" % (booking_offer.date.year, booking_offer.date.month, booking_offer.date.day),
+               'scene': booking_offer.scene.scene_name,
+               'scenes': [scene.scene_name for scene in Scene.objects.all()]
                }
+
+    print(context['scene'])
 
     return render(request, 'bookingansvarlig/create_booking_offer.html', context)
 
