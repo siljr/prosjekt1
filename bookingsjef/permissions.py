@@ -30,6 +30,13 @@ def add_user_permissions(**kwargs):
         content_type=ContentType.objects.get_for_model(Booking),
     )
 
+    permission_can_view_term_booking_information, created = Permission.objects.get_or_create(
+        codename='can_view_term_booking_information',
+        name="Can view term booking information",
+        content_type=ContentType.objects.get_for_model(Booking),
+    )
+
+    group.permissions.add(permission_can_view_term_booking_information)
     group.permissions.add(permission_can_approve_booking_offers)
     group.permissions.add(permission_can_view_economic_results)
     group.permissions.add(permission_can_view_all_booking_offers)
