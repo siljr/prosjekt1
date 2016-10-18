@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
-from band_booking.models import Concert
+from django.shortcuts import render, get_object_or_404, redirect
+from band_booking.models import Concert, Booking
 from bookingsjef.algorithms.ticket_price import get_ticket_prices_for_scenes
 from django.http import HttpResponse
+
 
 def economic_result_concert(request, concert_id):
     concert = get_object_or_404(Concert, pk=concert_id)
@@ -38,30 +39,32 @@ def approve_booking_offer(request, offer_id, approved=False):
         print('does not exist')
         return redirect('bookingansvarlig:bookings')
 
+
 def generator_input(request):
     context = {
 
     }
     return render(request, 'bookingsjef/generator_input.html', context)
 
+
 def price_generator(request):
     bandname = request.POST.get('band', '')
     price = int(request.POST.get('price', ''))
     price_generated = get_ticket_prices_for_scenes(bandname, price)
-    info=[]
+    info = []
     try:
         for list in price_generated:
             name = list[0].scene_name
             price = list[1]
 
             info.append({
-            'name': name,
-            'price': price
+                'name': name,
+                'price': price
 
             })
         context = {
             'info': info,
         }
         return render(request, 'bookingsjef/generate_price.html', context)
-    except (TypeError):
+    except TypeError:
         return HttpResponse('Bandet eksisterer ikke i våre databaser')
