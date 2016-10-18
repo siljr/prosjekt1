@@ -809,7 +809,7 @@ main{
     float: left;
     width: 100px;
     font-size: 16px;
-    margin: 40px 0 0 0px;
+    margin: 40px 0 0 0;
     border-radius: 4px;
     height: 28px;
 }
@@ -821,7 +821,7 @@ main{
 
 .generate-scene-boxes {
 	display: inline-flex;
-	width: : 800px;
+	width: 800px;
 	margin: 0 0 0 0;
 	float: left;
 }
@@ -838,7 +838,8 @@ main{
 .generate-scene-button {
 	width: 160px;
     font-size: 16px;
-    margin: 40px 0 0 0px;
+    line-height: 28px;
+    margin: 20px 0 0 5px;
     border-radius: 4px;
     height: 28px;
     position: relative;

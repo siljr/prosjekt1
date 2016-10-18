@@ -1,17 +1,19 @@
 {% extends 'band_booking/base.html' %}
 {% block content %}
-    <form action="{% url 'bookingsjef:generator_input' %}" method="post">
-        {% csrf_token %}
-        <div class="centered">
-            <h1 class="generate-scene-header">Generete bilettpriser</h1>
-            <div class="generate-scene-boxes">
-                {% for i in info %}
-                <div class="generate-scene-box">
-                    <p>Scene: {{ i.name }}</p>
-                    <p>Billettpris: {{ i.price }}</p>
-                </div>
-                {% endfor %}
+    <div class="centered">
+        <h1 class="generate-scene-header">Generete bilettpriser</h1>
+        <div class="generate-scene-boxes">
+            {% for i in info %}
+            <div class="generate-scene-box">
+                <p>Scene: {{ i.name }}</p>
+                <p>Billettpris: {{ i.price }}</p>
             </div>
+            {% endfor %}
         </div>
-        <input class="generate-scene-button basic-button" value="Tilbake til generator" type="submit">
+    </div>
+    <a href="{% url 'bookingsjef:generator_input' %}" class="black-link">
+        <div class="generate-scene-button basic-button">
+            Tilbake til pris generator
+        </div>
+    </a>
 {% endblock %}
