@@ -787,3 +787,38 @@ main{
 .economic-result-link:visited {
     color: #0977ab;
 }
+
+.booking-information-wrapper {
+    font-size: 20px;
+    width: 1200px;
+    max-width: 1200px;
+    text-align: center;
+}
+
+.booking-information-offers {
+    margin-bottom: 10%;
+}
+
+.booking-information-scenes > div {
+    display: inline-block;
+    margin-right: 10px;
+    width: 190px;
+}
+
+.booking-information-scene-title, .booking-information-offers-title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.booking-information-scene-information {
+    font-size: 18px;
+    height: 20px;
+    text-align: right;
+    width: 200px;
+    font-style: italic;
+}
+
+.booking-information-scene-middle-element {
+    margin-bottom: 10px;
+}
