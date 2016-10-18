@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from band_booking.models import Concert, Booking
+from .actions.concert_overview_term import get_information_this_term
 
 
 def economic_result_concert(request, concert_id):
@@ -36,3 +37,7 @@ def approve_booking_offer(request, offer_id, approved=False):
     except Booking.DoesNotExist:
         print('does not exist')
         return redirect('bookingansvarlig:bookings')
+
+
+def booking_information_term(request):
+    return render(request, "bookingsjef/booking_information_term.html", get_information_this_term())
