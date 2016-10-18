@@ -41,7 +41,6 @@ def approve_booking_offer(request, offer_id, approved=False):
         return redirect('bookingansvarlig:bookings')
 
 
-
 def booking_information_term(request):
     return render(request, "bookingsjef/booking_information_term.html", get_information_this_term())
 
