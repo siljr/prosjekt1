@@ -6,10 +6,11 @@ from django.dispatch import receiver
 # Create your models here.
 
 class Person(models.Model):
-    first_name = models.CharField(max_length=20)
-    last_name = models.CharField(max_length=20)
-    telephone_number = models.IntegerField()
-    email = models.EmailField()
+    user = models.OneToOneField(User, null=True, blank=True)
+    #first_name = models.CharField(max_length=20)
+    #last_name = models.CharField(max_length=20)
+    #telephone_number = models.IntegerField()
+    #email = models.EmailField()
     related_name = 'a_person'
 
     #adding choice variables helps to avoid typos and inconsistencies in the future
@@ -34,7 +35,7 @@ class Person(models.Model):
     )
 
     def __str__(self):
-        return self.first_name + ' ' + self.last_name
+        return self.user.first_name + ' ' + self.user.last_name
 
 
 class Scene(models.Model):
