@@ -20,6 +20,22 @@ def find_artist(name):
     return artist_discogs, artist_spotify
 
 
+def find_artist_spotify(name):
+    """
+    Finds the artist with the given name on Spotify
+    """
+    artists_spotify = spotify.search(q='artist:' + name, type='artist')
+
+    if len(artists_spotify['artists']['items']) == 0:
+        return None
+
+    artists_spotify = artists_spotify['artists']['items'][0]
+    if artists_spotify['name'] == name:
+        return artists_spotify
+
+    return None
+
+
 def get_artist_information(name):
     """
     Returns information about the given artist/band as a dictionary. If there is no valid artist,
