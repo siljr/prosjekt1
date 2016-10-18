@@ -822,3 +822,60 @@ main{
 .booking-information-scene-middle-element {
     margin-bottom: 10px;
 }
+
+.price-generator-input-box {
+    display: block;
+    width: 250px;
+    margin: 20px 40px 40px 0;
+    font-size: 17px;
+    float: left;
+}
+
+.price-generator-input-field {
+    font-size: 15px;
+    float: right;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    width: 250px;
+    padding: 3px 10px 3px 10px;
+}
+
+.price-generator-button {
+    float: left;
+    width: 100px;
+    font-size: 16px;
+    margin: 40px 0 0 0;
+    border-radius: 4px;
+    height: 28px;
+}
+
+.generate-scene-header {
+	margin: auto;
+	text-align: center;
+}
+
+.generate-scene-boxes {
+	display: inline-flex;
+	width: 800px;
+	margin: 0 0 0 0;
+	float: left;
+}
+
+.generate-scene-box {
+	margin-left: 50px;
+	font-size: 16px;
+}
+
+.generate-scene-box:first-child {
+	margin-left: 0;
+}
+
+.generate-scene-button {
+	width: 160px;
+    font-size: 16px;
+    line-height: 28px;
+    margin: 20px 0 0 5px;
+    border-radius: 4px;
+    height: 28px;
+    position: relative;
+}

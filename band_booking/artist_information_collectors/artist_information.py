@@ -20,6 +20,22 @@ def find_artist(name):
     return artist_discogs, artist_spotify
 
 
+def find_artist_spotify(name):
+    """
+    Finds the artist with the given name on Spotify
+    """
+    artists_spotify = spotify.search(q='artist:' + name, type='artist')
+
+    if len(artists_spotify['artists']['items']) == 0:
+        return None
+
+    artists_spotify = artists_spotify['artists']['items'][0]
+    if artists_spotify['name'] == name:
+        return artists_spotify
+
+    return None
+
+
 def get_artist_information(name):
     """
     Returns information about the given artist/band as a dictionary. If there is no valid artist,
@@ -131,6 +147,26 @@ def is_band(artist):
     """
     return len(artist.members) > 0
 
+
+def get_popularity(artist_spotify):
+    """
+    Returns information about popularity of up to 50 bands albums.
+    """
+    albums = spotify.artist_albums(artist_spotify['uri'], album_type='album', limit=50)['items']
+    popularity = []
+    album_names = []
+    for album in albums:
+        album = spotify.album(album['id'])
+
+        if album['name'] in album_names:
+            continue
+        popularity.append(int(album['popularity']))
+        album_names.append(album['name'])
+
+        if len(album_names) == 50:
+            break
+    popularity.sort(reverse=True)
+    return popularity
 
 """
 Creates variables for access to the APIs.
