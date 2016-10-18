@@ -114,8 +114,17 @@ main{
     color: #000000;
 }
 
+.white-link {
+    text-decoration: none;
+    color: #ffffff;
+}
+
 .black-link:visited {
     color: #000000;
+}
+
+.white-link:visited {
+    color: #ffffff;
 }
 
 .centered {
