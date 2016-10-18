@@ -135,6 +135,7 @@ class Booking(models.Model):
     recipient_email = models.EmailField(max_length=50,default = ' ')
     email_text = models.CharField(max_length = EMAIL_MAX_LENGTH,default = 'Booking offer goes here')
     date = models.DateField(default=timezone.now)
+    scene = models.ForeignKey(Scene, null=True, blank=True, default=True)
 
     UNDECIDED = 'U'
     NOT_APPROVED = 'N'
