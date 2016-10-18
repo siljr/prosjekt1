@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'band_booking.apps.BandBookingConfig',
     'bookingansvarlig.apps.BookingansvarligConfig',
     'bookingsjef.apps.BookingsjefConfig',
+    'tekniker.apps.TeknikerConfig',
 ]
 
 MIDDLEWARE = [
