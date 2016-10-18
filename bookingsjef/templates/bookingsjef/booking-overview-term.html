@@ -1,0 +1,92 @@
+{% extends 'band_booking/base.html' %}
+{% block content %}
+    <div class="calendar-wrapper center-horizontal">
+        <div class="calendar-controls">
+            {% if previous %}
+                <a href="{{ previous }}" class="black-link calendar-previous-month">
+                    <div >
+                        &lt; Forrige måned
+                    </div>
+                </a>
+            {% else %}
+                <div class="calendar-previous-month-adjuster">
+
+                </div>
+            {% endif %}
+            {% if next %}
+                <a href="{{ next }}" class="black-link calendar-next-month">
+                    <div >
+                        Neste måned &gt;
+                    </div>
+                </a>
+            {% endif %}
+            <div class="calendar-month">
+                {{ month }}
+            </div>
+        </div>
+        <div class="calendar-fields">
+            <div class="calendar-header-field">
+                Mandag
+            </div>
+            <div class="calendar-header-field">
+                Tirsdag
+            </div>
+            <div class="calendar-header-field">
+                Onsdag
+            </div>
+            <div class="calendar-header-field">
+                Torsdag
+            </div>
+            <div class="calendar-header-field">
+                Fredag
+            </div>
+            <div class="calendar-header-field">
+                Lørdag
+            </div>
+            <div class="calendar-header-field">
+                Søndag
+            </div>
+            {% for i in empty_dates %}
+                <div class="calendar-field-empty calendar-field">
+                    &nbsp
+                </div>
+            {% endfor %}
+            {% for date in dates %}
+                <div class="calendar-field {{ date.booked }}">
+                    {{ date.date }}
+                    {% if date.band %}
+                        <div class="calendar-date-band">
+                            {{ date.band }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            {% for i in empty_dates_end %}
+                <div class="calendar-field-empty calendar-field">
+                    &nbsp
+                </div>
+            {% endfor %}
+        </div>
+        <div class="calendar-color-explanation">
+            <div class="calendar-color-explanation-single">
+                <div class="calendar-color-box booked">
+
+                </div>
+                Booket
+            </div>
+            <div class="calendar-color-explanation-single">
+                <div class="calendar-color-box offer-sent">
+                </div>
+                Tilbud sent
+            </div>
+            <div class="calendar-color-explanation-single">
+                <div class="calendar-color-box not-booked">
+                </div>
+                Ledig
+            </div>
+            <div class="calendar-scene">
+                {{ scene }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
