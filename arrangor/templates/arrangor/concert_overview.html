@@ -1,0 +1,65 @@
+{% extends 'band_booking/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="center-horizontal concert-overview-wrapper">
+        <h1 class="concert-overview-title">Konserter i semestre</h1>
+        <div class="concert-overview-information-table table">
+            <div class="table-head concert-overview-table-head">
+                <div class="table-cell">
+                    Scene
+                </div>
+                <div class="table-cell">
+                    Konsert navn
+                </div>
+                <div class="table-cell">
+                    Band
+                </div>
+                <div class="table-cell">
+                    Dato
+                </div>
+                <div class="table-cell">
+                    Billettpris
+                </div>
+                <div class="table-cell">
+                    Sjanger
+                </div>
+                <div class="table-cell">
+                    Publikumstall
+                </div>
+            </div>
+            {% for concert in concerts %}
+                <div class="table-row">
+                    <div class="table-cell">
+                        {{ concert.scene }}
+                    </div>
+                    <div class="table-cell">
+                        {{ concert.concert_title }}
+                    </div>
+                    <div class="table-cell">
+                        {% for band in concert.bands.all %}
+                            <span class="concert-overview-band-name">
+                                {{ band }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                    <div class="table-cell">
+                        {{ concert.date }}
+                    </div>
+                    <div class="table-cell">
+                        {{ concert.ticket_price }} kr
+                    </div>
+                    <div class="table-cell">
+                        {% for band in concert.bands.all %}
+                            <span class="concert-overview-band-name">
+                                {{ band.genre }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                    <div class="table-cell">
+                        {{ concert.attendance }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
