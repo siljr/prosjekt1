@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^', include('bookingansvarlig.urls')),
     url(r'^', include('bookingsjef.urls')),
     url(r'^', include('band_booking.urls')),
-    url(r'^', include('tekniker.urls'))
+    url(r'^', include('tekniker.urls')),
+    url(r'^', include('arrangør.urls')),
 ]

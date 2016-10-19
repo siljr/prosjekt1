@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'bookingansvarlig.apps.BookingansvarligConfig',
     'bookingsjef.apps.BookingsjefConfig',
     'tekniker.apps.TeknikerConfig',
+    'arrangør.apps.ArrangørConfig',
 ]
 
 MIDDLEWARE = [
