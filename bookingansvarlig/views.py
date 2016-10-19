@@ -148,7 +148,7 @@ def create_booking_offer(request, offer_id=None):
     try:
         scene_name = booking_offer.scene.scene_name
     except ObjectDoesNotExist:
-        scene_name = "ingen"
+        scene_name = ""
 
     context = {'offer': booking_offer, 'saved': saved,
                'status': booking_offer.get_status_message(),
