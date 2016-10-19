@@ -114,8 +114,17 @@ main{
     color: #000000;
 }
 
+.white-link {
+    text-decoration: none;
+    color: #ffffff;
+}
+
 .black-link:visited {
     color: #000000;
+}
+
+.white-link:visited {
+    color: #ffffff;
 }
 
 .centered {
@@ -143,7 +152,7 @@ main{
 }
 
 .menu-links {
-    max-width: 900px;
+    max-width: 700px;
 }
 
 .menu-link-title {
@@ -720,6 +729,15 @@ main{
     width: 100%;
 }
 
+.booking-offer-date {
+    float: right;
+    margin-bottom: 15px;
+}
+
+.booking-offer-date > label {
+    font-weight: bold;
+}
+
 .booking-offer-label{
     padding-left: 4px;
     font-weight: bold;
@@ -727,11 +745,18 @@ main{
 
 .booking-offer-save-button {
     float: right;
+    margin-top: 20px;
+}
+
+.booking-offer-scene-selector {
+    display: inline-block;
+    float: right;
+    margin-right: 100px;
 }
 
 .booking-offer-menu-button {
     float: left;
-    margin-top: -170px;
+    margin-top: -155px;
 }
 
 .economic-result-wrapper {
@@ -786,6 +811,59 @@ main{
 
 .economic-result-link:visited {
     color: #0977ab;
+}
+
+.booking-information-wrapper {
+    font-size: 20px;
+    width: 1200px;
+    max-width: 1200px;
+    text-align: center;
+}
+
+.booking-information-offers {
+    margin-bottom: 10%;
+}
+
+.booking-information-scenes > div {
+    display: inline-block;
+    margin-right: 10px;
+    width: 190px;
+    height: 20px;
+}
+
+.calendar-link {
+    color: #0ca2e8;
+    text-decoration: none;
+}
+
+.calendar-link:visited {
+    color: #0ca2e8;
+}
+
+.booking-information-scene-title, .booking-information-offers-title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.booking-information-scene-information {
+    font-size: 18px;
+    height: 20px;
+    text-align: right;
+    width: 200px;
+    font-style: italic;
+}
+
+.booking-information-scene-title {
+    height: 30px;
+}
+
+.booking-information-scene-title-placeholder {
+    margin-bottom: -10px;
+}
+
+.booking-information-scene-middle-element {
+    margin-bottom: 10px;
 }
 
 .price-generator-input-box {
@@ -843,4 +921,134 @@ main{
     border-radius: 4px;
     height: 28px;
     position: relative;
+}
+
+.calendar-wrapper {
+    width: 1000px;
+    margin-top: 100px;
+}
+
+.calendar-field {
+    border-collapse: collapse;
+    width: 136px;
+    border: 1px solid black;
+    display: inline-block;
+    height: 98px;
+    padding-right: 2px;
+    padding-top: 2px;
+    margin: 0;
+    text-align: right;
+    float: left;
+}
+
+.calendar-header-field {
+    font-weight: bold;
+    width: 138px;
+    height: 30px;
+    border: 1px solid black;
+    display: inline-block;
+    margin: 0;
+    text-align: center;
+    float: left;
+    background-color: #faf1c4;
+    line-height: 30px;
+}
+
+.calendar-field-empty {
+    background-color: #c5c5c5;
+}
+
+.booked {
+    background-color: #68a4e8;
+}
+
+.offer-sent {
+    background-color: #ffc257;
+}
+
+.not-booked {
+    background-color: #f5faf8;
+}
+
+.calendar-color-explanation-single {
+    margin-right: 20px;
+    margin-top: 5px;
+    display: inline-block;
+    line-height: 25px;
+    height: 25px;
+    vertical-align: middle;
+}
+
+.calendar-color-box{
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    border: 1px solid #c6c6c6;
+}
+
+.calendar-color-explanation {
+    width: 980px;
+}
+
+.calendar-controls {
+    width: 980px;
+    height: 30px;
+    margin-bottom: 25px;
+}
+
+.calendar-fields {
+    width: 1000px;
+    display: block;
+}
+
+.calendar-month {
+    margin-left: 265px;
+    display: inline-block;
+    text-align: center;
+    width: 200px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.calendar-next-month {
+    float: right;
+}
+
+.calendar-next-month, .calendar-previous-month {
+    display: inline-block;
+    line-height: 30px;
+    height: 30px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+.calendar-previous-month {
+    float: left;
+}
+
+.calendar-previous-month-adjuster {
+    float: left;
+    width: 130px;
+    height: 30px;
+    display: inline-block;
+}
+
+.calendar-date-band {
+    text-align: center;
+    width: 136px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.calendar-scene {
+    margin-top: 10px;
+    float: right;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.back-button{
+    width: 200px;
+    margin-top: 20px
 }
