@@ -7,39 +7,6 @@ from django.utils import timezone
 
 # Create your models here.
 
-class Person(models.Model):
-    user = models.OneToOneField(User, null=True, blank=True)
-    # first_name = models.CharField(max_length=20)
-    # last_name = models.CharField(max_length=20)
-    # telephone_number = models.IntegerField()
-    # email = models.EmailField()
-    related_name = 'a_person'
-
-    # adding choice variables helps to avoid typos and inconsistencies in the future
-    # instead of using strings choices are easily available through class: Person.MANAGER
-    MANAGER = 'M'
-    ORGANIZER = 'O'
-    RIGGER = 'R'
-    CHIEF_ORGANIZER = 'C'
-    VOLUNTEER = 'V'
-
-    ROLE_CHOICES = (
-        (MANAGER, 'manager'),
-        (ORGANIZER, 'organizer'),
-        (RIGGER, 'rigger'),
-        (CHIEF_ORGANIZER, 'chief organizer'),
-        (VOLUNTEER, 'volunteer'),
-    )
-    role = models.CharField(
-        max_length=1,
-        choices=ROLE_CHOICES,
-        default=VOLUNTEER,
-    )
-
-    def __str__(self):
-        return self.user.first_name + ' ' + self.user.last_name
-
-
 class Scene(models.Model):
     number_of_seats = models.IntegerField()
     handicap_accessible = models.NullBooleanField()
@@ -69,7 +36,7 @@ class Scene(models.Model):
 
 class Band(models.Model):
     band_name = models.CharField(max_length=30)
-    manager = models.ForeignKey(User, limit_choices_to={'groups': "Manager"}, null=True, blank=True)
+    manager = models.ForeignKey(User, limit_choices_to={'groups__name': "Manager"}, null=True, blank=True)
     genre = models.CharField(max_length=20)
     booking_price = models.IntegerField()
     streaming_numbers = models.IntegerField()
@@ -134,7 +101,7 @@ class Concert(models.Model):
 class Booking(models.Model):
     EMAIL_MAX_LENGTH = 5000
 
-    sender = models.ForeignKey(User, null=True, blank=True)
+    sender = models.ForeignKey(User, limit_choices_to={'groups__name': 'Bookingansvarlig'}, null=True, blank=True)
     title_name = models.CharField(max_length=50, default=' ')
     recipient_email = models.EmailField(max_length=50, default=' ')
     email_text = models.CharField(max_length=EMAIL_MAX_LENGTH, default='Booking offer goes here')

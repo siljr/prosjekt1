@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from band_booking.models import Concert, Person
+from band_booking.models import Concert
 from django.contrib.auth.models import User
 # Create your views here.
 

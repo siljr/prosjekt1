@@ -68,7 +68,7 @@ def index(request):
             {"title": "Bookingoversikt", "link": reverse('bookingsjef:booking_information_term')}
         ],
         "Arrangør": [
-            {"title": "Konserter i semestre", "link": reverse('arrangør:concerts')},
+            {"title": "Konserter dette semesteret", "link": reverse('arrangør:concerts')},
         ],
         "Tekniker": [
             {"title": "Mine konserter", "link": reverse('tekniker:myconcerts')}
