@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'band_booking.apps.BandBookingConfig',
     'bookingansvarlig.apps.BookingansvarligConfig',
     'bookingsjef.apps.BookingsjefConfig',
-    'arrangor.apps.ArrangorConfig'
+    'arrangor.apps.ArrangorConfig',
     'tekniker.apps.TeknikerConfig',
 ]
 
