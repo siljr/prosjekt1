@@ -25,6 +25,7 @@ class Person(models.Model):
         (MANAGER, 'manager'),
         (ORGANIZER, 'organizer'),
         (RIGGER, 'rigger'),
+        (Lydteknikker)
         (CHIEF_ORGANIZER, 'chief organizer'),
         (VOLUNTEER, 'volunteer'),
     )
