@@ -8,4 +8,4 @@ def add_user_permissions(**kwargs):
     """
     Adds Bookingsjef to the group list, and adds several permissions to the bookingsjef group
     """
-    group, created = auth_models.Group.objects.get_or_create(name='Bookingsjef')
+    group, created = auth_models.Group.objects.get_or_create(name='Arrangør')
