@@ -95,6 +95,7 @@ class Concert(models.Model):
     attendance = models.IntegerField(default=0)
     ticket_price = models.IntegerField(default=0)
     booking_price = models.IntegerField(default=0)
+    organizer = models.ForeignKey(User, limit_choices_to={'groups': "Arrangør"})
     related_name = 'a_concert'
 
     GUARD_EXPENSE = 1000
