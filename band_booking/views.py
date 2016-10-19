@@ -67,7 +67,9 @@ def index(request):
             {"title": "Billettprisgenerator", "link": reverse('bookingsjef:generator_input')},
             {"title": "Bookingoversikt", "link": reverse('bookingsjef:booking_information_term')}
         ],
-        "Arrangør": [],
+        "Arrangør": [
+            {"title": "Konserter i semestre", "link": reverse('arrangør:concerts')},
+        ],
         "Tekniker": [
             {"title": "Mine konserter", "link": reverse('tekniker:myconcerts')}
         ],
