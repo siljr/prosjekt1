@@ -4,39 +4,8 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.utils import timezone
 
+
 # Create your models here.
-
-class Person(models.Model):
-    first_name = models.CharField(max_length=20)
-    last_name = models.CharField(max_length=20)
-    telephone_number = models.IntegerField()
-    email = models.EmailField()
-    related_name = 'a_person'
-
-    #adding choice variables helps to avoid typos and inconsistencies in the future
-    #instead of using strings choices are easily available through class: Person.MANAGER
-    MANAGER = 'M'
-    ORGANIZER = 'O'
-    RIGGER = 'R'
-    CHIEF_ORGANIZER = 'C'
-    VOLUNTEER = 'V'
-
-    ROLE_CHOICES = (
-        (MANAGER, 'manager'),
-        (ORGANIZER, 'organizer'),
-        (RIGGER, 'rigger'),
-        (CHIEF_ORGANIZER, 'chief organizer'),
-        (VOLUNTEER, 'volunteer'),
-    )
-    role = models.CharField(
-        max_length=1,
-        choices=ROLE_CHOICES,
-        default=VOLUNTEER,
-    )
-
-    def __str__(self):
-        return self.first_name + ' ' + self.last_name
-
 
 class Scene(models.Model):
     number_of_seats = models.IntegerField()
@@ -67,7 +36,7 @@ class Scene(models.Model):
 
 class Band(models.Model):
     band_name = models.CharField(max_length=30)
-    manager = models.ForeignKey(Person, limit_choices_to={'role': Person.MANAGER}, null=True, blank=True)
+    manager = models.ForeignKey(User, limit_choices_to={'groups__name': "Manager"}, null=True, blank=True)
     genre = models.CharField(max_length=20)
     booking_price = models.IntegerField()
     streaming_numbers = models.IntegerField()
@@ -80,7 +49,8 @@ class Band(models.Model):
 class Album(models.Model):
     name = models.CharField(max_length=30)
     sales_numbers = models.IntegerField()
-    band = models.ForeignKey(Band, null=True, blank=True)  # an album belongs to one band, but band can have many albums. Could be also ManyToManyField if album can have more then one band
+    band = models.ForeignKey(Band, null=True,
+                             blank=True)  # an album belongs to one band, but band can have many albums. Could be also ManyToManyField if album can have more then one band
     related_name = 'an_album'
 
     def __str__(self):
@@ -89,14 +59,14 @@ class Album(models.Model):
 
 class Concert(models.Model):
     concert_title = models.CharField(max_length=50)
-    date = models.DateField() #got en error with default=date.today() when migrating, so it's been removed
+    date = models.DateField()  # got en error with default=date.today() when migrating, so it's been removed
     bands = models.ManyToManyField(Band)  # There can play many bands on the concert and band can play many concerts
     scene = models.ForeignKey(Scene, null=True, blank=True)  # only one scene per concert, but many concerts per scene
-    personnel = models.ManyToManyField(Person)
+    personnel = models.ManyToManyField(User)
     attendance = models.IntegerField(default=0)
     ticket_price = models.IntegerField(default=0)
     booking_price = models.IntegerField(default=0)
-    organizer = models.ForeignKey(User, limit_choices_to={'groups': "Arrangør"})
+    organizer = models.ForeignKey(User, limit_choices_to={'groups__name': 'Arrangør'}, null=True, blank=True, related_name='organizer')
     related_name = 'a_concert'
 
     GUARD_EXPENSE = 1000
@@ -118,11 +88,11 @@ class Concert(models.Model):
     def __str__(self):
         return self.concert_title
 
-    #Calculates the concert's economic result
+    # Calculates the concert's economic result
     def calc_econ_result(self):
-        return self.ticket_price*self.attendance-self.booking_price-self.scene.expenditure-self.GUARD_EXPENSE
+        return self.ticket_price * self.attendance - self.booking_price - self.scene.expenditure - self.GUARD_EXPENSE
 
-    #Disguises the method call as a field
+    # Disguises the method call as a field
     @property
     def economic_result(self):
         return self.calc_econ_result()
@@ -131,10 +101,10 @@ class Concert(models.Model):
 class Booking(models.Model):
     EMAIL_MAX_LENGTH = 5000
 
-    sender = models.ForeignKey(User, null=True, blank=True)
-    title_name = models.CharField(max_length=50,default = ' ')
-    recipient_email = models.EmailField(max_length=50,default = ' ')
-    email_text = models.CharField(max_length = EMAIL_MAX_LENGTH,default = 'Booking offer goes here')
+    sender = models.ForeignKey(User, limit_choices_to={'groups__name': 'Bookingansvarlig'}, null=True, blank=True)
+    title_name = models.CharField(max_length=50, default=' ')
+    recipient_email = models.EmailField(max_length=50, default=' ')
+    email_text = models.CharField(max_length=EMAIL_MAX_LENGTH, default='Booking offer goes here')
     date = models.DateField(default=timezone.now)
     scene = models.ForeignKey(Scene, null=True, blank=True, default=True)
 
@@ -150,7 +120,7 @@ class Booking(models.Model):
         (SENT, 'Sent'),
     )
     status = models.CharField(
-        default ='U',
+        default='U',
         max_length=1,
         choices=STATUS_CHOICES,
     )
@@ -177,14 +147,13 @@ class Booking(models.Model):
     def __str__(self):
         return self.title_name
 
-
     # Unused change method for changing e-mail text.
-    #def change_email_text(self, new_text):
+    # def change_email_text(self, new_text):
     #    if len(new_text) < self.EMAIL_MAX_LENGTH:
     #        self.email_text = new_text
     #        self.save()
 
-    def change_status(self, new_status): #Method that changes the status of the booking
+    def change_status(self, new_status):  # Method that changes the status of the booking
         if new_status in (Booking.UNDECIDED, Booking.NOT_APPROVED, Booking.APPROVED, Booking.SENT):
             self.status = new_status
             self.save()
@@ -200,10 +169,3 @@ def handle_change(sender, **kwargs):
         from bookingansvarlig.actions.send_booking import send_booking
         send_booking(booking_object)
         booking_object.change_status(Booking.SENT)
-
-
-
-
-
-
-
