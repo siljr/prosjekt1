@@ -3,7 +3,7 @@ from band_booking.models import Scene, Concert, Band, Booking
 from django.shortcuts import render, redirect, reverse
 from django.utils import timezone
 from django.core import validators
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 import re
 
 
@@ -145,16 +145,19 @@ def create_booking_offer(request, offer_id=None):
     if not booking_offer.user_allowed_to_view(request.user):
         return redirect('band_booking:index')
 
+    try:
+        scene_name = booking_offer.scene.scene_name
+    except ObjectDoesNotExist:
+        scene_name = "ingen"
+
     context = {'offer': booking_offer, 'saved': saved,
                'status': booking_offer.get_status_message(),
                'link': reverse('bookingansvarlig:update_booking_offer', kwargs={'offer_id': offer_id}),
                'email_text': booking_offer.email_text,
                'date': "%04d-%02d-%02d" % (booking_offer.date.year, booking_offer.date.month, booking_offer.date.day),
-               'scene': booking_offer.scene.scene_name,
+               'scene': scene_name,
                'scenes': [scene.scene_name for scene in Scene.objects.all()]
                }
-
-    print(context['scene'])
 
     return render(request, 'bookingansvarlig/create_booking_offer.html', context)
 

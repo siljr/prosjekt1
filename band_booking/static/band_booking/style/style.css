@@ -1047,3 +1047,8 @@ main{
     font-weight: bold;
     font-size: 18px;
 }
+
+.back-button{
+    width: 200px;
+    margin-top: 20px
+}
