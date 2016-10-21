@@ -10,6 +10,23 @@
             </a>
         </div>
 
+        <div class="booking-overview-button-container">
+            <a href="{% url 'bookingansvarlig:bookings-filtered' %}" class="booking-offer-button button black-link">
+                <div class="basic-button booking-list-filter-button">
+                    Sendt
+                </div>
+            </a>
+        </div>
+
+        <div class="booking-overview-button-container">
+            <a href="{% url 'bookingansvarlig:bookings' %}" class="booking-offer-button button black-link">
+                <div class="basic-button booking-list-filter-button">
+                    Alle
+                </div>
+            </a>
+        </div>
+
+
       <!--  adds a dropdown menu where the user can choose a status to filter by -->
         <div class="table-cell">
             <div class="dropdown">
