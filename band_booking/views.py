@@ -57,15 +57,22 @@ def index(request):
     """
     pages = {
         "Bookingansvarlig": [
-            {"title": "Bookingoversikt", "link": reverse('bookingansvarlig:bookings')},
+            {"title": "Bookingtilbud", "link": reverse('bookingansvarlig:bookings')},
             {"title": "Tidligere konserter", "link": reverse('bookingansvarlig:concerts')},
-            {"title": "Artistinformasjon", "link": reverse('bookingansvarlig:search_for_artist')}
+            {"title": "Artistinformasjon", "link": reverse('bookingansvarlig:search_for_artist')},
         ],
         "Bookingsjef": [
             {"title": "Tidligere konserter", "link": reverse('bookingansvarlig:concerts')},
+            {"title": "Bookingtilbud", "link": reverse('bookingansvarlig:bookings')},
+            {"title": "Billettprisgenerator", "link": reverse('bookingsjef:generator_input')},
+            {"title": "Bookingoversikt", "link": reverse('bookingsjef:booking_information_term')}
         ],
-        "Arrangør": [],
-        "Tekniker": [],
+        "Arrangør": [
+            {"title": "Konserter dette semesteret", "link": reverse('arrangør:concerts')},
+        ],
+        "Tekniker": [
+            {"title": "Mine konserter", "link": reverse('tekniker:myconcerts')}
+        ],
     }
 
     if request.user.is_superuser:

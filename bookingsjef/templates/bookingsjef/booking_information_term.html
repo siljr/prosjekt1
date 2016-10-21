@@ -1,0 +1,45 @@
+{% extends 'band_booking/base.html' %}
+{% block content %}
+    <title>Booking dette semesteret</title>
+    <div class="centered booking-information-wrapper">
+        <div class="booking-information-scenes">
+            <div>
+                <div class="booking-information-scene-title-placeholder">
+                </div>
+                <div class="booking-information-scene-information booking-information-scene-middle-element">
+                    Antall bookete datoer:
+                </div>
+                <div class="booking-information-scene-information booking-information-scene-middle-element">
+                    Antall ledige datoer:
+                </div>
+                <div class="booking-information-scene-information booking-information-scene-middle-element">
+                    Antall tilbud sent:
+                </div>
+                <div class="booking-information-scene-information">
+                    Kalender for semesteret:
+                </div>
+            </div>
+            {% for scene in scenes %}
+            <div>
+                <div class="booking-information-scene-title">
+                    {{ scene.name }}
+                </div>
+                <div class="booking-information-scene-middle-element">
+                    {{ scene.booked }}
+                </div>
+                <div class="booking-information-scene-middle-element">
+                    {{ scene.unbooked }}
+                </div>
+                <div class="booking-information-scene-middle-element">
+                    {{ scene.offers }}
+                </div>
+                <a href="{{ scene.calendar }}" class="calendar-link">
+                    <div>
+                        Kalender
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
