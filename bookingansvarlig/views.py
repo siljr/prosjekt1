@@ -169,6 +169,14 @@ class BookingListView(generic.ListView):
     def get_queryset(self):
         return [booking for booking in Booking.objects.all() if booking.user_allowed_to_view(self.request.user)]
 
+# Makes a page with just the filtered view of just the status sent
+class BookingFilteredListView(generic.ListView):
+    template_name = 'bookingansvarlig/bookings_list.html'
+    context_object_name = 'bookings'
+
+    def get_queryset(self):
+        return [booking for booking in Booking.objects.filter(status="S") if booking.user_allowed_to_view(self.request.user)]
+
 
 def search_for_artist(request):
     artist_name = request.GET.get('name', None)

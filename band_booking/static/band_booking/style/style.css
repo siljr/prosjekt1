@@ -603,6 +603,28 @@ main{
     float: right;
 }
 
+.booking-list-filter-button {
+    height: 33px;
+    width: 100px;
+    line-height: 33px;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.booking-overview-float-down {
+    margin-top: 50px;
+}
+
+.disabled-filter-button {
+    background-color: darkgray;
+}
+
+.disabled-filter-button:hover {
+    background-color: darkgray;
+    cursor: default;
+}
+
 .booking-offer-accept-button, .booking-offer-decline-button {
     width: 100%;
     height: 25px;
