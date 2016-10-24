@@ -1,8 +1,9 @@
 {% extends 'band_booking/base.html' %}
 {% block content %}
+    {% url 'bookingansvarlig:bookings-filtered' as filtered_url %}
     <title>Bookingtilbud</title>
     <div class="booking-list-wrapper center-horizontal">
-        <div class="booking-overview-button-container">
+        <div class="booking-overview-button-container booking-overview-float-down">
             <a href="{% url 'bookingansvarlig:create_booking_offer' %}" class="booking-offer-button button black-link">
                 <div class="basic-button booking-list-new-offer-button">
                     Nytt bookingtilbud
@@ -12,7 +13,7 @@
 
         <div class="booking-overview-button-container">
             <a href="{% url 'bookingansvarlig:bookings-filtered' %}" class="booking-offer-button button black-link">
-                <div class="basic-button booking-list-filter-button">
+                <div class="basic-button booking-list-filter-button{% if request.get_full_path == filtered_url %} disabled-filter-button{% endif %}">
                     Sendt
                 </div>
             </a>
@@ -20,7 +21,7 @@
 
         <div class="booking-overview-button-container">
             <a href="{% url 'bookingansvarlig:bookings' %}" class="booking-offer-button button black-link">
-                <div class="basic-button booking-list-filter-button">
+                <div class="basic-button booking-list-filter-button{% if request.get_full_path != filtered_url %} disabled-filter-button{% endif %}">
                     Alle
                 </div>
             </a>
