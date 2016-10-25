@@ -634,10 +634,20 @@ main{
 }
 
 .booking-offer-accept-button, .booking-offer-decline-button {
-    width: 100%;
-    height: 25px;
+    width: calc(100% - 6px);
+    margin: 1px;
+    height: 23px;
     line-height: 25px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
 
+.booking-offer-decline-button:hover {
+    background-color: #d0524e;
+}
+
+.booking-offer-accept-button:hover {
+    background-color: #338c30;
 }
 
 .booking-offer-disabled-approval-buttons {
