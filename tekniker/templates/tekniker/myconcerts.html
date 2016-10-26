@@ -18,13 +18,10 @@
                     Dato
                 </div>
                 <div class="table-cell">
-                    Billettpris
-                </div>
-                <div class="table-cell">
-                    Sjanger
-                </div>
-                <div class="table-cell">
                     Publikumstall
+                </div>
+                <div class="table-cell">
+                    Tidspunkt
                 </div>
             </div>
             {% for concert in concerts %}
@@ -46,17 +43,16 @@
                         {{ concert.date }}
                     </div>
                     <div class="table-cell">
-                        {{ concert.ticket_price }} kr
-                    </div>
-                    <div class="table-cell">
-                        {% for band in concert.bands.all %}
-                            <span class="concert-overview-band-name">
-                                {{ band.genre }}
-                        </span>
-                        {% endfor %}
-                    </div>
-                    <div class="table-cell">
                         {{ concert.attendance }}
+                    </div>
+                    <div class="table-cell">
+                        {% if concert.attendance|divisibleby:3 %}
+                            20:00 - 22:30
+                        {% elif concert.attendance|divisibleby:4 %}
+                            21:00 - 23:00
+                        {% else %}
+                            22:30 - 00:00
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

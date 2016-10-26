@@ -26,6 +26,9 @@
                 <div class="table-cell">
                     Publikumstall
                 </div>
+                <div class="table-cell">
+                    Konsertinformasjon
+                </div>
             </div>
             {% for concert in concerts %}
                 <div class="table-row">
@@ -57,6 +60,13 @@
                     </div>
                     <div class="table-cell">
                         {{ concert.attendance }}
+                    </div>
+                    <div class="table-cell">
+                        {% if request.user == concert.organizer or request.user.is_superuser%}
+                            <a href="{% url 'arrangør:concert' id=concert.pk %}">
+                                Informasjon
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
