@@ -38,7 +38,7 @@ class Band(models.Model):
     band_name = models.CharField(max_length=30)
     manager = models.ForeignKey(User, limit_choices_to={'groups__name': "Manager"}, null=True, blank=True)
     genre = models.CharField(max_length=20)
-    band_member = models.ManyToManyField(User, limit_choices_to={'groups__name': "Tekniker"}, blank=True, related_name='member')
+    band_member = models.ManyToManyField(User, limit_choices_to={'groups__name': "Tekniker"}, related_name='band_member')
     booking_price = models.IntegerField()
     streaming_numbers = models.IntegerField()
     related_name = "a_band"
