@@ -1,0 +1,20 @@
+{% extends 'band_booking/base.html' %}
+{% load static %}
+{% block content %}
+	<title>Tekniske behov</title>
+	<script src="{% static 'manager/scripts/delete_on_click.js' %}"/>
+	<div class="">
+		{% if equipmentCollection %}
+			{% for equipment in equipmentCollection %}
+				<div class="">
+					<input type="text" value="{{ equipment.name }}">
+					<input type="number" min="1" value="{{ equipment.number }}">
+					<input type="number" value="0" hidden>
+					<button class="equipment-add-delete-button"> Slett utstyr </button>
+				</div>
+			{% endfor %}
+		{% else %}
+			<p>Det finnes ikke noen krav til utstyr i databasen</p>
+		{% endif %}
+	</div>
+{% endblock %}
