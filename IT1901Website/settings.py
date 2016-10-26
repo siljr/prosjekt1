@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'tekniker.apps.TeknikerConfig',
     'arrangør.apps.ArrangørConfig',
     'manager.apps.ManagerConfig',
+    'bandmedlem.apps.BandmedlemConfig',
 ]
 
 MIDDLEWARE = [
