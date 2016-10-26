@@ -185,6 +185,10 @@ main{
     padding-right: 8px;
 }
 
+.small-padding-bottom {
+    padding-bottom: 8px;
+}
+
 .basic-button:hover {
     background-color: #e4e4e4;
 }
@@ -1120,6 +1124,7 @@ main{
 
 .concert-technical-information {
     width: 395px;
+    min-height: 140px;
     float: right;
 }
 
@@ -1131,4 +1136,20 @@ main{
 
 .margin-top-medium {
     padding-top: 20px;
+}
+
+.concert-equipment-information {
+    float: left;
+    margin-top: 30px;
+    width: 395px;
+}
+
+
+.concert-equipment-column{
+    width: 295px;
+}
+
+.concert-equipment-amount-column {
+    width: 95px;
+    text-align: center;
 }
