@@ -145,7 +145,7 @@ class Booking(models.Model):
         """
         Returns a status word in Norwegian for the current status of the booking offer
         """
-        status_words = {'U': 'Under godkjenning', 'N': 'Ikke godkjent', 'A': 'Godkjent', 'S': 'Sent'}
+        status_words = {'U': 'Under godkjenning', 'N': 'Ikke godkjent', 'A': 'Godkjent', 'S': 'Sendt'}
         return status_words[self.status]
 
     def user_allowed_to_view(self, user):

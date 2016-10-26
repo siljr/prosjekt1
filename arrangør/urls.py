@@ -5,4 +5,5 @@ from . import views
 app_name = "arrangør"
 urlpatterns = [
      url(r'^concerts_in_semester/$', views.ConcertsView.as_view(), name='concerts'),
+     url(r'^concert/(?P<id>([0-9]+))', views.overview_concert, name='concert'),
 ]

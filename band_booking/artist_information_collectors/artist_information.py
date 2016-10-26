@@ -1,6 +1,5 @@
 import discogs_client
 import spotipy
-from .songkick_collector import get_past_events
 
 
 def find_artist(name):
@@ -30,7 +29,7 @@ def find_artist_spotify(name):
         return None
 
     artists_spotify = artists_spotify['artists']['items'][0]
-    if artists_spotify['name'] == name:
+    if artists_spotify['name'].lower() == name.lower() or artists_spotify['name'].lower().startswith(name.lower()):
         return artists_spotify
 
     return None
