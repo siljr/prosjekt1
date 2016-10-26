@@ -7,5 +7,5 @@ admin.site.register(Concert)
 admin.site.register(Band)
 admin.site.register(Album)
 admin.site.register(Booking)
-
+admin.site.register(Technical_needs)
 
