@@ -57,7 +57,7 @@
                     <td class="{{ booking.status }}">{{ booking.get_status_word }}</td>
                     {% if perms.band_booking.can_approve_booking_offers %}
                         {% if booking.status == "N" or booking.status == "U" %}
-                            <td class=" booking-offer-accept-buttons">
+                            <td class=" booking-offer-accept-buttons booking-offer-disabled-approval-buttons">
                                 <a href="{% url 'bookingsjef:approve_booking_offer' booking.pk %}" class="black-link">
                                     <div class="booking-offer-accept-button S">
                                         Godkjenn
