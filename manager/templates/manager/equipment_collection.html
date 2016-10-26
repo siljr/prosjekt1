@@ -2,18 +2,13 @@
 {% load static %}
 {% block content %}
 	<title>Tekniske behov</title>
-	<script src="{% static 'manager/scripts/delete_on_click.js' %}"/>
+	<script src="{% static 'manager/scripts/delete_on_click.js' %}"></script>
 	<div class="">
 		{% if equipmentCollection %}
-			<form method="POST" action="">
+			<form method="POST" action="/technical/requirements/update/">
 			{% csrf_token %}
 			{% for equipment in equipmentCollection %}
-				<div class="">
-					<input type="number" value="{{ equipment.pk }}" hidden name="pk[]">
-					<input type="text" value="{{ equipment.name }}" name="equipment_name[]">
-					<input type="number" min="1" value="{{ equipment.number }}" name="equipment_number[]">
-					<input type="number" value="0" hidden name="delete[]">
-					<button class="equipment-add-delete-button"> Slett utstyr </button>
+				<div class=""><input type="number" value="{{ equipment.pk }}" hidden name="pk"><input type="text" value="{{ equipment.name }}" name="equipment_name"><input type="number" min="1" value="{{ equipment.number }}" name="equipment_number"><input type="number" value="0" hidden name="delete"/><div class="equipment-add-delete-button basic-button"> Slett utstyr </div>
 				</div>
 			{% endfor %}
 			<input type="submit" value="Lagre endringer" class="basic-button">
