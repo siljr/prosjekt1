@@ -1,0 +1,26 @@
+{% extends 'band_booking/base.html' %}
+{% load static %}
+{% block content %}
+	<title>Tekniske behov</title>
+	<script src="{% static 'manager/scripts/delete_on_click.js' %}"/>
+	<div class="">
+		{% if equipmentCollection %}
+			<form method="POST" action="">
+			{% csrf_token %}
+			{% for equipment in equipmentCollection %}
+				<div class="">
+					<input type="number" value="{{ equipment.pk }}" hidden name="pk[]">
+					<input type="text" value="{{ equipment.name }}" name="equipment_name[]">
+					<input type="number" min="1" value="{{ equipment.number }}" name="equipment_number[]">
+					<input type="number" value="0" hidden name="delete[]">
+					<button class="equipment-add-delete-button"> Slett utstyr </button>
+				</div>
+			{% endfor %}
+			<input type="submit" value="Lagre endringer" class="basic-button">
+			<a href="" class="black-link"> <div class="basic-button">Legg til utstyr</div> </a>
+			</form>
+		{% else %}
+			<p>Det finnes ikke noen krav til utstyr i databasen</p>
+		{% endif %}
+	</div>
+{% endblock %}
