@@ -16,7 +16,7 @@ def get_current_term():
 def get_term(month, year):
     if month <= 6:
         return django_date(year, 1, 15), django_date(year, 5, 15)
-    return django_date(year, 8, 15), django_date(year, 12, 1)
+    return django_date(year, 8, 15), django_date(year, 11, 30)
 
 
 def get_number_of_booking_offers_sent_this_term(scene):
@@ -52,13 +52,14 @@ def build_information_month(year, month, scene):
     term = get_term(month, year)
     information = {
         'scene': scene[0].upper() + scene[1:],
-        'empty_dates': range(start),
-        'empty_dates_end': range(7 - (start + days_in_month) % 7),
+        'empty_dates': list(range(start)),
+        'empty_dates_end': list(range(7 - (start + days_in_month) % 7)),
         'dates': [{'date': date + 1} for date in range(days_in_month)],
         'month': ["Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"][month-1],
     }
 
-    for date in information['dates']:
+    remove = []
+    for index, date in enumerate(information['dates']):
         concerts_date = Concert.objects.filter(date=django_date(year, month, date['date']), scene__scene_name__icontains=scene)
         if concerts_date:
             date['booked'] = 'booked'
@@ -68,7 +69,15 @@ def build_information_month(year, month, scene):
         if booking_offers:
             date['booked'] = 'offer-sent'
             continue
+        if [month, date['date']] < [term[0].month, term[0].day]:
+            remove.append(index)
+            information['empty_dates'].append(0)
+        if [month, date['date']] > [term[1].month, term[1].day]:
+            remove.append(index)
+            information['empty_dates_end'].append(0)
         date['booked'] = 'not-booked'
+    for index in remove[::-1]:
+        del information['dates'][index]
     if term[0].month != month:
         information["previous"] = reverse('bookingsjef:calendar', kwargs={'year': year, 'month': month - 1, 'scene': scene})
     if term[1].month != month:

@@ -7,7 +7,7 @@
     line-height: 45px;
 }
 
-.inline {
+.inline-block {
     display: inline-block;
 }
 
@@ -63,6 +63,14 @@ main{
 
 .bold {
     font-weight: bold;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.inline {
+    display: inline;
 }
 
 .table-row {
@@ -175,6 +183,10 @@ main{
 
 .small-padding-right {
     padding-right: 8px;
+}
+
+.small-padding-bottom {
+    padding-bottom: 8px;
 }
 
 .basic-button:hover {
@@ -626,10 +638,20 @@ main{
 }
 
 .booking-offer-accept-button, .booking-offer-decline-button {
-    width: 100%;
-    height: 25px;
+    width: calc(100% - 6px);
+    margin: 1px;
+    height: 23px;
     line-height: 25px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
 
+.booking-offer-decline-button:hover {
+    background-color: #d0524e;
+}
+
+.booking-offer-accept-button:hover {
+    background-color: #338c30;
 }
 
 .booking-offer-disabled-approval-buttons {
@@ -1073,4 +1095,61 @@ main{
 .back-button{
     width: 200px;
     margin-top: 20px
+}
+
+.concert-person-email-title, .concert-person-name-title {
+    margin-bottom: 10px;
+}
+
+.concert-person-email, .concert-person-email-title{
+    width: 200px;
+}
+
+.concert-person-name, .concert-person-name-title {
+    width: 180px;
+}
+
+.concert-wrapper {
+    width: 800px;
+}
+
+.concert-title {
+    text-align: center;
+}
+
+.concert-base-information {
+    width: 395px;
+    float: left;
+}
+
+.concert-technical-information {
+    width: 395px;
+    min-height: 140px;
+    float: right;
+}
+
+.concert-information-line {
+    width: 60px;
+    margin: 0;
+    padding: 0;
+}
+
+.margin-top-medium {
+    padding-top: 20px;
+}
+
+.concert-equipment-information {
+    float: left;
+    margin-top: 30px;
+    width: 395px;
+}
+
+
+.concert-equipment-column{
+    width: 295px;
+}
+
+.concert-equipment-amount-column {
+    width: 95px;
+    text-align: center;
 }

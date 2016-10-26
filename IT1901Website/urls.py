@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^', include('tekniker.urls')),
     url(r'^', include('arrangør.urls')),
     url(r'^', include('manager.urls')),
+    url(r'^', include('bandmedlem.urls'))
 ]
