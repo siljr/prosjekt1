@@ -57,6 +57,9 @@ class Band(models.Model):
     def get_bandmedlems_band(cls, user: User):
         return Band.objects.filter(band_member=user)[0]
 
+    def equipment(self, user: User):
+        user_band = Band.objects.filter(band_menmber__contains=user)
+        return Technical_needs.objects.filter(band=user_band)
 
 class Album(models.Model):
     name = models.CharField(max_length=30)
@@ -108,6 +111,12 @@ class Concert(models.Model):
     @property
     def economic_result(self):
         return self.calc_econ_result()
+
+class Technical_needs(models.Model):
+    Equipment_name = models.CharField(max_length=128, default=' ')
+    amount = models.IntegerField(default=1)
+    band = models.ForeignKey(Band)
+
 
 
 class Booking(models.Model):
