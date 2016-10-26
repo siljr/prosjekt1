@@ -1,12 +1,25 @@
 {% extends 'band_booking/base.html' %}
 {% load static %}
 {% block content %}
-    <title> Bookingtilbud </title>
-    <div class="create-booking-offer-wrapper center-horizontal">
+    <title> Tekniske behov </title>
+    <h1 class="page-title"> Legg til utstyrsbehov </h1>
+    <div class="center-horizontal">
       <form method="POST">
         {% csrf_token %}
-        {{ form }}
-        <input class="booking-offer-button booking-offer-save-button basic-button" type="submit" value="Lagre tilbud"/>
+        <!-- {{ form }} -->
+        <div>
+          <label for={{ form.Equipment_name.id_for_label }}> Utstyr:</label>
+          {{ form.Equipment_name }}
+        </div>
+        <div>
+          <label for={{ form.amount.id_for_label }}> Antall:</label>
+          {{ form.amount }}
+        </div>
+        <div>
+          <label for={{ form.band.id_for_label }}> Band:</label>
+          {{ form.band }}
+        </div>
+        <input class="booking-offer-button booking-offer-save-button basic-button" type="submit" value="Lagre"/>
       </form>
     </div>
 {% endblock %}
