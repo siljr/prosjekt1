@@ -5,6 +5,7 @@
 	<script src="{% static 'manager/scripts/delete_on_click.js' %}"/>
 	<div class="">
 		{% if equipmentCollection %}
+			<form>
 			{% for equipment in equipmentCollection %}
 				<div class="">
 					<input type="text" value="{{ equipment.name }}">
@@ -13,6 +14,7 @@
 					<button class="equipment-add-delete-button"> Slett utstyr </button>
 				</div>
 			{% endfor %}
+			</form>
 		{% else %}
 			<p>Det finnes ikke noen krav til utstyr i databasen</p>
 		{% endif %}
