@@ -92,7 +92,7 @@ class Concert(models.Model):
 
     def __str__(self):
         return self.concert_title
-
+    
     # Calculates the concert's economic result
     def calc_econ_result(self):
         return self.ticket_price * self.attendance - self.booking_price - self.scene.expenditure - self.GUARD_EXPENSE
