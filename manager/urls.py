@@ -5,5 +5,5 @@ from . import views
 app_name = "manager"
 
 urlpatterns = [
-    url(r'^technical_needs/$', views.ChangeTechnicalneed, name='changeNeeds'),
+    url(r'^technical_needs/$', views.changeTechnicalneed, name='changeNeeds'),
 ]

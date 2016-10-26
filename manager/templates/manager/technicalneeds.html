@@ -1,0 +1,12 @@
+{% extends 'band_booking/base.html' %}
+{% load static %}
+{% block content %}
+    <title> Bookingtilbud </title>
+    <div class="create-booking-offer-wrapper center-horizontal">
+      <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input class="booking-offer-button booking-offer-save-button basic-button" type="submit" value="Lagre tilbud"/>
+      </form>
+    </div>
+{% endblock %}
