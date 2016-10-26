@@ -47,7 +47,7 @@ class Band(models.Model):
         return self.band_name
 
     def equipment(self, user: User):
-        user_band = Band.objects.filter(band_menmber__contains=user)
+        user_band = Band.objects.filter(band_member__contains=user)
         return Technical_needs.objects.filter(band=user_band)
 
 class Album(models.Model):
