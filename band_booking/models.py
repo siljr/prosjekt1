@@ -38,7 +38,7 @@ class Band(models.Model):
     band_name = models.CharField(max_length=30)
     manager = models.ForeignKey(User, limit_choices_to={'groups__name': "Manager"}, null=True, blank=True)
     genre = models.CharField(max_length=20)
-    band_member = models.ManyToManyField(User, limit_choices_to={'groups__name': "Tekniker"}, related_name='band_member')
+    band_member = models.ManyToManyField(User, limit_choices_to={'groups__name': "Bandmedlem"}, related_name='band_member')
     booking_price = models.IntegerField()
     streaming_numbers = models.IntegerField()
     related_name = "a_band"
@@ -46,8 +46,9 @@ class Band(models.Model):
     def __str__(self):
         return self.band_name
 
-    def equipment(self, user: User):
-        user_band = Band.objects.filter(band_member__contains=user)
+    @classmethod
+    def equipment(cls, user: User):
+        user_band = Band.objects.filter(band_member=user)[0]
         return Technical_needs.objects.filter(band=user_band)
 
 class Album(models.Model):
@@ -102,7 +103,7 @@ class Concert(models.Model):
         return self.calc_econ_result()
 
 class Technical_needs(models.Model):
-    Equipment_name = models.CharField(max_length=128, default=' ')
+    equipment_name = models.CharField(max_length=128, default=' ')
     amount = models.IntegerField(default=1)
     band = models.ForeignKey(Band)
 
