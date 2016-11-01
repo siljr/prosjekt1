@@ -55,7 +55,10 @@ class Band(models.Model):
 
     @classmethod
     def get_bandmedlems_band(cls, user: User):
-        return Band.objects.filter(band_member=user)[0]
+        try:
+            return Band.objects.filter(band_member=user)[:1].get()
+        except Band.DoesNotExist:
+            return None
 
     @classmethod
     def equipment(cls, user: User):
