@@ -58,7 +58,6 @@ def build_information_month(year, month, scene):
         'month': ["Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"][month-1],
     }
 
-    remove = []
     for index, date in enumerate(information['dates']):
         concerts_date = Concert.objects.filter(date=django_date(year, month, date['date']), scene__scene_name__icontains=scene)
         if concerts_date:
