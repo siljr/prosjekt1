@@ -17,7 +17,8 @@ def technical_requirements(request):
             'name': current_equipment.Equipment_name,
             'number': current_equipment.amount,
         })
-    return render(request, 'manager/equipment_collection.html', {'equipmentCollection': equipment_information})
+    return render(request, 'manager/equipment_collection.html', {'equipmentCollection': equipment_information,
+                                                                 'band': band})
 
 
 def update_technical_requirements(request):
@@ -25,14 +26,15 @@ def update_technical_requirements(request):
     equipment_pk = request.POST.getlist('pk')
     equipment_name = request.POST.getlist('equipment_name')
     delete = request.POST.getlist('delete')
-    print(equipment_number)
     for index in range(len(equipment_number)):
         try:
             equipment = Technical_needs.objects.get(pk=equipment_pk[index])
+            if equipment.band.manager != request.user:
+                continue
             if delete[index] == '1':
                 equipment.delete()
                 continue
-            if equipment.band.manager != request.user or int(equipment_number[index]) < 1 or len(equipment_name[index]) < 1:
+            if int(equipment_number[index]) < 1 or len(equipment_name[index]) < 1:
                 continue
             equipment.Equipment_name = equipment_name[index]
             equipment.amount = int(equipment_number[index])
