@@ -1,6 +1,29 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from band_booking.models import Technical_needs, Band
-# Create your views here.
+from band_booking.forms import ChangeTechnicalneedsForm
+
+
+def changeTechnicalneed(request):
+    if request.method == 'POST':
+        form = ChangeTechnicalneedsForm(request.POST)
+        if form.is_valid():
+            technical_need = form.save(commit=False)
+            try:
+                band = Band.objects.filter(manager=request.user)[:1].get()
+                technical_need.band = band
+            except Band.DoesNotExist:
+                return redirect(reverse('band_booking:index'))
+            # hvis dette fungerer går jeg tilbake til listen over behov.. Kanskje
+            # return HttpResponseRedirect(reverse('changeNeeds'))
+            technical_need.save()
+            return redirect(reverse('manager:technical_requirements'))
+
+    else:
+        form = ChangeTechnicalneedsForm()
+
+    context = {'form': form}
+
+    return render(request, 'manager/technicalneeds.html', context=context)
 
 
 def technical_requirements(request):
