@@ -998,10 +998,6 @@ main{
     line-height: 30px;
 }
 
-.calendar-field-empty {
-    background-color: #c5c5c5;
-}
-
 .booked {
     background-color: #68a4e8;
 }
@@ -1012,6 +1008,10 @@ main{
 
 .not-booked {
     background-color: #f5faf8;
+}
+
+.calendar-field-empty {
+    background-color: #c5c5c5;
 }
 
 .calendar-color-explanation-single {
@@ -1083,6 +1083,10 @@ main{
     width: 136px;
     margin-top: 20px;
     font-weight: bold;
+}
+
+.calendar-greyed-field {
+    background: lightgray;
 }
 
 .calendar-date-email {

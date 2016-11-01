@@ -73,15 +73,9 @@ def build_information_month(year, month, scene):
             except Band.DoesNotExist:
                 date['email'] = booking_offers[0].recipient_email
             continue
-        if [month, date['date']] < [term[0].month, term[0].day]:
-            remove.append(index)
-            information['empty_dates'].append(0)
-        if [month, date['date']] > [term[1].month, term[1].day]:
-            remove.append(index)
-            information['empty_dates_end'].append(0)
+        if [month, date['date']] < [term[0].month, term[0].day] or [month, date['date']] > [term[1].month, term[1].day]:
+            date['greyed'] = True
         date['booked'] = 'not-booked'
-    for index in remove[::-1]:
-        del information['dates'][index]
     if term[0].month != month:
         information["previous"] = reverse('bookingsjef:calendar', kwargs={'year': year, 'month': month - 1, 'scene': scene})
     if term[1].month != month:
