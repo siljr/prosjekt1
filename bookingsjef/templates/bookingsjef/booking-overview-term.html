@@ -52,11 +52,15 @@
                 </div>
             {% endfor %}
             {% for date in dates %}
-                <div class="calendar-field {{ date.booked }}">
+                <div class="calendar-field {% if date.greyed %}calendar-field-empty{% endif %} {{ date.booked }}">
                     {{ date.date }}
                     {% if date.band %}
                         <div class="calendar-date-band">
                             {{ date.band }}
+                        </div>
+                    {% elif date.email %}
+                        <div class="calendar-date-email">
+                            {{ date.email }}
                         </div>
                     {% endif %}
                 </div>
