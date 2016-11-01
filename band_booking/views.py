@@ -73,6 +73,9 @@ def index(request):
         "Tekniker": [
             {"title": "Mine konserter", "link": reverse('tekniker:myconcerts')}
         ],
+        "Manager": [
+            {"title": "Utstyrsliste", "link": reverse('manager:technical_requirements')}
+        ],
     }
 
     if request.user.is_superuser:

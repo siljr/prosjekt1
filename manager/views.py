@@ -14,7 +14,7 @@ def technical_requirements(request):
     for current_equipment in equipment:
         equipment_information.append({
             'pk': current_equipment.pk,
-            'name': current_equipment.Equipment_name,
+            'name': current_equipment.equipment_name,
             'number': current_equipment.amount,
         })
     return render(request, 'manager/equipment_collection.html', {'equipmentCollection': equipment_information,
