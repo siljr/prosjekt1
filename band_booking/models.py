@@ -119,7 +119,7 @@ class Technical_needs(models.Model):
     band = models.ForeignKey(Band)
 
     def __str__(self):
-        return self.Equipment_name
+        return self.equipment_name
 
 
 class Booking(models.Model):
