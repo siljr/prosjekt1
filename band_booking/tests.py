@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User, Group
-from .models import Band, Booking
+from .models import Band, Booking, Technical_needs
 
 
 # Create your tests here.
@@ -17,6 +17,7 @@ class BandMethodsTest(TestCase):
         self.band = Band.objects.create(band_name='bla', manager=self.manager, booking_price=100, genre='jazz',
                                         streaming_numbers=111)
         self.band.band_member.add(self.bandmedlem)
+        self.equipment = Technical_needs.objects.create(equipment_name='mic', amount=2, band=self.band)
 
     def test_get_bandmedlems_band(self):
         band = Band.get_bandmedlems_band(self.bandmedlem)
@@ -26,3 +27,7 @@ class BandMethodsTest(TestCase):
         booking = Booking.objects.create(title_name='booking', recipient_email=self.manager_mail)
         bookings = self.band.get_band_manager_bookings()
         self.assertEqual(bookings[0], booking)
+
+    def test_f(self):
+        band_equipment=Band.equipment(self.bandmedlem)
+        self.assertEqual(band_equipment[0], self.equipment)
