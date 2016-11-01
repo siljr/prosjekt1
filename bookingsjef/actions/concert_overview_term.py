@@ -1,6 +1,6 @@
 from django.utils import timezone
 from django.shortcuts import reverse
-from band_booking.models import Booking, Concert, Scene
+from band_booking.models import Booking, Concert, Scene, Band
 from calendar import monthrange
 
 
@@ -53,12 +53,11 @@ def build_information_month(year, month, scene):
     information = {
         'scene': scene[0].upper() + scene[1:],
         'empty_dates': list(range(start)),
-        'empty_dates_end': list(range(7 - (start + days_in_month) % 7)),
+        'empty_dates_end': list(range(6 - (start + days_in_month - 1) % 7)),
         'dates': [{'date': date + 1} for date in range(days_in_month)],
         'month': ["Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"][month-1],
     }
 
-    remove = []
     for index, date in enumerate(information['dates']):
         concerts_date = Concert.objects.filter(date=django_date(year, month, date['date']), scene__scene_name__icontains=scene)
         if concerts_date:
@@ -68,16 +67,14 @@ def build_information_month(year, month, scene):
         booking_offers = Booking.objects.filter(date=django_date(year, month, date['date']), scene__scene_name__icontains=scene)
         if booking_offers:
             date['booked'] = 'offer-sent'
+            try:
+                date['band'] = Band.objects.filter(manager__email=booking_offers[0].recipient_email)[:1].get().band_name
+            except Band.DoesNotExist:
+                date['email'] = booking_offers[0].recipient_email
             continue
-        if [month, date['date']] < [term[0].month, term[0].day]:
-            remove.append(index)
-            information['empty_dates'].append(0)
-        if [month, date['date']] > [term[1].month, term[1].day]:
-            remove.append(index)
-            information['empty_dates_end'].append(0)
+        if [month, date['date']] < [term[0].month, term[0].day] or [month, date['date']] > [term[1].month, term[1].day]:
+            date['greyed'] = True
         date['booked'] = 'not-booked'
-    for index in remove[::-1]:
-        del information['dates'][index]
     if term[0].month != month:
         information["previous"] = reverse('bookingsjef:calendar', kwargs={'year': year, 'month': month - 1, 'scene': scene})
     if term[1].month != month:
