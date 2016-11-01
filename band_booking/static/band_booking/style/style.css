@@ -1172,3 +1172,62 @@ main{
     width: 95px;
     text-align: center;
 }
+
+.technical-equipment-wrapper {
+    margin-top: 20px;
+    width: 450px;
+}
+
+.equipment-add-delete-button {
+    width: 120px;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.technical-equipment-row {
+    margin-bottom: 10px;
+    display: block;
+    width: 450px;
+}
+
+.technical-equipment-row > input {
+    margin-right: 10px;
+    border: 1px solid #808080;
+    border-radius: 5px;
+    padding: 2px 5px 2px 5px;
+}
+
+.technical-equipment-row > input:nth-child(2) {
+    width: 225px;
+}
+
+.technical-equipment-row > input:nth-child(3) {
+    text-align: right;
+    padding-right: 2px;
+    width: 40px;
+}
+
+.technical-equipment-row > input:read-only {
+    background: #c6c6c6;
+    border: 2px solid #f03737;
+    margin-left: -2px;
+}
+
+.technical-equipment-add {
+    float: left;
+    padding: 2px;
+}
+
+.technical-equipment-save {
+    float: right;
+}
+
+.technical-equipment-save, .technical-equipment-add {
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.technical-equipment-title {
+    width: 100%;
+    text-align: center;
+}

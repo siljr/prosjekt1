@@ -1,0 +1,24 @@
+{% extends 'band_booking/base.html' %}
+{% load static %}
+{% block content %}
+	<title>Tekniske behov</title>
+	<script src="{% static 'manager/scripts/delete_on_click.js' %}"></script>
+	<div class="technical-equipment-wrapper center-horizontal">
+        <h1 class="technical-equipment-title">
+            Utstyr for {{ band.band_name }}
+        </h1>
+		{% if equipmentCollection %}
+			<form method="POST" action="/technical/requirements/update/">
+			{% csrf_token %}
+			{% for equipment in equipmentCollection %}
+				<div class="technical-equipment-row"><input type="number" value="{{ equipment.pk }}" hidden name="pk"><input type="text" value="{{ equipment.name }}" name="equipment_name"><input type="number" min="1" value="{{ equipment.number }}" name="equipment_number"><input type="number" value="0" hidden name="delete"/><div class="equipment-add-delete-button basic-button hover-pointer"> Slett utstyr </div>
+				</div>
+			{% endfor %}
+			<input type="submit" value="Lagre endringer" class="basic-button technical-equipment-save">
+			</form>
+		{% else %}
+			<p>Det finnes ikke noen krav til utstyr i databasen</p>
+		{% endif %}
+        <a href="" class="black-link"> <div class="basic-button inline-block technical-equipment-add">Legg til utstyr</div> </a>
+	</div>
+{% endblock %}
