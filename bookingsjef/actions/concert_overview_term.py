@@ -1,6 +1,6 @@
 from django.utils import timezone
 from django.shortcuts import reverse
-from band_booking.models import Booking, Concert, Scene
+from band_booking.models import Booking, Concert, Scene, Band
 from calendar import monthrange
 
 
@@ -68,6 +68,10 @@ def build_information_month(year, month, scene):
         booking_offers = Booking.objects.filter(date=django_date(year, month, date['date']), scene__scene_name__icontains=scene)
         if booking_offers:
             date['booked'] = 'offer-sent'
+            try:
+                date['band'] = Band.objects.filter(manager__email=booking_offers[0].recipient_email)[:1].get().band_name
+            except Band.DoesNotExist:
+                date['email'] = booking_offers[0].recipient_email
             continue
         if [month, date['date']] < [term[0].month, term[0].day]:
             remove.append(index)
