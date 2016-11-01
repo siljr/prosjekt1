@@ -1085,6 +1085,21 @@ main{
     font-weight: bold;
 }
 
+.calendar-date-email {
+    margin-top: 5px;
+    text-align: center;
+    width: 136px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
+    -ms-word-wrap: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    font-weight: bold;
+}
+
 .calendar-scene {
     margin-top: 10px;
     float: right;

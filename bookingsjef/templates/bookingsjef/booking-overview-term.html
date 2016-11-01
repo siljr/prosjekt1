@@ -58,6 +58,10 @@
                         <div class="calendar-date-band">
                             {{ date.band }}
                         </div>
+                    {% elif date.email %}
+                        <div class="calendar-date-email">
+                            {{ date.email }}
+                        </div>
                     {% endif %}
                 </div>
             {% endfor %}
