@@ -6,4 +6,5 @@ class ChangeTechnicalneedsForm(forms.ModelForm):
     class Meta:
         model = Technical_needs
         # må alltid ha en include eller en exclude, den kan være tom
-        exclude = []
+        exclude = ['band']
+
