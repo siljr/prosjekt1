@@ -19,6 +19,6 @@
 		{% else %}
 			<p>Det finnes ikke noen krav til utstyr i databasen</p>
 		{% endif %}
-        <a href="" class="black-link"> <div class="basic-button inline-block technical-equipment-add">Legg til utstyr</div> </a>
+        <a href="{% url 'manager:changeNeeds' %}" class="black-link"> <div class="basic-button inline-block technical-equipment-add">Legg til utstyr</div> </a>
 	</div>
 {% endblock %}
