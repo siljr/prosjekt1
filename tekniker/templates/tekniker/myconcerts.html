@@ -3,6 +3,7 @@
 {% block content %}
     <div class="center-horizontal concert-overview-wrapper">
         <h1 class="concert-overview-title">Konserter</h1>
+        {% if concerts %}
         <div class="concert-overview-information-table table">
             <div class="table-head concert-overview-table-head">
                 <div class="table-cell">
@@ -57,5 +58,10 @@
                 </div>
             {% endfor %}
         </div>
+        {% else %}
+            <h4>
+                Du er ikke satt opp på noen konserter
+            </h4>
+        {% endif %}
     </div>
 {% endblock %}
