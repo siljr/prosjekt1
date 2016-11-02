@@ -1215,15 +1215,17 @@ main{
 
 .technical-equipment-add {
     float: left;
-    padding: 2px;
+    padding: 4px;
+    height: 16px;
+    line-height: 16px;
 }
 
 .technical-equipment-save {
     float: right;
+    height: 25px;
 }
 
 .technical-equipment-save, .technical-equipment-add {
-    font-size: 14px;
     margin-top: 15px;
 }
 

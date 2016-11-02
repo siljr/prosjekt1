@@ -121,6 +121,8 @@ class Technical_needs(models.Model):
     amount = models.IntegerField(default=1)
     band = models.ForeignKey(Band)
 
+    def __str__(self):
+        return self.equipment_name
 
 
 class Booking(models.Model):

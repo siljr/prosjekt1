@@ -1,0 +1,21 @@
+{% extends 'band_booking/base.html' %}
+{% load static %}
+{% block content %}
+    <title> Tekniske behov </title>
+    <h1 class="page-title"> Legg til utstyrsbehov </h1>
+    <div class="center-horizontal">
+      <form method="POST">
+        {% csrf_token %}
+        <!-- {{ form }} -->
+        <div>
+          <label for={{ form.equipment_name.id_for_label }}> Utstyr:</label>
+          {{ form.equipment_name }}
+        </div>
+        <div>
+          <label for={{ form.amount.id_for_label }}> Antall:</label>
+          {{ form.amount }}
+        </div>
+        <input class="booking-offer-button booking-offer-save-button basic-button" type="submit" value="Lagre"/>
+      </form>
+    </div>
+{% endblock %}
