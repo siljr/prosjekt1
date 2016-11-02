@@ -59,7 +59,7 @@ def build_basic_information_month(year, month, scene):
 
 
 def build_information_month(year, month, scene):
-    information = build_information_month(year, month, scene)
+    information = build_basic_information_month(year, month, scene)
     term = get_term(month, year)
 
     for index, date in enumerate(information['dates']):
