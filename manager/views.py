@@ -30,8 +30,7 @@ def technical_requirements(request):
     try:
         band = Band.objects.get(manager=request.user)
     except Band.DoesNotExist:
-        # TODO: Add error message
-        return redirect('band_booking:index')
+        return render(request, 'band_booking:error', {'error': "Du er ikke tilknyttet et band som manager."})
     equipment = Technical_needs.objects.filter(band=band)
     equipment_information = []
     for current_equipment in equipment:
