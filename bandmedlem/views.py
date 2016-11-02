@@ -7,7 +7,7 @@ def concerts_band(request, year, month):
     band = Band.get_bandmedlems_band(user=request.user)
     if band is None:
         # TODO: Error message
-        return redirect(reverse('band_booking:index'))
+        return render(request, 'band_booking/error.html', {'error': "Du er ikke tilknyttet et band som medlem."})
 
     month, year = int(month), int(year)
     information = build_basic_information_month(year, month, band.band_name + " - " + str(year))
