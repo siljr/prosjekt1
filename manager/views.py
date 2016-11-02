@@ -59,7 +59,7 @@ def update_technical_requirements(request):
                 continue
             if int(equipment_number[index]) < 1 or len(equipment_name[index]) < 1:
                 continue
-            equipment.Equipment_name = equipment_name[index]
+            equipment.equipment_name = equipment_name[index]
             equipment.amount = int(equipment_number[index])
             equipment.save()
         except Technical_needs.DoesNotExist:

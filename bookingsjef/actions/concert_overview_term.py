@@ -47,16 +47,20 @@ def get_information_this_term():
     }
 
 
-def build_information_month(year, month, scene):
+def build_basic_information_month(year, month, scene):
     start, days_in_month = monthrange(year, month)
-    term = get_term(month, year)
-    information = {
+    return {
         'scene': scene[0].upper() + scene[1:],
         'empty_dates': list(range(start)),
         'empty_dates_end': list(range(6 - (start + days_in_month - 1) % 7)),
         'dates': [{'date': date + 1} for date in range(days_in_month)],
         'month': ["Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"][month-1],
     }
+
+
+def build_information_month(year, month, scene):
+    information = build_information_month(year, month, scene)
+    term = get_term(month, year)
 
     for index, date in enumerate(information['dates']):
         concerts_date = Concert.objects.filter(date=django_date(year, month, date['date']), scene__scene_name__icontains=scene)

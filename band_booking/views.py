@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as logout_user
 from django.shortcuts import render, redirect, reverse
+from datetime import datetime
 
 from band_booking.artist_information_collectors.artist_information import get_artist_information
 from band_booking.artist_information_collectors.songkick_collector import get_past_events
@@ -76,6 +77,9 @@ def index(request):
         "Manager": [
             {"title": "Utstyrsliste", "link": reverse('manager:technical_requirements')}
         ],
+        "Bandmedlem": [
+            {"title": "Konserter", "link": reverse('bandmedlem:calendar', kwargs={'year': datetime.now().year, 'month': datetime.now().month})}
+        ]
     }
 
     if request.user.is_superuser:

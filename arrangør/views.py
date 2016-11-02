@@ -31,10 +31,10 @@ def overview_concert(request, id):
             band_equipment = Technical_needs.objects.filter(band=band)
             for current_equipment in band_equipment:
                 # Combine the needs of similar equipment for different bands
-                if current_equipment.Equipment_name in equipment:
-                    equipment[current_equipment.Equipment_name] += current_equipment.amount
+                if current_equipment.equipment_name in equipment:
+                    equipment[current_equipment.equipment_name] += current_equipment.amount
                 else:
-                    equipment[current_equipment.Equipment_name] = current_equipment.amount
+                    equipment[current_equipment.equipment_name] = current_equipment.amount
         return equipment
 
     # Try to find a concert with the given ID
