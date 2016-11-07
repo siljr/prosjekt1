@@ -24,7 +24,7 @@ class ConcertsView(generic.ListView):
 
 def overview_concert(request, id):
     """
-    :param request: The HTML request
+    :param request: The HTTP request
     :param id: The id of the concert
     :return An overview page for the given concert, if the user has the required permissions. Else a redirect.
     Returns an overview page for the concert of the given ID. If there is no concert with this ID or the user does not
@@ -34,7 +34,7 @@ def overview_concert(request, id):
     def build_equipment(concert):
         """
         Finds the amount of equipment needed for all the bands of the concert, especially it combines the requirements
-        with same names such that it is easier for the user to read through the list
+        with the same names such that it is easier for the user to read through the list
         """
         equipment = {}
         for band in concert.bands.all():

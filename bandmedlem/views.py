@@ -4,7 +4,7 @@ from band_booking.models import Band, Concert, Booking
 
 
 def concerts_band(request, year, month):
-    band = Band.get_bandmedlems_band(user=request.user)
+    band = Band.get_users_band(user=request.user)
     if band is None:
         # TODO: Error message
         return render(request, 'band_booking/error.html', {'error': "Du er ikke tilknyttet et band som medlem."})

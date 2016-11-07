@@ -20,7 +20,7 @@ class BandMethodsTest(TestCase):
         self.equipment = Technical_needs.objects.create(equipment_name='mic', amount=2, band=self.band)
 
     def test_get_bandmedlems_band(self):
-        band = Band.get_bandmedlems_band(self.bandmedlem)
+        band = Band.get_users_band(self.bandmedlem)
         self.assertEqual(band, self.band)
 
     def test_get_band_manager_bookings(self):

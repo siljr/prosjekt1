@@ -8,11 +8,15 @@ from django.utils import timezone
 # Create your models here.
 
 class Scene(models.Model):
+    """
+    A model for the scenes at Samfundet
+    """
     number_of_seats = models.IntegerField()
     handicap_accessible = models.NullBooleanField()
     related_name = 'a_scene'
     expenditure = models.IntegerField(default=0)
 
+    # All the choices for the scenes
     STORSALEN = 'Storsalen'
     KLUBBEN = 'Klubben'
     KNAUS = 'Knaus'
@@ -35,6 +39,9 @@ class Scene(models.Model):
 
 
 class Band(models.Model):
+    """
+    A model for the bands
+    """
     band_name = models.CharField(max_length=30)
     manager = models.OneToOneField(User, limit_choices_to={'groups__name': "Manager"}, null=True, blank=True)
     genre = models.CharField(max_length=20)
@@ -47,6 +54,9 @@ class Band(models.Model):
         return self.band_name
 
     def get_band_manager_bookings(self):
+        """
+        :return: Returns all bookings sent to the manager of the band. Else raises an error.
+        """
         try:
             manager_email = self.manager.email
         except:
@@ -54,7 +64,11 @@ class Band(models.Model):
         return Booking.objects.filter(recipient_email=manager_email)
 
     @classmethod
-    def get_bandmedlems_band(cls, user: User):
+    def get_users_band(cls, user: User):
+        """
+        :param user: The user
+        :return: The band the user is a member of if it exists
+        """
         try:
             return Band.objects.filter(band_member=user)[:1].get()
         except Band.DoesNotExist:
@@ -62,21 +76,18 @@ class Band(models.Model):
 
     @classmethod
     def equipment(cls, user: User):
+        """
+        :param user: The user for which we want to find equipment needed
+        :return: The equipment needed for the band of the user, if the user is a member of a band.
+        """
         user_band = Band.objects.filter(band_member=user)[0]
         return Technical_needs.objects.filter(band=user_band)
 
-class Album(models.Model):
-    name = models.CharField(max_length=30)
-    sales_numbers = models.IntegerField()
-    band = models.ForeignKey(Band, null=True,
-                             blank=True)  # an album belongs to one band, but band can have many albums. Could be also ManyToManyField if album can have more then one band
-    related_name = 'an_album'
-
-    def __str__(self):
-        return self.name
-
 
 class Concert(models.Model):
+    """
+    A database model for a concert
+    """
     concert_title = models.CharField(max_length=50)
     date = models.DateField()  # got en error with default=date.today() when migrating, so it's been removed
     bands = models.ManyToManyField(Band)  # There can play many bands on the concert and band can play many concerts
@@ -109,14 +120,25 @@ class Concert(models.Model):
 
     # Calculates the concert's economic result
     def calc_econ_result(self):
+        """
+        :return: The economic results for the concert
+        """
         return self.ticket_price * self.attendance - self.booking_price - self.scene.expenditure - self.GUARD_EXPENSE
 
     # Disguises the method call as a field
     @property
     def economic_result(self):
+        """
+        :return: The economic results for the concert
+         The economic results for the concert disguised as a field.
+        """
         return self.calc_econ_result()
 
+
 class Technical_needs(models.Model):
+    """
+    A database model for technical equipment
+    """
     equipment_name = models.CharField(max_length=128, default=' ')
     amount = models.IntegerField(default=1)
     band = models.ForeignKey(Band)
@@ -126,6 +148,9 @@ class Technical_needs(models.Model):
 
 
 class Booking(models.Model):
+    """
+    A database model for a booking
+    """
     EMAIL_MAX_LENGTH = 5000
 
     sender = models.ForeignKey(User, limit_choices_to={'groups__name': 'Bookingansvarlig'}, null=True, blank=True)
@@ -174,13 +199,12 @@ class Booking(models.Model):
     def __str__(self):
         return self.title_name
 
-    # Unused change method for changing e-mail text.
-    # def change_email_text(self, new_text):
-    #    if len(new_text) < self.EMAIL_MAX_LENGTH:
-    #        self.email_text = new_text
-    #        self.save()
-
-    def change_status(self, new_status):  # Method that changes the status of the booking
+    def change_status(self, new_status):
+        """
+        Changes the status of the booking
+        :param new_status: The new status of the booking
+        :return: None
+        """
         if new_status in (Booking.UNDECIDED, Booking.NOT_APPROVED, Booking.APPROVED, Booking.SENT):
             self.status = new_status
             self.save()
@@ -189,7 +213,10 @@ class Booking(models.Model):
 @receiver(models.signals.post_save, sender=Booking)
 def handle_change(sender, **kwargs):
     """
-    Sends the email for the booking offer when the status changes to approved
+    :param sender: The sender of the Django signal
+    :param kwargs: Keyword arguments for the give Django signal
+    :return: None
+    Sends an email for the given booking that had a change if the stauts was changed to approved.
     """
     booking_object = kwargs['instance']
     if booking_object.status == Booking.APPROVED:
