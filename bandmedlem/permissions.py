@@ -11,5 +11,5 @@ def add_user_permissions(**kwargs):
     """
 
     add_permissions_group("Bandmedlem", [
-
+        ('can_view_band_calendar', 'Can view band calendar'),
     ])
