@@ -6,6 +6,9 @@ from django.http import HttpResponse
 
 
 def economic_result_concert(request, concert_id):
+    """
+    Renders a page with economic results of the concert
+    """
     concert = get_object_or_404(Concert, pk=concert_id)
     context = {
         'title': concert.concert_title,
@@ -26,6 +29,9 @@ def economic_result_concert(request, concert_id):
 
 
 def approve_booking_offer(request, offer_id, approved=False):
+    """
+    Changes booking status to APPROVED.
+    """
     try:
         offer = Booking.objects.get(pk=offer_id)
         if offer.status not in [Booking.UNDECIDED, Booking.NOT_APPROVED]:
@@ -42,14 +48,23 @@ def approve_booking_offer(request, offer_id, approved=False):
 
 
 def calendar(request, year, month, scene):
+    """
+    Renders calendar page with booking overview for the month and scene based on input parameter.
+    """
     return render(request, "bookingsjef/booking-overview-term.html", build_information_month(int(year), int(month), scene))
 
 
 def booking_information_term(request):
+    """
+    Renders page with booking information for the current semester.
+    """
     return render(request, "bookingsjef/booking_information_term.html", get_information_this_term())
 
 
 def generator_input(request):
+    """
+    Renders page that allow the user to generate ticket prices for specific band and booking price.
+    """
     context = {
 
     }
@@ -57,6 +72,9 @@ def generator_input(request):
 
 
 def price_generator(request):
+    """
+    Generates band prices for all the scenes
+    """
     bandname = request.POST.get('band', '')
     price = int(request.POST.get('price', ''))
     price_generated = get_ticket_prices_for_scenes(bandname, price)

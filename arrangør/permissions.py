@@ -9,7 +9,7 @@ from band_booking.models import Concert
 @receiver(pre_migrate, sender=auth_models)
 def add_user_permissions(**kwargs):
     """
-    Adds Arrangør to the group list
+    Adds Arrangør to the user group list. Adds permission to this group for seeing concert information
     """
     group, created = auth_models.Group.objects.get_or_create(name='Arrangør')
 

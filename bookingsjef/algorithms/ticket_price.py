@@ -25,6 +25,9 @@ def get_ticket_prices_for_scenes(band_name, booking_price):
 
 
 def _get_marked_data(band_name):
+    """
+    Returns popularity data for the band
+    """
     artist_spotify = find_artist_spotify(band_name)
     if artist_spotify is None:
         raise ValueError("No such band in Spotify")
@@ -33,11 +36,17 @@ def _get_marked_data(band_name):
 
 
 def _get_avg_popularity(band_name):
+    """
+    Calculates band's popularity based on Spotify data
+    """
     popularity = _get_marked_data(band_name)
     return sum(popularity[:10]) / 10
 
 
 def _get_minimum_ticket_price_to_cover_costs(scene: Scene, booking_price):
+    """
+    Returns minimum ticket price to cover the costs based on scene and booking_price input parameters
+    """
     return (scene.expenditure + booking_price) / scene.number_of_seats
 
 

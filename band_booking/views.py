@@ -8,20 +8,20 @@ from band_booking.artist_information_collectors.songkick_collector import get_pa
 
 
 def login_page(request, error=None):
-    '''
+    """
     Displays the login page if the user is not logged in, else it redirects to the index page. Displays an informative
     error message if the error argument is set.
-    '''
+    """
     if request.user.is_authenticated:
         return redirect('band_booking:index')
     return render(request, 'band_booking/login.html', {'error': error})
 
 
 def login_authenticate(request):
-    '''
+    """
     Authenticates the user and login if the username and password are correct, else the user is redirected to the login
     page with an error
-    '''
+    """
     username = request.POST.get('username', None)
     password = request.POST.get('password', None)
     user = authenticate(username=username, password=password)
@@ -33,28 +33,37 @@ def login_authenticate(request):
 
 
 def logout(request):
-    '''
+    """
     Logs the user out, redirects to the login page
-    '''
+    """
     logout_user(request)
     return redirect('band_booking:login')
 
 
 def artist(request, name):
+    """
+    Retrieves artist information and renders page with this information
+    """
     return render(request, 'band_booking/artist.html', get_artist_information(name))
 
 
 def artist_load(request, name):
+    """
+    Renders loading page while artist information is retrieved
+    """
     return render(request, 'band_booking/loading_artist.html', {'name': name})
 
 
 def event_load(request, name):
+    """
+    Retrieves past events information for given artist and renders it on the page
+    """
     return render(request, 'band_booking/artist_information_events.html', get_past_events(name))
 
 
 def index(request):
     """
-    Creates a role specific user page
+    Creates a role specific user index page
     """
     pages = {
         "Bookingansvarlig": [

@@ -4,6 +4,9 @@ from band_booking.forms import ChangeTechnicalneedsForm
 
 
 def changeTechnicalneed(request):
+    """
+    Renders page for changing technical needs of the manager's band.
+    """
     if request.method == 'POST':
         form = ChangeTechnicalneedsForm(request.POST)
         if form.is_valid():
@@ -27,6 +30,9 @@ def changeTechnicalneed(request):
 
 
 def technical_requirements(request):
+    """
+    Renders page with technical requirements information for the user's band.
+    """
     try:
         band = Band.objects.get(manager=request.user)
     except Band.DoesNotExist:
@@ -44,6 +50,10 @@ def technical_requirements(request):
 
 
 def update_technical_requirements(request):
+    """
+    Deletes technical requirement based on request data.
+    Renders page with updated list of requirements for the manager's (user's) band
+    """
     equipment_number = request.POST.getlist('equipment_number')
     equipment_pk = request.POST.getlist('pk')
     equipment_name = request.POST.getlist('equipment_name')
