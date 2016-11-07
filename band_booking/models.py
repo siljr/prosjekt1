@@ -8,6 +8,9 @@ from django.utils import timezone
 # Create your models here.
 
 class Scene(models.Model):
+    """
+    Class representing scene.
+    """
     number_of_seats = models.IntegerField()
     handicap_accessible = models.NullBooleanField()
     related_name = 'a_scene'
@@ -35,6 +38,9 @@ class Scene(models.Model):
 
 
 class Band(models.Model):
+    """
+    Class representing band.
+    """
     band_name = models.CharField(max_length=30)
     manager = models.OneToOneField(User, limit_choices_to={'groups__name': "Manager"}, null=True, blank=True)
     genre = models.CharField(max_length=20)
@@ -47,6 +53,12 @@ class Band(models.Model):
         return self.band_name
 
     def get_band_manager_bookings(self):
+        """
+        Returns:
+            list (queryset) with all the bookings for the band's manager.
+        Raises:
+            ValueError: if band's manager doesn't have an email
+        """
         try:
             manager_email = self.manager.email
         except:
@@ -55,10 +67,25 @@ class Band(models.Model):
 
     @classmethod
     def get_bandmedlems_band(cls, user: User):
-        return Band.objects.filter(band_member=user)[0]
+        """
+        Returns:
+            band based on the user input parameter or None when the user doesn't belong to any band
+        Args:
+            user: user that should belong to bandmedlem group
+        """
+        try:
+            return Band.objects.filter(band_member=user)[:1].get()
+        except Band.DoesNotExist:
+            return None
 
     @classmethod
     def equipment(cls, user: User):
+        """
+        Returns:
+            list of equipment/technical needs for the user's band
+        Args:
+            user: user that should belong to bandmedlem group
+        """
         user_band = Band.objects.filter(band_member=user)[0]
         return Technical_needs.objects.filter(band=user_band)
 
@@ -74,6 +101,9 @@ class Album(models.Model):
 
 
 class Concert(models.Model):
+    """
+    Class representation of concert.
+    """
     concert_title = models.CharField(max_length=50)
     date = models.DateField()  # got en error with default=date.today() when migrating, so it's been removed
     bands = models.ManyToManyField(Band)  # There can play many bands on the concert and band can play many concerts
@@ -104,16 +134,25 @@ class Concert(models.Model):
     def __str__(self):
         return self.concert_title
 
-    # Calculates the concert's economic result
     def calc_econ_result(self):
+        """
+        Calculates the concert's economic result
+        """
         return self.ticket_price * self.attendance - self.booking_price - self.scene.expenditure - self.GUARD_EXPENSE
 
-    # Disguises the method call as a field
+    #
     @property
     def economic_result(self):
+        """
+        Disguises the method call as a  Concert class property field
+        """
         return self.calc_econ_result()
 
+
 class Technical_needs(models.Model):
+    """
+    Class representing specific technical needs for the band
+    """
     equipment_name = models.CharField(max_length=128, default=' ')
     amount = models.IntegerField(default=1)
     band = models.ForeignKey(Band)
@@ -123,6 +162,10 @@ class Technical_needs(models.Model):
 
 
 class Booking(models.Model):
+    """
+    Class representing band booking.
+    """
+
     EMAIL_MAX_LENGTH = 5000
 
     sender = models.ForeignKey(User, limit_choices_to={'groups__name': 'Bookingansvarlig'}, null=True, blank=True)
@@ -171,13 +214,10 @@ class Booking(models.Model):
     def __str__(self):
         return self.title_name
 
-    # Unused change method for changing e-mail text.
-    # def change_email_text(self, new_text):
-    #    if len(new_text) < self.EMAIL_MAX_LENGTH:
-    #        self.email_text = new_text
-    #        self.save()
-
-    def change_status(self, new_status):  # Method that changes the status of the booking
+    def change_status(self, new_status):
+        """
+        Changes the status of the booking to the new_status
+        """
         if new_status in (Booking.UNDECIDED, Booking.NOT_APPROVED, Booking.APPROVED, Booking.SENT):
             self.status = new_status
             self.save()
