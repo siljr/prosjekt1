@@ -145,7 +145,9 @@ def update_booking_offer(request, offer_id=None):
 
 def create_booking_offer(request, offer_id=None):
     """
-    Either displays the information about the current booking offer
+    :param request: The HTTP request
+    :param offer_id: The id of the given offer, if none a new offer is to be created
+    :return: Displays information in an editable form for the current booking-offer
     """
     saved = request.session.pop('saved-offer', False)
 
@@ -181,6 +183,9 @@ def create_booking_offer(request, offer_id=None):
 
 
 class BookingListView(generic.ListView):
+    """
+    A view for the current bookings
+    """
     template_name = 'bookingansvarlig/bookings_list.html'
     context_object_name = 'bookings'
 
@@ -190,17 +195,30 @@ class BookingListView(generic.ListView):
 
 # Makes a page with just the filtered view of just the status sent
 class BookingFilteredListView(generic.ListView):
+    """
+    A filtered view for the given bookings showing only the sent bookings
+    """
     template_name = 'bookingansvarlig/bookings_list.html'
     context_object_name = 'bookings'
 
     def get_queryset(self):
+        """
+        :return: A list of all sent booking offers
+        """
         return [booking for booking in Booking.objects.filter(status="S") if booking.user_allowed_to_view(self.request.user)]
 
 
 def search_for_artist(request):
+    """
+    :param request: The HTTP request
+    :return: A render of the search page for artists or if a valid name is set in the GET request a redirect to the artist information load page
+    """
     artist_name = request.GET.get('name', None)
+    # Check if the name is set
     if artist_name is None or artist_name == "":
         return render(request, 'bookingansvarlig/search_artist.html', {})
+    # Check if the name is valid, in that case redirect
     if re.match("^[A-Za-z0-9 ]+$", artist_name):
         return redirect('band_booking:artist_load', name=artist_name)
+    # Invalid name, show an error
     return render(request, 'bookingansvarlig/search_artist.html', {'name': artist_name, 'error': 'Artist navnet inneholder karakterer som ikke er støttet. Støttede karakterer er mellomrom, bokstavene fra A til Z og tall'})
