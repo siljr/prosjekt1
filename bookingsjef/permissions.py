@@ -15,6 +15,7 @@ def add_user_permissions(**kwargs):
         ("view_all_booking_offers", "Can view all booking offers"),
         ("can_approve_booking_offers", "Can approve booking offers"),
         ("can_view_term_booking_information", "Can view term booking information"),
+        ("can_create_booking", "Can create booking"),
     ])
 
 

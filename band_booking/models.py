@@ -45,9 +45,9 @@ class Band(models.Model):
     band_name = models.CharField(max_length=30)
     manager = models.OneToOneField(User, limit_choices_to={'groups__name': "Manager"}, null=True, blank=True)
     genre = models.CharField(max_length=20)
-    band_member = models.ManyToManyField(User, limit_choices_to={'groups__name': "Bandmedlem"}, related_name='band_member')
-    booking_price = models.IntegerField()
-    streaming_numbers = models.IntegerField()
+    band_member = models.ManyToManyField(User, limit_choices_to={'groups__name': "Bandmedlem"}, related_name='band_member', blank=True)
+    booking_price = models.IntegerField(default=0)
+    streaming_numbers = models.IntegerField(default=0)
     related_name = "a_band"
 
     def __str__(self):
@@ -92,7 +92,7 @@ class Concert(models.Model):
     date = models.DateField()  # got en error with default=date.today() when migrating, so it's been removed
     bands = models.ManyToManyField(Band)  # There can play many bands on the concert and band can play many concerts
     scene = models.ForeignKey(Scene, null=True, blank=True)  # only one scene per concert, but many concerts per scene
-    personnel = models.ManyToManyField(User)
+    personnel = models.ManyToManyField(User, blank=True)
     attendance = models.IntegerField(default=0)
     ticket_price = models.IntegerField(default=0)
     booking_price = models.IntegerField(default=0)
@@ -113,6 +113,7 @@ class Concert(models.Model):
     status = models.CharField(
         max_length=1,
         choices=STATUS_CHOICES,
+        default=BOOKED
     )
 
     def __str__(self):
