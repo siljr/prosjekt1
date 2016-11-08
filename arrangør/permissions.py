@@ -9,7 +9,6 @@ def add_user_permissions(**kwargs):
     """
     Adds the Arrangør group and gives it the required permissions
     """
-
     add_permissions_group("Arrangør", [
         ("view_concert_information", "Can view concert information"),
         ("view_concerts_term", "Can view concerts this term"),

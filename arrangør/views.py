@@ -56,7 +56,7 @@ def overview_concert(request, id):
         return redirect('arrangør:concerts')
 
     # Check if user is allowed to view the given concert
-    if not request.user.is_superuser and request.user != concert.organizer:
+    if not request.user.is_superuser and not request.user.has_perm('band_booking.can_see_concert_information') and request.user != concert.organizer:
         return redirect('arrangør:concerts')
 
     # Render the page

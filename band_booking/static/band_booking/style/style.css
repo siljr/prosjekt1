@@ -1104,11 +1104,18 @@ main{
     font-weight: bold;
 }
 
+.calendar-header-center {
+    width: 100%;
+    margin-top: -40px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
 .calendar-scene {
     margin-top: 10px;
     float: right;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 28px;
 }
 
 .back-button{

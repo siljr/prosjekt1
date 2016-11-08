@@ -62,7 +62,7 @@
                         {{ concert.attendance }}
                     </div>
                     <div class="table-cell">
-                        {% if request.user == concert.organizer or request.user.is_superuser%}
+                        {% if request.user == concert.organizer or perms.band_booking.can_see_concert_information or request.user.is_superuser%}
                             <a href="{% url 'arrangør:concert' id=concert.pk %}">
                                 Informasjon
                             </a>
