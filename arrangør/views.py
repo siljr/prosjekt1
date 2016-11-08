@@ -6,6 +6,9 @@ from band_booking.models import Concert, Technical_needs
 # Create your views here.
 
 class ConcertsView(generic.ListView):
+    """
+    Returns an overview page for all concerts for the semester.
+    """
     template_name = 'arrangør/concert_overview.html'
     context_object_name = 'concerts'
 

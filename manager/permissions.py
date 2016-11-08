@@ -9,7 +9,7 @@ from band_booking.models import Band
 @receiver(pre_migrate, sender=auth_models)
 def add_user_permissions(**kwargs):
     """
-    Adds Manager to the group list
+    Adds Manager to the group list. Adds permission to this group for seeing technical needs information.
     """
     group, created = auth_models.Group.objects.get_or_create(name='Manager')
 

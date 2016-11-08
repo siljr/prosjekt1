@@ -4,9 +4,12 @@ from band_booking.models import Band, Concert, Booking
 
 
 def concerts_band(request, year, month):
+    """
+    Retrieves information about bookings for the user's band and renders calendar view with this information.
+    If the user does not belong to a band error page is rendered.
+    """
     band = Band.get_bandmedlems_band(user=request.user)
     if band is None:
-        # TODO: Error message
         return render(request, 'band_booking/error.html', {'error': "Du er ikke tilknyttet et band som medlem."})
 
     month, year = int(month), int(year)
