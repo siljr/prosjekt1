@@ -1,30 +1,31 @@
 {% extends 'band_booking/base.html' %}
 {% block content %}
-    <table class="booking-overview-table">
-        <thead class="booking-overview-table-header">
-        <tr>
-            <th>Tittel</th>
-            <th>Mottaker</th>
-            <th>Ansvarlig</th>
-            <th>Tilbud</th>
-            <th>Dato</th>
-            <th>Status</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for booking in bookings %}
+    <title>Bookingtilbud</title>
+    <div class="booking-list-wrapper center-horizontal">
+        <table class="booking-overview-table">
+            <thead class="booking-overview-table-header">
             <tr>
-                <td>{{ booking.title_name }}</td>
-                <td>{{ booking.recipient_email }}</td>
-                {% if booking.sender.first_name %}
-                    <td>{{ booking.sender.first_name }} {{ booking.sender.last_name }}</td>
-                {% else %}
-                    <td>{{ booking.sender.username }}</td>
-                {% endif %}
-                <td><a href="{% url 'bookingansvarlig:create_booking_offer' booking.pk %}">Se tilbud</a></td>
-                <td>{{ booking.date }}</td>
-                <td class="{{ booking.status }}">{{ booking.get_status_word }}</td>
+                <th>Tittel</th>
+                <th>Mottaker</th>
+                <th>Ansvarlig</th>
+                <th>Scene</th>
+                <th>Dato</th>
             </tr>
-          {% endfor %}
-    </table>
+            </thead>
+            <tbody>
+            {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.title_name }}</td>
+                    <td>{{ booking.recipient_email }}</td>
+                    {% if booking.sender.first_name %}
+                        <td>{{ booking.sender.first_name }} {{ booking.sender.last_name }}</td>
+                    {% else %}
+                        <td>{{ booking.sender.username }}</td>
+                    {% endif %}
+                    <td>{{ booking.scene }}</td>
+                    <td>{{ booking.date }}</td>
+                </tr>
+              {% endfor %}
+        </table>
+    </div>
 {% endblock %}

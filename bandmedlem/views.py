@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django.views import generic
-from band_booking.models import Booking
+from band_booking.models import Booking, Band
+
+
+def band_offers(request):
+    pass
 
 
 class BandListView(generic.ListView):
@@ -8,5 +12,5 @@ class BandListView(generic.ListView):
     context_object_name = 'bookings'
 
     def get_queryset(self):
-        return [booking for booking in Booking.objects.all() if booking.user_allowed_to_view(self.request.user)]
+        return [booking for booking in Booking.objects().filter()]
 
