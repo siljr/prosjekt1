@@ -1,6 +1,7 @@
 {% extends 'band_booking/base.html' %}
 {% block content %}
     <div class="calendar-wrapper center-horizontal">
+        <h1 class="calendar-header-center">{{ scene }}</h1>
         <div class="calendar-controls">
             {% if previous %}
                 <a href="{{ previous }}" class="black-link calendar-previous-month">
@@ -62,6 +63,12 @@
                         <div class="calendar-date-email">
                             {{ date.email }}
                         </div>
+                    {% elif not date.greyed %}
+                        {% if perms.band_booking.can_create_booking %}
+                            <div class="calendar-date-band">
+                                <a href="{% url 'bookingsjef:create_concert' scene=scene.lower date=date.url_date %}" class="black-link">Ny booking</a>
+                            </div>
+                        {% endif %}
                     {% endif %}
                 </div>
             {% endfor %}
@@ -88,13 +95,10 @@
                 </div>
                 Ledig
             </div>
-            <div class="calendar-scene">
-                {{ scene }}
-            </div>
         </div>
         <div class="back-button">
             <a class="black-link" href="{% url 'bookingsjef:booking_information_term' %}">
-                <div class="basic-button"> Bookingoversikt </div>
+                <div class="basic-button"> Tilbake </div>
             </a>
         </div>
     </div>

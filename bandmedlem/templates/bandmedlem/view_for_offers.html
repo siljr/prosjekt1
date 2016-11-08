@@ -1,0 +1,26 @@
+{% extends 'band_booking/base.html' %}
+{% block content %}
+    <title>Bookingtilbud</title>
+    <div class="booking-list-wrapper center-horizontal">
+        <h2>Bookingtilbud for {{ band.band_name }}</h2>
+        <table class="booking-overview-table">
+            <thead class="booking-overview-table-header">
+            <tr>
+                <th>Tittel</th>
+                <th>Mottaker</th>
+                <th>Scene</th>
+                <th>Dato</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.title_name }}</td>
+                    <td>{{ booking.recipient_email }}</td>
+                    <td>{{ booking.scene }}</td>
+                    <td>{{ booking.date }}</td>
+                </tr>
+              {% endfor %}
+        </table>
+    </div>
+{% endblock %}

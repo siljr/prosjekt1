@@ -1,14 +1,15 @@
-from django.contrib.auth.models import Permission
-from django.contrib.contenttypes.models import ContentType
 from django.db.models.signals import pre_migrate
 from django.contrib.auth import models as auth_models
 from django.dispatch import receiver
-from band_booking.models import Concert, Booking
+from permission_creator import add_permissions_group
 
 
 @receiver(pre_migrate, sender=auth_models)
 def add_user_permissions(**kwargs):
     """
-    Adds Tekniker to the group list.
+    Adds the Tekniker group and gives it the required permissions
     """
-    group, created = auth_models.Group.objects.get_or_create(name='Tekniker')
+
+    add_permissions_group("Tekniker", [
+
+    ])
