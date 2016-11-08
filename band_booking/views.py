@@ -104,7 +104,8 @@ def index(request):
             {'title': 'Utstyrsliste', 'link': reverse('manager:technical_requirements')}
         ],
         'Bandmedlem': [
-            {'title': 'Konserter', 'link': reverse('bandmedlem:calendar', kwargs={'year': datetime.now().year, 'month': datetime.now().month})}
+            {'title': 'Konserter', 'link': reverse('bandmedlem:calendar', kwargs={'year': datetime.now().year, 'month': datetime.now().month})},
+            {'title': 'Tilbud', 'link': reverse('bandmedlem:bookings')},
         ]
     }
 
