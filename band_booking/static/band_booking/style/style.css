@@ -185,6 +185,10 @@ main{
     padding-right: 8px;
 }
 
+.small-padding-bottom {
+    padding-bottom: 8px;
+}
+
 .basic-button:hover {
     background-color: #e4e4e4;
 }
@@ -994,10 +998,6 @@ main{
     line-height: 30px;
 }
 
-.calendar-field-empty {
-    background-color: #c5c5c5;
-}
-
 .booked {
     background-color: #68a4e8;
 }
@@ -1008,6 +1008,10 @@ main{
 
 .not-booked {
     background-color: #f5faf8;
+}
+
+.calendar-field-empty {
+    background-color: #c5c5c5;
 }
 
 .calendar-color-explanation-single {
@@ -1081,6 +1085,25 @@ main{
     font-weight: bold;
 }
 
+.calendar-greyed-field {
+    background: lightgray;
+}
+
+.calendar-date-email {
+    margin-top: 5px;
+    text-align: center;
+    width: 136px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
+    -ms-word-wrap: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    font-weight: bold;
+}
+
 .calendar-scene {
     margin-top: 10px;
     float: right;
@@ -1120,6 +1143,7 @@ main{
 
 .concert-technical-information {
     width: 395px;
+    min-height: 140px;
     float: right;
 }
 
@@ -1131,4 +1155,104 @@ main{
 
 .margin-top-medium {
     padding-top: 20px;
+}
+
+.concert-equipment-information {
+    float: left;
+    margin-top: 30px;
+    width: 395px;
+}
+
+
+.concert-equipment-column{
+    width: 295px;
+}
+
+.concert-equipment-amount-column {
+    width: 95px;
+    text-align: center;
+}
+
+.technical-equipment-wrapper {
+    margin-top: 20px;
+    width: 450px;
+}
+
+.equipment-add-delete-button {
+    width: 120px;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.technical-equipment-row {
+    margin-bottom: 10px;
+    display: block;
+    width: 450px;
+}
+
+.technical-equipment-row > input {
+    margin-right: 10px;
+    border: 1px solid #808080;
+    border-radius: 5px;
+    padding: 2px 5px 2px 5px;
+}
+
+.technical-equipment-row > input:nth-child(2) {
+    width: 225px;
+}
+
+.technical-equipment-row > input:nth-child(3) {
+    text-align: right;
+    padding-right: 2px;
+    width: 40px;
+}
+
+.technical-equipment-row > input:read-only {
+    background: #c6c6c6;
+    border: 2px solid #f03737;
+    margin-left: -2px;
+}
+
+.technical-equipment-add {
+    float: left;
+    padding: 4px;
+    height: 16px;
+    line-height: 16px;
+}
+
+.technical-equipment-save {
+    float: right;
+    height: 25px;
+}
+
+.technical-equipment-save, .technical-equipment-add {
+    margin-top: 15px;
+}
+
+.technical-equipment-title {
+    width: 100%;
+    text-align: center;
+}
+
+.wrapper-create-booking {
+    width: 400px;
+    margin-top: 10px;
+}
+
+.wrapper-create-booking label {
+    display: inline-block;
+    width: 155px;
+}
+
+.booking-form-field {
+    margin-bottom: 10px;
+}
+
+.new_band {
+    height: 20px;
+    width: 20px;
+    border: 1px solid #5b5b5b;
+    border-radius: 4px;
+    background: transparent url("../images/add.png");
+    background-size: contain;
 }

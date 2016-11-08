@@ -1,11 +1,16 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from band_booking.models import Concert, Booking
+from django.shortcuts import render, get_object_or_404, redirect, reverse
+from band_booking.models import Concert, Booking, Scene
 from .actions.concert_overview_term import get_information_this_term, build_information_month
 from bookingsjef.algorithms.ticket_price import get_ticket_prices_for_scenes
 from django.http import HttpResponse
+from band_booking.forms import CreateBandForm, CreateConcertForm
+from datetime import datetime
 
 
 def economic_result_concert(request, concert_id):
+    """
+    Renders a page with economic results of the concert
+    """
     concert = get_object_or_404(Concert, pk=concert_id)
     context = {
         'title': concert.concert_title,
@@ -26,6 +31,9 @@ def economic_result_concert(request, concert_id):
 
 
 def approve_booking_offer(request, offer_id, approved=False):
+    """
+    Changes booking status to APPROVED.
+    """
     try:
         offer = Booking.objects.get(pk=offer_id)
         if offer.status not in [Booking.UNDECIDED, Booking.NOT_APPROVED]:
@@ -42,14 +50,23 @@ def approve_booking_offer(request, offer_id, approved=False):
 
 
 def calendar(request, year, month, scene):
+    """
+    Renders calendar page with booking overview for the month and scene based on input parameter.
+    """
     return render(request, "bookingsjef/booking-overview-term.html", build_information_month(int(year), int(month), scene))
 
 
 def booking_information_term(request):
+    """
+    Renders page with booking information for the current semester.
+    """
     return render(request, "bookingsjef/booking_information_term.html", get_information_this_term())
 
 
 def generator_input(request):
+    """
+    Renders page that allow the user to generate ticket prices for specific band and booking price.
+    """
     context = {
 
     }
@@ -57,6 +74,9 @@ def generator_input(request):
 
 
 def price_generator(request):
+    """
+    Generates band prices for all the scenes
+    """
     bandname = request.POST.get('band', '')
     price = int(request.POST.get('price', ''))
     price_generated = get_ticket_prices_for_scenes(bandname, price)
@@ -77,3 +97,52 @@ def price_generator(request):
         return render(request, 'bookingsjef/generate_price.html', context)
     except TypeError:
         return HttpResponse('Bandet eksisterer ikke i våre databaser')
+
+
+def create_concert(request, date=None, scene=None):
+    """
+    :param request: The HTTP request
+    :param date: The date
+    :param scene: The scene
+    :return: A redirect or render depending on the validity of the form
+    """
+    if request.method == 'POST':
+        form = CreateConcertForm(request.POST)
+        # Check if the form is valid
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('bookingsjef:booking_information_term'))
+        return render(request, 'bookingsjef/create_concert.html', context={'form': form})
+
+    # Try selecting a valid scene
+    if scene:
+        try:
+            scene = Scene.objects.get(scene_name__icontains=scene)
+        except Scene.DoesNotExist:
+            scene = None
+
+    # Create the context of the request
+    context = {'form': CreateConcertForm(initial={'date': (date or datetime.now()), 'scene': scene})}
+    return render(request, 'bookingsjef/create_concert.html', context=context)
+
+
+def create_band(request):
+    """
+    :param request: The HTTP request
+    :return: A redirect to an error page if there are no available managers or to the concert creation page if the form is correct.
+            Else a render of the creation page
+    """
+    if request.method == 'POST':
+        form = CreateBandForm(request.POST)
+        # Check if the form is valid
+        if form.is_valid():
+            form.save()
+            return redirect(request.POST.get('url'))
+
+    # Create the context of the request
+    context = {'form': CreateBandForm(request.POST), 'url': (request.POST.get('url') or reverse('bookingsjef:create_concert'))}
+
+    # Check if there are any choices of managers
+    if not context['form'].fields['manager'].widget.choices:
+        return render(request, 'band_booking/error.html', {'error': "Ingen ledige managers i systemet. Kontakt system administratoren for å få registrert nye managers"})
+    return render(request, 'bookingsjef/create_band.html', context=context)

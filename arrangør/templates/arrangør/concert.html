@@ -46,5 +46,24 @@
                 </div>
             {% endfor %}
         </div>
+        <div class="concert-equipment-information">
+            <h3 class="concert-information-title">
+                Utstyr
+            </h3>
+            <div class="concert-equipment-column bold inline-block small-padding-bottom underline">
+                Gjenstand
+            </div>
+            <div class="concert-equipment-amount-column bold inline-block small-padding-bottom underline">
+                Antall
+            </div>
+            {% for equip,amount in equipment.items %}
+                <div class="concert-equipment-column inline-block">
+                    {{ equip }}
+                </div>
+                <div class="concert-equipment-amount-column inline-block">
+                    {{ amount }}
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

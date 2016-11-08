@@ -2,12 +2,12 @@
 {% block content %}
     <title>Bookingtilbud</title>
     <div class="booking-list-wrapper center-horizontal">
+        <h2>Bookingtilbud for {{ band.band_name }}</h2>
         <table class="booking-overview-table">
             <thead class="booking-overview-table-header">
             <tr>
                 <th>Tittel</th>
                 <th>Mottaker</th>
-                <th>Ansvarlig</th>
                 <th>Scene</th>
                 <th>Dato</th>
             </tr>
@@ -17,11 +17,6 @@
                 <tr>
                     <td>{{ booking.title_name }}</td>
                     <td>{{ booking.recipient_email }}</td>
-                    {% if booking.sender.first_name %}
-                        <td>{{ booking.sender.first_name }} {{ booking.sender.last_name }}</td>
-                    {% else %}
-                        <td>{{ booking.sender.username }}</td>
-                    {% endif %}
                     <td>{{ booking.scene }}</td>
                     <td>{{ booking.date }}</td>
                 </tr>

@@ -1,0 +1,24 @@
+{% extends 'band_booking/base.html' %}
+{% block content %}
+    <div class="wrapper-create-booking center-horizontal">
+        <h2>Lag nytt band</h2>
+        {{ form.errorlist }}
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="booking-form-field">
+                <label for="id_band_name">Band navn:</label>
+                {{ form.band_name }}
+            </div>
+            <div class="booking-form-field">
+                <label for="id_manager">Manager:</label>
+                {{ form.manager }}
+            </div>
+            <div class="booking-form-field">
+                <label for="id_genre">Sjanger:</label>
+                {{ form.genre }}
+            </div>
+            <input type="submit" class="basic-button"/>
+            <input type="text" name="url" value="{{ url }}"hidden/>
+        </form>
+    </div>
+{% endblock %}
