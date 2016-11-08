@@ -3,6 +3,9 @@ from .models import Technical_needs, Band, Concert, User
 
 
 class ChangeTechnicalneedsForm(forms.ModelForm):
+    """
+    Form for changing technical needs
+    """
     # henter modellen og har nå alle feltene, husk at man må importere den i toppen for å ha tilgang
     class Meta:
         model = Technical_needs

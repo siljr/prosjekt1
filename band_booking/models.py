@@ -9,7 +9,7 @@ from django.utils import timezone
 
 class Scene(models.Model):
     """
-    A model for the scenes at Samfundet
+    Class representing scene.
     """
     number_of_seats = models.IntegerField()
     handicap_accessible = models.NullBooleanField()
@@ -40,7 +40,7 @@ class Scene(models.Model):
 
 class Band(models.Model):
     """
-    A model for the bands
+    Class representing band.
     """
     band_name = models.CharField(max_length=30)
     manager = models.OneToOneField(User, limit_choices_to={'groups__name': "Manager"}, null=True, blank=True)
@@ -56,6 +56,8 @@ class Band(models.Model):
     def get_band_manager_bookings(self):
         """
         :return: Returns all bookings sent to the manager of the band. Else raises an error.
+        Raises:
+            ValueError: if band's manager doesn't have an email
         """
         try:
             manager_email = self.manager.email
@@ -86,7 +88,7 @@ class Band(models.Model):
 
 class Concert(models.Model):
     """
-    A database model for a concert
+    Class representation of concert.
     """
     concert_title = models.CharField(max_length=50)
     date = models.DateField()  # got en error with default=date.today() when migrating, so it's been removed
@@ -119,26 +121,26 @@ class Concert(models.Model):
     def __str__(self):
         return self.concert_title
 
-    # Calculates the concert's economic result
     def calc_econ_result(self):
         """
         :return: The economic results for the concert
+        Calculates the concert's economic result
         """
         return self.ticket_price * self.attendance - self.booking_price - self.scene.expenditure - self.GUARD_EXPENSE
 
-    # Disguises the method call as a field
+    #
     @property
     def economic_result(self):
         """
         :return: The economic results for the concert
-         The economic results for the concert disguised as a field.
+        The economic results for the concert disguised as a field.
         """
         return self.calc_econ_result()
 
 
 class Technical_needs(models.Model):
     """
-    A database model for technical equipment
+    Class representing specific technical needs for the band
     """
     equipment_name = models.CharField(max_length=128, default=' ')
     amount = models.IntegerField(default=1)
@@ -150,8 +152,9 @@ class Technical_needs(models.Model):
 
 class Booking(models.Model):
     """
-    A database model for a booking
+    Class representing band booking.
     """
+
     EMAIL_MAX_LENGTH = 5000
 
     sender = models.ForeignKey(User, limit_choices_to={'groups__name': 'Bookingansvarlig'}, null=True, blank=True)
@@ -202,9 +205,9 @@ class Booking(models.Model):
 
     def change_status(self, new_status):
         """
-        Changes the status of the booking
         :param new_status: The new status of the booking
         :return: None
+        Changes the status of the booking to the new_status
         """
         if new_status in (Booking.UNDECIDED, Booking.NOT_APPROVED, Booking.APPROVED, Booking.SENT):
             self.status = new_status

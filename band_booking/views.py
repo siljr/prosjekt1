@@ -22,7 +22,8 @@ def login_authenticate(request):
     """
     :param request: The HTTP request
     :return: A redirect to either the index page or the login page based on if the the login was successful.
-    If the login isn't successful the redirect to the login page will have the error flag set.
+    Authenticates the user and login if the username and password are correct, else the user is redirected to the login
+    page with an error
     """
     username = request.POST.get('username', None)
     password = request.POST.get('password', None)
@@ -49,6 +50,7 @@ def artist(request, name):
     :param request: The HTTP request
     :param name: The name of the artist to search for
     :return: The artist information page for the given artist
+    Retrieves artist information and renders page with this information
     """
     return render(request, 'band_booking/artist.html', get_artist_information(name))
 
@@ -58,23 +60,26 @@ def artist_load(request, name):
     :param request: The HTTP request
     :param name: The name of the artist to search for
     :return: A loading page for searching for the given artist
+    Renders loading page while artist information is retrieved
     """
     return render(request, 'band_booking/loading_artist.html', {'name': name})
 
 
 def event_load(request, name):
     """
-    :param request: The HTTP request 
+    :param request: The HTTP request
     :param name: The name of the artist for which to find events
     :return: A page of events for the given artist
+    Retrieves past events information for given artist and renders it on the page
     """
     return render(request, 'band_booking/artist_information_events.html', get_past_events(name))
 
 
 def index(request):
     """
-    :param request: The HTTP request 
+    :param request: The HTTP request
     :return: An index page based on the role of the user containing links to the pages of the given user
+    Creates a role specific user index page
     """
     # The pages available to the different roles
     pages = {
