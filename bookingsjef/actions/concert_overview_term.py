@@ -102,13 +102,8 @@ def build_information_month(year, month, scene):
     term = get_term(month, year)
 
     for index, date in enumerate(information['dates']):
-<<<<<<< HEAD
         date['url_date'] = '%02d/%02d/%04d' % (date['date'], month, year)
         concerts_date = Concert.objects.filter(date=django_date(year, month, date['date']), scene__scene_name__icontains=scene)
-=======
-        concerts_date = Concert.objects.filter(date=django_date(year, month, date['date']),
-                                               scene__scene_name__icontains=scene)
->>>>>>> master
         if concerts_date:
             date['booked'] = 'booked'
             date['band'] = concerts_date[0].bands.all()[0].band_name
