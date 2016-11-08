@@ -1,4 +1,0 @@
-Arrangør
-========
-.. automodule:: arrangør
-    :members:..
