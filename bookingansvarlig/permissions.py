@@ -14,4 +14,7 @@ def add_user_permissions(**kwargs):
     """
     add_permissions_group("Bookingansvarlig", [
         ("view_scenes", "Can see scenes information"),
+        ("view_concert_information", "Can view concert information"),
+        ("view_concerts_term", "Can view concerts this term"),
+        ("can_see_concert_information", "Can see concert information"),
     ])
