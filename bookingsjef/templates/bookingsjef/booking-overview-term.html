@@ -62,6 +62,12 @@
                         <div class="calendar-date-email">
                             {{ date.email }}
                         </div>
+                    {% elif not date.greyed %}
+                        {% if perms.band_booking.can_create_booking %}
+                            <div class="calendar-date-band">
+                                <a href="{% url 'bookingsjef:create_concert' scene=scene.lower date=date.url_date %}" class="black-link">Ny booking</a>
+                            </div>
+                        {% endif %}
                     {% endif %}
                 </div>
             {% endfor %}

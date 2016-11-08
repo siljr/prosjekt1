@@ -1,0 +1,40 @@
+{% extends 'band_booking/base.html' %}
+{% load static %}
+{% block content %}
+    <script src="{% static 'bookingsjef/scripts/new_band.js' %}"></script>
+    <div class="wrapper-create-booking center-horizontal">
+        <h2>
+            Registrer konsert
+        </h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="booking-form-field">
+                <label for="id_concert_title">Tittel:</label>
+                {{ form.concert_title }}
+            </div>
+            <div class="booking-form-field">
+                <label for="id_date">Dato (dd/mm/yyyy):</label>
+                {{ form.date }}
+            </div>
+            <div class="booking-form-field">
+                <label for="id_bands">Band:</label>
+                {{ form.bands }}
+                <button id="create_new_band" class="new_band hover-pointer"></button>
+            </div>
+            <div class="booking-form-field">
+                <label for="id_scene">Scene:</label>
+                {{ form.scene }}
+            </div>
+            <div class="booking-form-field">
+                <label for="id_ticket_price">Billettpris:</label>
+                {{ form.ticket_price }}
+            </div>
+            <div class="booking-form-field">
+                <label for="id_booking_price">Booking kostnad:</label>
+                {{ form.booking_price }}
+            </div>
+            <input type="submit" class="basic-button"/>
+        </form>
+    </div>
+
+{% endblock %}

@@ -1,24 +1,32 @@
 from django.shortcuts import render, redirect
 from django.views import generic
 from band_booking.models import Concert, Technical_needs
+from bookingsjef.actions.concert_overview_term import get_current_term
 
 
 # Create your views here.
 
 class ConcertsView(generic.ListView):
     """
-    Returns an overview page for all concerts for the semester.
+    Generates a view for the query set of the current term
     """
     template_name = 'arrangør/concert_overview.html'
     context_object_name = 'concerts'
 
     def get_queryset(self):
-        concerts = Concert.objects.filter(date__range=["2016-08-16", "2016-11-28"])
+        """
+        :return: The concerts of the current term
+        """
+        start_term, end_term = get_current_term()
+        concerts = Concert.objects.filter(date__range=[start_term, end_term])
         return concerts
 
 
 def overview_concert(request, id):
     """
+    :param request: The HTTP request
+    :param id: The id of the concert
+    :return An overview page for the given concert, if the user has the required permissions. Else a redirect.
     Returns an overview page for the concert of the given ID. If there is no concert with this ID or the user does not
     have the necessary requirements to view the page the user will be redirected to the concert_overview page.
     """
@@ -26,7 +34,7 @@ def overview_concert(request, id):
     def build_equipment(concert):
         """
         Finds the amount of equipment needed for all the bands of the concert, especially it combines the requirements
-        with same names such that it is easier for the user to read through the list
+        with the same names such that it is easier for the user to read through the list
         """
         equipment = {}
         for band in concert.bands.all():

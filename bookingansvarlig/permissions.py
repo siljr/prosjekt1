@@ -4,16 +4,14 @@ from django.contrib.contenttypes.models import ContentType
 from django.db.models.signals import pre_migrate
 from django.contrib.auth import models as auth_models
 from django.dispatch import receiver
-
-__author__ = 'Weronika'
+from permission_creator import add_permissions_group
 
 
 @receiver(pre_migrate, sender=auth_models)
 def add_user_permissions(**kwargs):
     """
-    Adds Bookingansvarlig to the user group list. Adds permission to this group for seeing scenes information
+    Adds the Bookingansvarlig group and gives it the required permissions
     """
-    auth_models.Group.objects.get_or_create(name='Bookingansvarlig')
-    content_type = ContentType.objects.get_for_model(Scene)
-    Permission.objects.get_or_create(codename='view_scenes', name='Can see scenes information',
-                                     content_type=content_type)
+    add_permissions_group("Bookingansvarlig", [
+        ("view_scenes", "Can see scenes information"),
+    ])
