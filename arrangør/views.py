@@ -26,7 +26,8 @@ def overview_concert(request, id):
     """
     :param request: The HTTP request
     :param id: The id of the concert
-    :return An overview page for the given concert, if the user has the required permissions. Else a redirect.
+    :return: An overview page for the given concert, if the user has the required permissions. Else a redirect.
+
     Returns an overview page for the concert of the given ID. If there is no concert with this ID or the user does not
     have the necessary requirements to view the page the user will be redirected to the concert_overview page.
     """

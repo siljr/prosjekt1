@@ -48,6 +48,7 @@ class Band(models.Model):
     band_member = models.ManyToManyField(User, limit_choices_to={'groups__name': "Bandmedlem"}, related_name='band_member', blank=True)
     booking_price = models.IntegerField(default=0)
     streaming_numbers = models.IntegerField(default=0)
+
     related_name = "a_band"
 
     def __str__(self):
@@ -59,6 +60,7 @@ class Band(models.Model):
         Raises:
             ValueError: if band's manager doesn't have an email
         """
+
         try:
             manager_email = self.manager.email
         except:

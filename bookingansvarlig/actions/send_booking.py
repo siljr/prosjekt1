@@ -5,12 +5,13 @@ from smtplib import SMTPException
 
 def send_booking(booking: Booking):
     """
-    Sends email with booking with info provided in booking parameter.
     Returns:
         bool: True if email was send successfully and False if it failed because of SMTPException
     Raises:
-     ValueError: if booking is not approved.
+        ValueError: if booking is not approved.
+    Sends email with booking with info provided in booking parameter.
     """
+
     if booking.status == Booking.APPROVED:
         email = EmailMessage(subject=booking.title_name, body=booking.email_text, to=[booking.recipient_email],
                              from_email=booking.sender.email)

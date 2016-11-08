@@ -23,29 +23,36 @@ class SendBookingTest(TestCase):
     """
 
     def setUp(self):
+        """
+        Instantiates objects for testing
+        """
         user = User.objects.create(email='fake_mail@fake.com')
         self.booking = Booking.objects.create(sender=user, title_name="mail_subject_test",
                                               recipient_email='fake_recipient@fake.com')
 
     def test_send_booking_approved(self):
+        """
+        Tests that send_booking returns True
+        Tests that one message has been sent, with correct subject and body
+        Tests that booking status has been updated
+        """
         self.booking.status = Booking.APPROVED
         result = send_booking(self.booking)
 
-        # Test that send_booking returns True
         self.assertEqual(result, True)
 
-        # Test that one message has been sent, with correct subject and body
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(str(mail.outbox[0].subject), self.booking.title_name)
         self.assertEqual(str(mail.outbox[0].body), self.booking.email_text)
 
-        # Test that booking status has been updated
         new_status = Booking.objects.get(pk=self.booking.id).status
         self.assertEqual(new_status, Booking.SENT)
 
     def test_send_booking_not_approved(self):
+        """
+        Test that send_booking raises exception
+        """
         self.booking.status = Booking.NOT_APPROVED
-        # Test that send_booking raises exception
         with self.assertRaises(ValueError) as e:
             send_booking(self.booking)
         self.assertEqual(type(e.exception), ValueError)

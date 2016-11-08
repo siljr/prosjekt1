@@ -71,11 +71,12 @@ def concert(request):
 
 def update_booking_offer(request, offer_id=None):
     """
-    Updates the booking offer with the given ID, if no ID a new booking offer is created instead.
-    Also creates a new booking offer if the user does not have permissions to edit the current booking offer
     :param request: The HTTP request
     :param offer_id: The id of the offer if the offer has an id
     :return: A redirect to the edit page
+
+    Updates the booking offer with the given ID, if no ID a new booking offer is created instead.
+    Also creates a new booking offer if the user does not have permissions to edit the current booking offer
     """
     def create_new_offer(title, email, text, user, date, scene):
         """

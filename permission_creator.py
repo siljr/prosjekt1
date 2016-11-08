@@ -4,11 +4,12 @@ from django.contrib.contenttypes.models import ContentType
 
 def add_permissions_group(group_name, permissions):
     """
-    Creates or gets the group with the given name before adding permissions to the group
     :param group_name: The name of the group to add the permissions to
     :param permissions: A list of tuples on the form (codename, name) each representing a single permission
     :return: None
+    Creates or gets the group with the given name before adding permissions to the group
     """
+
     group, created = Group.objects.get_or_create(name=group_name)
 
     # Loop through each permission
@@ -23,3 +24,4 @@ def add_permissions_group(group_name, permissions):
 
         # Add the permission to the group
         group.permissions.add(permission)
+
